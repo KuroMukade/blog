@@ -2,6 +2,7 @@ import { Suspense, useContext, useState } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 import { AboutPageAsync } from './components/AboutPage/AboutPage.async';
 import { MainPageAsync } from './components/MainPage/MainPage.async';
+import { classNames } from './helpers/classNames/classNames';
 
 import './styles/index.scss';
 import { Theme, ThemeContext } from './theme/ThemeContext';
@@ -11,7 +12,7 @@ const App = () => {
   const {theme, toggleTheme} = useTheme();
     
   return (
-    <div className={`app ${theme}`}>
+    <div className={classNames('app', {}, [theme])}>
       <Link to={'/about'}>About</Link>
       <Link to={'/'}>Home</Link>
       <button onClick={toggleTheme} >Сменить тему</button>
