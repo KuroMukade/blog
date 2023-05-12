@@ -1,10 +1,6 @@
-import { Suspense } from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
-
-import { AboutPage } from 'pages/AboutPage';
-import { MainPage } from 'pages/MainPage';
-
 import { AppRouter } from 'app/providers/router';
+
+import { Navbar } from 'widgets/Navbar';
 
 import { classNames } from 'shared/lib/classNames';
 import { useTheme } from 'shared/contexts/theme/useTheme';
@@ -16,8 +12,7 @@ const App = () => {
 
   return (
     <div className={classNames('app', {}, [theme])}>
-      <Link to={'/about'}>About</Link>
-      <Link to={'/'}>Home</Link>
+      <Navbar />
       <button onClick={toggleTheme}>Сменить тему</button>
       <AppRouter />
     </div>
