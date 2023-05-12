@@ -10,5 +10,3 @@ export function classNames(cn: string, modifications?: Modifications, additional
   ]
     .join(' ');
 }
-
-classNames('aue', { hovered: true }, ['']);
