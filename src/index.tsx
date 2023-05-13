@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { ThemeProvider } from 'shared/contexts/theme';
 
+import "shared/config/i18n"
+
 import App from 'app/App';
 
 render(

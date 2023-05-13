@@ -5,19 +5,24 @@ import { Navbar } from 'widgets/Navbar';
 import { classNames } from 'shared/lib/classNames';
 import { useTheme } from 'shared/contexts/theme/useTheme';
 
-import './styles/index.scss';
 import { Sidebar } from 'widgets/Sidebar';
+import { Suspense } from 'react';
+
+import './styles/index.scss';
 
 const App = () => {
   const { theme } = useTheme();
 
   return (
     <div className={classNames('app', {}, [theme])}>
-      <Navbar />
-      <div className='content-page'>
-        <Sidebar />
-        <AppRouter />
-      </div>
+      <Suspense fallback='lang downloading'>
+          <Navbar />
+          <div className="content-page">
+            <Sidebar />
+            <AppRouter />
+          </div>        
+      </Suspense>
+
     </div>
   );
 };
