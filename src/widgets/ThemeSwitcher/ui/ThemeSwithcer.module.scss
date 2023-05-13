@@ -1,0 +1,22 @@
+.dark {
+  background-color: var(--bg-color);
+}
+
+.light {
+  background-color: var(--bg-color);
+}
+
+.wrapper {
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--primary-color);
+  padding: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.img {
+  width: 20px;
+}

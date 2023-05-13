@@ -5,13 +5,13 @@ import { BuildOptions } from './types/config';
 export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
   const { isDev } = options;
 
-  const typescriptLoader = {
+  const typescriptLoader: webpack.RuleSetRule = {
     test: /\.tsx?$/,
     use: 'ts-loader',
     exclude: /node_modules/,
   };
 
-  const cssLoader = {
+  const cssLoader: webpack.RuleSetRule = {
     test: /\.s[ac]ss$/i,
     use: [
       // dont compile css if dev
@@ -31,5 +31,21 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
     ],
   };
 
-  return [typescriptLoader, cssLoader];
+  const svgLoader: webpack.RuleSetRule = {
+    test: /\.svg$/,
+    type: 'asset/resource',
+    generator: {
+      filename: './icons/[contenthash].[ext]',
+    },
+  };
+
+  const imgLoader: webpack.RuleSetRule = {
+    test: /\.(png|jpg)$/i,
+    type: 'asset/resource',
+    generator: {
+      filename: './img/[contenthash].[ext]',
+    },
+  };
+
+  return [typescriptLoader, cssLoader, svgLoader, imgLoader];
 }
