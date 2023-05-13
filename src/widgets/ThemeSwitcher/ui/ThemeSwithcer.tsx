@@ -19,7 +19,7 @@ export const ThemeSwithcer: FC<ThemeSwithcerProps> = ({ className }) => {
 
    return (
     <div className={classNames(styles.wrapper, {}, [className, theme === Theme.DARK ? styles.light : styles.dark])} onClick={toggleTheme}>
-      <img className={styles.img} src={theme === Theme.DARK ? DarkIcon : LightIcon} alt="" />
+      <img className={styles.img} src={theme === Theme.DARK ? DarkIcon : LightIcon} alt={theme} />
     </div>
     )
 }
