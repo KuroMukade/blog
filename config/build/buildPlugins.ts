@@ -1,8 +1,8 @@
 import webpack from "webpack";
-import path from "path";
 
 import HTMLWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 
 import { BuildOptions } from "./types/config";
 
@@ -17,8 +17,9 @@ export function buildPlugins({ paths, isDev }: BuildOptions): webpack.WebpackPlu
             filename: "css/[name].[contenthash:8].css",
             chunkFilename: "css/[name].[contenthash:8].css"
         }),
+        isDev && new ReactRefreshWebpackPlugin(),
         new webpack.DefinePlugin({
             __IS_DEV__: JSON.stringify(isDev)
-        })
-    ]
+        }),
+    ].filter(Boolean)
 }
