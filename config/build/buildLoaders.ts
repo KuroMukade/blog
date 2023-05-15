@@ -1,84 +1,84 @@
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import webpack from "webpack";
-import { BuildOptions } from "./types/config";
-import ReactRefreshTypeScipt from "react-refresh-typescript";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack from 'webpack';
+import ReactRefreshTypeScipt from 'react-refresh-typescript';
+import { BuildOptions } from './types/config';
 
 export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
-  const { isDev } = options;
+    const { isDev } = options;
 
-  const typescriptLoader: webpack.RuleSetRule = {
-    test: /\.tsx?$/,
-    use: [
-      {
-        loader: "ts-loader",
-        options: {
-          getCustomTransformers: () => ({
-            before: [isDev && ReactRefreshTypeScipt()].filter(Boolean),
-          }),
-          transpileOnly: isDev,
-        },
-      },
-    ],
-    exclude: /node_modules/,
-  };
-
-  const babelLoader = {
-    test: /\.(js|tsx|ts|jsx)$/,
-    exclude: "/node_modules/",
-    use: {
-      loader: "babel-loader",
-      options: {
-        presets: ["@babel/preset-env"],
-        plugins: [
-          [
-            "i18next-extract",
+    const typescriptLoader: webpack.RuleSetRule = {
+        test: /\.tsx?$/,
+        use: [
             {
-              locales: ["ru", "en"],
-              keyAsDefaultValue: true,
+                loader: 'ts-loader',
+                options: {
+                    getCustomTransformers: () => ({
+                        before: [isDev && ReactRefreshTypeScipt()].filter(Boolean),
+                    }),
+                    transpileOnly: isDev,
+                },
             },
-          ],
         ],
-      },
-    },
-  };
+        exclude: /node_modules/,
+    };
 
-  const cssLoader: webpack.RuleSetRule = {
-    test: /\.s[ac]ss$/i,
-    use: [
-      // dont compile css if dev
-      isDev ? "style-loader" : MiniCssExtractPlugin.loader,
-
-      // setup css modules
-      {
-        loader: "css-loader",
-        options: {
-          modules: {
-            localIdentName: isDev
-              ? "[path][name]__[local]--[hash:base64:5]"
-              : "[hash:base64:8]",
-            auto: (resPath: string) => resPath.includes(".module."),
-          },
+    const babelLoader = {
+        test: /\.(js|tsx|ts|jsx)$/,
+        exclude: '/node_modules/',
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env'],
+                plugins: [
+                    [
+                        'i18next-extract',
+                        {
+                            locales: ['ru', 'en'],
+                            keyAsDefaultValue: true,
+                        },
+                    ],
+                ],
+            },
         },
-      },
-      "sass-loader",
-    ],
-  };
+    };
 
-  const svgLoader: webpack.RuleSetRule = {
-    test: /\.svg$/,
-    type: "asset/resource",
-    generator: {
-      filename: "./icons/[contenthash].[ext]",
-    },
-  };
+    const cssLoader: webpack.RuleSetRule = {
+        test: /\.s[ac]ss$/i,
+        use: [
+            // dont compile css if dev
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 
-  const imgLoader: webpack.RuleSetRule = {
-    test: /\.(png|jpg)$/i,
-    type: "asset/resource",
-    generator: {
-      filename: "./img/[contenthash].[ext]",
-    },
-  };
+            // setup css modules
+            {
+                loader: 'css-loader',
+                options: {
+                    modules: {
+                        localIdentName: isDev
+                            ? '[path][name]__[local]--[hash:base64:5]'
+                            : '[hash:base64:8]',
+                        auto: (resPath: string) => resPath.includes('.module.'),
+                    },
+                },
+            },
+            'sass-loader',
+        ],
+    };
 
-  return [babelLoader, typescriptLoader, cssLoader, svgLoader, imgLoader];
+    const svgLoader: webpack.RuleSetRule = {
+        test: /\.svg$/,
+        type: 'asset/resource',
+        generator: {
+            filename: './icons/[contenthash].[ext]',
+        },
+    };
+
+    const imgLoader: webpack.RuleSetRule = {
+        test: /\.(png|jpg)$/i,
+        type: 'asset/resource',
+        generator: {
+            filename: './img/[contenthash].[ext]',
+        },
+    };
+
+    return [babelLoader, typescriptLoader, cssLoader, svgLoader, imgLoader];
 }
