@@ -10,7 +10,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'eng',
-    debug: __IS_DEV__ ? true : false,
+    debug: !!__IS_DEV__,
 
     react: {
       // useSuspense: false,

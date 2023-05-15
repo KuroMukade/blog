@@ -3,17 +3,18 @@ declare module '*.module.scss' {
   export default styles;
 }
 
-declare module "*.svg"
+declare module '*.svg'
 
-declare module "*.png" {
-  const value: any
+declare module '*.png' {
+  const value: any;
   export = value;
 }
 
-declare module "*.jpeg";
+declare module '*.jpeg';
 
-declare module "*.jpg";
+declare module '*.jpg';
 
-declare module "*.gif";
+declare module '*.gif';
 
+// eslint-disable-next-line no-unused-vars
 declare const __IS_DEV__: boolean;

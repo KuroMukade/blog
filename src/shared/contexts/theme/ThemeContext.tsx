@@ -1,4 +1,6 @@
-import React, { FC, useMemo, useState, createContext } from 'react';
+import React, {
+  FC, useMemo, useState, createContext,
+} from 'react';
 
 export enum Theme {
   LIGHT = 'light',
@@ -29,4 +31,3 @@ export const ThemeProvider: FC = ({ children }) => {
 
   return <ThemeContext.Provider value={defaultProps}>{children}</ThemeContext.Provider>;
 };
-
