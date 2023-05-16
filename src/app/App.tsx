@@ -11,6 +11,7 @@ import { Suspense } from 'react';
 import Loader from 'shared/ui/Loader/Loader';
 
 import './styles/index.scss';
+import { BugButton } from './providers/ErrorBoundary';
 
 const App = () => {
   const { theme } = useTheme();
@@ -19,6 +20,7 @@ const App = () => {
       <div className={classNames('app', {}, [theme])}>
           <Suspense fallback={<Loader />}>
               <Navbar />
+              <BugButton />
               <div className="content-page">
                   <Sidebar />
                   <AppRouter />

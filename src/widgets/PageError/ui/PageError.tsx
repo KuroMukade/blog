@@ -9,9 +9,16 @@ import styles from './PageError.module.scss';
 export const PageError: FC = () => {
   const { t } = useTranslation();
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   return (
       <div className={styles.pageError}>
-          <Button className={styles.text}>{t('Произошла ')}</Button>
+          <p className={styles.text}>{t('Произошла непредвиденная ошибка')}</p>
+          <Button onClick={reloadPage}>
+              {t('Произошла ошибка')}
+          </Button>
       </div>
   );
 };
