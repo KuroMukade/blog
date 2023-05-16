@@ -8,6 +8,8 @@ import { useTheme } from 'shared/contexts/theme/useTheme';
 import { Sidebar } from 'widgets/Sidebar';
 import { Suspense } from 'react';
 
+import Loader from 'shared/ui/Loader/Loader';
+
 import './styles/index.scss';
 
 const App = () => {
@@ -15,7 +17,7 @@ const App = () => {
 
   return (
       <div className={classNames('app', {}, [theme])}>
-          <Suspense fallback="lang downloading">
+          <Suspense fallback={<Loader />}>
               <Navbar />
               <div className="content-page">
                   <Sidebar />
