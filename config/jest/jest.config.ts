@@ -1,3 +1,5 @@
+import path from 'path';
+
 import type { Config } from 'jest';
 
 const config: Config = {
@@ -30,6 +32,7 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
   moduleNameMapper: {
     '\\s?css$': 'identity-obj-proxy',
+    '\\.svg': path.resolve(__dirname, 'jestEmptyComponent'),
   },
 };
 
