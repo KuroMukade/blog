@@ -29,7 +29,6 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
               onClick={onToggle}
           >
               toggle
-
           </Button>
           <div className={styles.switchers}>
               <ThemeSwithcer />
