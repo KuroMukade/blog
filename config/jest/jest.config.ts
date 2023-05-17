@@ -4,14 +4,14 @@ const config: Config = {
   coveragePathIgnorePatterns: [
     '\\\\node_modules\\\\',
   ],
-
   clearMocks: true,
   testEnvironment: 'jsdom',
-
   moduleDirectories: [
     'node_modules',
   ],
-
+  modulePaths: [
+    '<rootDir>src',
+  ],
   moduleFileExtensions: [
     'js',
     'mjs',
@@ -22,19 +22,15 @@ const config: Config = {
     'json',
     'node',
   ],
-
-  roots: [
-    '../../',
-  ],
-
-  transform: {
-    '^.+\\.ts?$': 'ts-jest',
-  },
-
+  rootDir: '../../',
   testMatch: [
     '**/__tests__/**/*.[jt]s?(x)',
     '**/?(*.)+(spec|test).[jt]s?(x)',
   ],
+  setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
+  moduleNameMapper: {
+    '\\s?css$': 'identity-obj-proxy',
+  },
 };
 
 export default config;

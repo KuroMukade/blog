@@ -1,4 +1,4 @@
-import { classNames } from './classNames';
+import { classNames } from 'shared/lib/classNames';
 
 describe('classnames', () => {
   test('with only 1 parameter', () => {

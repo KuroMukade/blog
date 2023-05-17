@@ -13,7 +13,4 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
-    "[scss]": {
-        "editor.defaultFormatter": "stylelint.vscode-stylelint",
-    }
 }
