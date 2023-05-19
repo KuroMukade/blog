@@ -9,7 +9,7 @@ i18n
 
     debug: false,
 
-    resources: {ru: { translationsNS: {} } },
+    resources: { ru: { translationsNS: {} } },
   });
 
 export default i18n;

@@ -13,4 +13,8 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
+    "i18n-ally.localesPaths": [
+        "public/locales",
+        "src/shared/config/i18n"
+    ],
 }

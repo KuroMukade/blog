@@ -1,7 +1,7 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 import ReactRefreshTypeScipt from 'react-refresh-typescript';
 import { BuildOptions } from './types/config';
+import { buildCssLoader } from './loaders/buildCSSLoader';
 
 export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
     const { isDev } = options;
@@ -42,27 +42,7 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
         },
     };
 
-    const cssLoader: webpack.RuleSetRule = {
-        test: /\.s[ac]ss$/i,
-        use: [
-            // dont compile css if dev
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-
-            // setup css modules
-            {
-                loader: 'css-loader',
-                options: {
-                    modules: {
-                        localIdentName: isDev
-                            ? '[path][name]__[local]--[hash:base64:5]'
-                            : '[hash:base64:8]',
-                        auto: (resPath: string) => resPath.includes('.module.'),
-                    },
-                },
-            },
-            'sass-loader',
-        ],
-    };
+    const cssLoader = buildCssLoader(isDev);
 
     const svgLoader: webpack.RuleSetRule = {
         test: /\.svg$/,

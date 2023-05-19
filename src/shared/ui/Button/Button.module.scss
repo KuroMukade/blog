@@ -10,3 +10,10 @@
     border: none;
     outline: none;
 }
+
+.outlined {
+    padding: 12px 24px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background: none;
+}
