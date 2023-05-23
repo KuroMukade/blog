@@ -1,3 +1,5 @@
+import { Suspense, useState } from 'react';
+
 import { AppRouter } from 'app/providers/router';
 
 import { Navbar } from 'widgets/Navbar';
@@ -6,12 +8,8 @@ import { classNames } from 'shared/lib/classNames';
 import { useTheme } from 'shared/contexts/theme/useTheme';
 
 import { Sidebar } from 'widgets/Sidebar';
-import { Suspense } from 'react';
 
-import Loader from 'shared/ui/Loader/Loader';
-
-import './styles/index.scss';
-import { BugButton } from './providers/ErrorBoundary';
+import { Loader } from 'shared/ui/Loader/Loader';
 
 const App = () => {
   const { theme } = useTheme();
@@ -20,13 +18,12 @@ const App = () => {
       <div className={classNames('app', {}, [theme])}>
           <Suspense fallback={<Loader />}>
               <Navbar />
-              <BugButton />
+              {/* <BugButton /> */}
               <div className="content-page">
                   <Sidebar />
                   <AppRouter />
               </div>
           </Suspense>
-
       </div>
   );
 };
