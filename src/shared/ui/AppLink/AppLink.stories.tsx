@@ -16,7 +16,8 @@ export default {
   },
 } as ComponentMeta<typeof AppLink>;
 
-const Template: ComponentStory<typeof AppLink> = (args) => <AppLink {...args}>Ссылка</AppLink>;
+// eslint-disable-next-line i18next/no-literal-string
+const Template: ComponentStory<typeof AppLink> = (args) => <AppLink {...args}>Cсылка</AppLink>;
 
 export const Primary = Template.bind({});
 Primary.args = {

@@ -4,8 +4,6 @@ import React, {
 
 import { classNames } from 'shared/lib/classNames';
 
-import styles from './Input.module.scss';
-
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
 interface InputProps extends HTMLInputProps {
@@ -22,6 +20,6 @@ export const Input: FC<InputProps> = ({
   };
 
   return (
-      <input className={classNames(styles.wrapper, {}, [className])} />
+      <input onChange={onChangeHandler} className={classNames('', {}, [className])} />
   );
 };

@@ -27,6 +27,7 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
               data-testid="sidebar-toggle"
               type="button"
               onClick={onToggle}
+          // eslint-disable-next-line i18next/no-literal-string
           >
               toggle
           </Button>
