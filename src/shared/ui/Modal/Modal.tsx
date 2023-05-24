@@ -4,6 +4,7 @@ import React, {
 
 import { classNames } from 'shared/lib/classNames';
 
+import { useTheme } from 'shared/contexts/theme';
 import styles from './Modal.module.scss';
 import { Portal } from '../Portal/Portal';
 
@@ -20,6 +21,8 @@ export const Modal: FC<ModalProps> = ({
   const mods: Record<string, boolean> = {
     [styles.opened]: isOpen,
   };
+
+  const { theme } = useTheme();
 
   const closeHandler = useCallback(() => {
     if (onClose) {
@@ -47,7 +50,7 @@ export const Modal: FC<ModalProps> = ({
 
   return (
       <Portal>
-          <div className={classNames(styles.modal, mods, [className])}>
+          <div className={classNames(styles.modal, mods, [className, theme])}>
               <div className={styles.overlay} onClick={closeHandler}>
                   <div
                       onClick={onContentClick}

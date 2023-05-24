@@ -1,7 +1,7 @@
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ThemeProvider } from 'shared/contexts/theme';
+import { Theme, ThemeProvider } from 'shared/contexts/theme';
 
 import 'shared/config/i18n';
 
@@ -16,7 +16,7 @@ render(
     <BrowserRouter>
         <StoreProvider>
             <ErrorBoundary>
-                <ThemeProvider>
+                <ThemeProvider initialTheme={Theme.LIGHT}>
                     <App />
                 </ThemeProvider>
             </ErrorBoundary>
