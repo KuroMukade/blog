@@ -24,6 +24,9 @@ const config: Config = {
     'json',
     'node',
   ],
+  globals: {
+    __IS_DEV__: true,
+  },
   rootDir: '../../',
   testMatch: [
     '**/__tests__/**/*.[jt]s?(x)',

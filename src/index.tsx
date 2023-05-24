@@ -10,14 +10,17 @@ import App from 'app/App';
 import { ErrorBoundary } from 'app/providers/ErrorBoundary';
 
 import 'app/styles/index.scss';
+import { StoreProvider } from 'app/providers/StoreProvider';
 
 render(
     <BrowserRouter>
-        <ErrorBoundary>
-            <ThemeProvider>
-                <App />
-            </ThemeProvider>
-        </ErrorBoundary>
+        <StoreProvider>
+            <ErrorBoundary>
+                <ThemeProvider>
+                    <App />
+                </ThemeProvider>
+            </ErrorBoundary>
+        </StoreProvider>
     </BrowserRouter>,
     document.getElementById('root'),
 );
