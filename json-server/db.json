@@ -5,8 +5,13 @@
         { "id": 3, "title": "Post 3", "author": "lina" },
         { "id": 4, "title": "Post 4", "author": "ignat" }
     ],
-    "comments": [
-        { "id": 1, "body": "some comment", "postId": 1 }
-    ],
-    "profile": { "name": "mukade" }
+    "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+    "profile": { "name": "mukade" },
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "123"
+        }
+    ]
 }

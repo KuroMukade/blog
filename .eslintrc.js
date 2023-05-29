@@ -20,18 +20,24 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks'],
   rules: {
-    'max-len': ['error', {
-      ignoreTrailingComments: true,
-      ignoreUrls: true,
-      comments: 150,
-      tabWidth: 2,
-      code: 110,
-    }],
+    'max-len': [
+      'error',
+      {
+        ignoreTrailingComments: true,
+        ignoreUrls: true,
+        comments: 150,
+        tabWidth: 4,
+        code: 110,
+      },
+    ],
     'react/jsx-indent': [2, 4],
     'react/jsx-indent-props': [2, 4],
-    'react/jsx-filename-extension': [2, {
-      extensions: ['.js', '.jsx', '.tsx'],
-    }],
+    'react/jsx-filename-extension': [
+      2,
+      {
+        extensions: ['.js', '.jsx', '.tsx'],
+      },
+    ],
     'import/no-unresolved': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
@@ -46,10 +52,13 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
     'linebreak-style': ['error', 'windows'],
-    'i18next/no-literal-string': ['error', {
-      markupOnly: true,
-      ignoreAttribute: ['data-testid', 'to'],
-    }],
+    'i18next/no-literal-string': [
+      'error',
+      {
+        markupOnly: true,
+        ignoreAttribute: ['data-testid', 'to'],
+      },
+    ],
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'no-param-reassign': 'off',
@@ -57,10 +66,12 @@ module.exports = {
   globals: {
     __IS_DEV__: true,
   },
-  overrides: [{
-    files: ['**/src/**/*.test.{ts,tsx}'],
-    rules: {
-      'i18next/no-literal-string': 'off',
+  overrides: [
+    {
+      files: ['**/src/**/*.test.{ts,tsx}'],
+      rules: {
+        'i18next/no-literal-string': 'off',
+      },
     },
-  }],
+  ],
 };

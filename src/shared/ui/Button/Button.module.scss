@@ -17,3 +17,20 @@
     color: var(--primary-color);
     background: none;
 }
+
+.size_m {
+    font: var(--font-m);
+}
+
+.size_l {
+    font: var(--font-l);
+}
+
+.size_xl {
+    font: var(--font-xl);
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
