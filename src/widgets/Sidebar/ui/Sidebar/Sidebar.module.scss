@@ -22,9 +22,7 @@
     border-radius: 2px;
     border: none;
     background-color: var(bg-color);
-    -webkit-box-shadow: 18px 11px 18px -10px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 18px 11px 18px -10px rgba(34, 60, 80, 0.2);
-    box-shadow: 18px 11px 18px -10px rgba(34, 60, 80, 0.2);
+    box-shadow: 18px 11px 18px -10px rgb(34 60 80 / 20%);
 }
 
 .collapsed {

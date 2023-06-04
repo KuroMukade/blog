@@ -1,6 +1,16 @@
 .button {
     cursor: pointer;
-    color: var(--primary-color);
+    color: var(--color-primary);
+    border-radius: 4px;
+    border: none;
+
+    &:hover {
+        box-shadow: 4px 4px 15px -4px var(--color-inverted);
+    }
+
+    &:focus {
+        box-shadow: 0 1px 23px -8px var(--color-inverted);
+    }
 }
 
 .clear {
@@ -13,9 +23,55 @@
 
 .outlined {
     padding: 12px 24px;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 1px solid var(--color-inverted);
+    color: var(--color-inverted);
     background: none;
+    transition: 0.2s ease-in all;
+}
+
+.withGrowth {
+    position: relative;
+    box-shadow: black 0 0 0;
+
+    &.default,
+    &.primary,
+    &.secondary {
+        transition: 0.2s ease-in all;
+        transition-property: box-shadow, color, transform, background-color;
+
+        &:hover {
+            transform: translate(-4px, -4px);
+        }
+    }
+
+    &.default {
+        color: var(--color-inverted);
+
+        &:hover,
+        &:focus {
+            box-shadow: var(--color-inverted) 4px 4px 0;
+        }
+    }
+
+    &.primary {
+        &:hover,
+        &:focus {
+            box-shadow: var(--color-inverted) 4px 4px 0;
+            background-color: var(--color-primary);
+            color: var(--color-inverted);
+        }
+    }
+
+    &.secondary {
+        color: var(--color-secondary);
+
+        &:hover,
+        &:focus {
+            box-shadow: var(--color-inverted) 4px 4px 0;
+            background-color: var(--color-secondary);
+            color: var(--color-main);
+        }
+    }
 }
 
 .size_m {
@@ -33,4 +89,8 @@
 .disabled {
     cursor: not-allowed;
     opacity: 0.5;
+
+    &:hover {
+        pointer-events: none;
+    }
 }

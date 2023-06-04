@@ -1,11 +1,12 @@
 .title {
     font: var(--font-l);
-    color: var(--primary-color);
+    color: var(--color-primary);
 }
 
 .text {
     font: var(--font-m);
-    color: var(--secondary-color);
+    color: var(--color-secondary);
+    margin-top: 12px;
 }
 
 .error {
@@ -15,5 +16,11 @@
 
     .text {
         color: var(--error);
+    }
+}
+
+.clear {
+    .title {
+        color: inherit;
     }
 }

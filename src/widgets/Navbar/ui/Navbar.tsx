@@ -6,7 +6,7 @@ import { LoginModal } from 'features/AuthByUsername';
 
 import { getUserAuthData, userActions } from 'entities/User';
 
-import { Button, ThemeButton } from 'shared/ui/Button/Button';
+import { Button, GrowthColor, ThemeButton } from 'shared/ui/Button/Button';
 import { classNames } from 'shared/lib/classNames';
 
 import styles from './Navbar.module.scss';
@@ -42,7 +42,12 @@ export const Navbar = ({ className }: NavbarProps) => {
 
   return (
       <div className={classNames(styles.navbar, {}, [className])}>
-          <Button theme={ThemeButton.OUTLINE} onClick={onToggleModal}>{t('Войти')}</Button>
+          <Button
+              theme={ThemeButton.OUTLINE}
+              onClick={onToggleModal}
+          >
+              {t('Вход')}
+          </Button>
           <LoginModal isOpen={isAuthOpen} onClose={onToggleModal} />
       </div>
   );

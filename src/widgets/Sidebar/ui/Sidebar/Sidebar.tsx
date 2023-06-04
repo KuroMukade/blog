@@ -19,7 +19,7 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
 
   const { t } = useTranslation();
 
-  const onToggle = async () => {
+  const onToggle = () => {
     setCollapsed((prev) => !prev);
   };
 

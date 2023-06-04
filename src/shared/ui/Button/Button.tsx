@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC } from 'react';
+import React, { ButtonHTMLAttributes, FC, memo } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
 
@@ -15,19 +15,27 @@ export enum ButtonSize {
   XL = 'size_xl',
 }
 
+export enum GrowthColor {
+  DEFAULT = 'default',
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+}
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    className?: string;
    theme?: ThemeButton;
-   size?: ButtonSize.M;
+   size?: ButtonSize;
+   growthColor?: GrowthColor;
    disabled?: boolean;
 }
 
-export const Button: FC<ButtonProps> = ({
-  className, theme, children, disabled, size = ButtonSize.M, ...restBtnProps
-}) => {
+export const Button = memo(({
+  className, theme, children, disabled, size = ButtonSize.M, growthColor, ...restBtnProps
+}: ButtonProps) => {
   const mods: Record<string, boolean> = {
     [styles[theme]]: true,
     [styles[size]]: true,
+    [styles[growthColor]]: growthColor && true,
     [styles.disabled]: disabled,
   };
 
@@ -38,7 +46,7 @@ export const Button: FC<ButtonProps> = ({
             classNames(
               styles.button,
               mods,
-              [className],
+              [className, styles.withGrowth],
             )
           }
           disabled={disabled}
@@ -47,4 +55,4 @@ export const Button: FC<ButtonProps> = ({
           {children}
       </button>
   );
-};
+});

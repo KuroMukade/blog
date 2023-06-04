@@ -1,8 +1,9 @@
 import React, {
-  FC, HTMLAttributes, InputHTMLAttributes, memo,
+  FC, InputHTMLAttributes,
 } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
+import styles from './Input.module.scss';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
@@ -13,13 +14,19 @@ interface InputProps extends HTMLInputProps {
 }
 
 export const Input: FC<InputProps> = ({
-  className, onChange, value, type = 'text', ...restInputProps
+  className, onChange, value, type = 'text', placeholder = '',
 }) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
 
   return (
-      <input onChange={onChangeHandler} className={classNames('', {}, [className])} />
+      <input
+          value={value}
+          type={type}
+          placeholder={placeholder}
+          onChange={onChangeHandler}
+          className={classNames(styles.input, {}, [className])}
+      />
   );
 };

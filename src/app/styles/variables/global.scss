@@ -11,6 +11,7 @@
     --font-size-xl: 32px;
     --font-line-xl: 40px;
     --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+
     // Размеры
     --navbar-height: 76px;
     --sidebar-width: 300px;
@@ -21,5 +22,8 @@
 
     // Цвета
     --overlay-color: rgba(0 0 0 / 60%);
-    --error: #EB5757;
+    --error: #eb5757;
+    --hint-color: #aeaeae;
+
+    // box-shadow on focus
 }

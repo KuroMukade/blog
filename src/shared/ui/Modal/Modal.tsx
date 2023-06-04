@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactNode, useCallback, useEffect, useState,
+  FC, ReactNode, useCallback, useEffect, useRef, useState,
 } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
@@ -14,10 +14,11 @@ interface ModalProps {
    isOpen?: boolean;
    onClose?: () => void;
    lazy?: boolean;
+   tabIndex?: number;
 }
 
 export const Modal: FC<ModalProps> = ({
-  className, children, onClose, isOpen, lazy = true,
+  className, children, onClose, isOpen, tabIndex, lazy = true,
 }) => {
   const mods: Record<string, boolean> = {
     [styles.opened]: isOpen,
@@ -63,13 +64,13 @@ export const Modal: FC<ModalProps> = ({
 
   return (
       <Portal>
-          <div className={classNames(styles.modal, mods, [className, theme])}>
+          <div tabIndex={tabIndex} className={classNames(styles.modal, mods, [className, theme])}>
               <div className={styles.overlay} onClick={closeHandler}>
                   <div
                       onClick={onContentClick}
                       className={
-                  classNames(styles.content, { [styles.modalOpen]: isOpen })
-                }
+                        classNames(styles.content, { [styles.modalOpen]: isOpen })
+                      }
                   >
                       {children}
                   </div>
