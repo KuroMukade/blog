@@ -3,14 +3,6 @@
     color: var(--color-primary);
     border-radius: 4px;
     border: none;
-
-    &:hover {
-        box-shadow: 4px 4px 15px -4px var(--color-inverted);
-    }
-
-    &:focus {
-        box-shadow: 0 1px 23px -8px var(--color-inverted);
-    }
 }
 
 .clear {

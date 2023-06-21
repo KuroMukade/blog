@@ -7,7 +7,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { BuildOptions } from './types/config';
 
-export function buildPlugins({ paths, isDev }: BuildOptions): webpack.WebpackPluginInstance[] {
+export function buildPlugins({ paths, isDev, apiUrl }: BuildOptions): webpack.WebpackPluginInstance[] {
   return [
     new HTMLWebpackPlugin({
       template: paths.html,
@@ -20,8 +20,10 @@ export function buildPlugins({ paths, isDev }: BuildOptions): webpack.WebpackPlu
     isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
+      __API__: JSON.stringify(apiUrl),
     }),
     process.env.analyze && new BundleAnalyzerPlugin({ openAnalyzer: true }),
     new webpack.HotModuleReplacementPlugin(),
-  ].filter(Boolean);
+    // as any filter cuz there is no way to return "" or false to this plugins
+  ].filter(Boolean as any);
 }

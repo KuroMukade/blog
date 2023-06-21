@@ -16,9 +16,9 @@ body {
 
 .content-page {
     display: flex;
+    background-color: var(--bg-color-secondary);
 }
 
 .page-wrapper {
     flex-grow: 1;
-    padding: 20px;
 }

@@ -1,0 +1,24 @@
+.wrapper {
+}
+
+.profileHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profileData {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inputText {
+    font: var(--font-l);
+}

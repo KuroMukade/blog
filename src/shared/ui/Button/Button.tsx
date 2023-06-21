@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, memo } from 'react';
+import { ButtonHTMLAttributes, FC, memo } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
 
@@ -30,9 +30,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = memo(({
-  className, theme, children, disabled, size = ButtonSize.M, growthColor, ...restBtnProps
+  className, theme = ThemeButton.CLEAR, children, disabled, size = ButtonSize.M, growthColor, ...restBtnProps
 }: ButtonProps) => {
-  const mods: Record<string, boolean> = {
+  const mods: Record<string, boolean | undefined> = {
     [styles[theme]]: true,
     [styles[size]]: true,
     [styles[growthColor]]: growthColor && true,

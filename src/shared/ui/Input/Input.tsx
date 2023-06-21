@@ -1,5 +1,5 @@
 import React, {
-  FC, InputHTMLAttributes,
+  FC, InputHTMLAttributes, memo,
 } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
@@ -13,9 +13,9 @@ interface InputProps extends HTMLInputProps {
    onChange?: (value: string) => void;
 }
 
-export const Input: FC<InputProps> = ({
+export const Input = memo(({
   className, onChange, value, type = 'text', placeholder = '',
-}) => {
+}: InputProps) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
@@ -29,4 +29,4 @@ export const Input: FC<InputProps> = ({
           className={classNames(styles.input, {}, [className])}
       />
   );
-};
+});

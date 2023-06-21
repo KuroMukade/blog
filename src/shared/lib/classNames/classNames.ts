@@ -1,6 +1,10 @@
-type Modifications = Record<string, boolean | string>;
+type Modifications = Record<string, boolean | string | undefined>;
 
-export function classNames(cn: string, modifications: Modifications = {}, additional: string[] = []): string {
+export function classNames(
+  cn: string,
+  modifications: Modifications = {},
+  additional: Array<string | undefined> = [],
+): string {
   return [
     cn,
     ...additional.filter(Boolean),

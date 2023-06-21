@@ -1,5 +1,5 @@
 import React, {
-  FC, ReactNode, useCallback, useEffect, useRef, useState,
+  FC, ReactNode, useCallback, useEffect, useState,
 } from 'react';
 
 import { classNames } from 'shared/lib/classNames';

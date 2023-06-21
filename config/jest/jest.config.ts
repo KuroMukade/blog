@@ -26,6 +26,7 @@ const config: Config = {
   ],
   globals: {
     __IS_DEV__: true,
+    __API__: '',
   },
   rootDir: '../../',
   testMatch: [

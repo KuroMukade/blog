@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next';
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
+import { classNames } from 'shared/lib/classNames';
+import styles from './LangSwithcer.module.scss';
+
 interface LangSwitcherProps {
   className?: string;
+  collapsed?: boolean;
 }
 
-export const LangSwitcher: FC<LangSwitcherProps> = ({ className }) => {
+export const LangSwitcher: FC<LangSwitcherProps> = ({ className, collapsed }) => {
   const { t, i18n } = useTranslation();
 
   const toggle = () => {
@@ -15,8 +19,15 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ className }) => {
   };
 
   return (
-      <Button className={className} theme={ThemeButton.CLEAR} onClick={toggle}>
+      <Button
+          className={
+            classNames(styles.switcher, {}, [className])
+          }
+          theme={ThemeButton.CLEAR}
+          onClick={toggle}
+      >
           {t('ру')}
+          {!collapsed && <span className={styles.text}>{t('Язык интерфейса')}</span>}
       </Button>
   );
 };

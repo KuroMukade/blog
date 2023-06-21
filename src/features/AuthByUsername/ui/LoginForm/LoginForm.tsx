@@ -7,11 +7,11 @@ import { Button, GrowthColor, ThemeButton } from 'shared/ui/Button/Button';
 
 import { useTranslation } from 'react-i18next';
 
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { ReduxStoreWithManager } from 'app/providers/StoreProvider';
-import { type ReducersList, useDynamicModuleLoader } from 'shared/hooks/useDynamicModuleLoader';
+import { type ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
@@ -23,24 +23,24 @@ import styles from './LoginForm.module.scss';
 
 interface LoginFormProps {
    className?: string
+   onSuccess?: () => void;
 }
 
 const initialReducers: ReducersList = {
   loginForm: loginReducer,
 };
 
-const LoginForm = memo(({ className }: LoginFormProps) => {
+const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const { t } = useTranslation();
 
-  const store = useStore() as ReduxStoreWithManager;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const username = useSelector(getLoginUsername);
   const password = useSelector(getLoginPassword);
   const isLoading = useSelector(getLoginIsLoading);
   const error = useSelector(getLoginError);
 
-  useDynamicModuleLoader('loginForm', initialReducers);
+  useDynamicModuleLoader('loginForm', initialReducers, true);
 
   const onChangeUsername = useCallback((value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -50,9 +50,12 @@ const LoginForm = memo(({ className }: LoginFormProps) => {
     dispatch(loginActions.setPassword(value));
   }, [dispatch]);
 
-  const onLoginClick = useCallback(() => {
-    dispatch(loginByUsername({ username, password }));
-  }, [dispatch, password, username]);
+  const onLoginClick = useCallback(async () => {
+    const result = await dispatch(loginByUsername({ username, password }));
+    if (result.meta.requestStatus === 'fulfilled') {
+      onSuccess?.();
+    }
+  }, [dispatch, onSuccess, password, username]);
 
   return (
       <div className={classNames(styles.wrapper, {}, [className])}>

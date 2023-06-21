@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
 import { Button } from 'shared/ui/Button/Button';
@@ -8,7 +8,9 @@ import { ThemeSwithcer } from 'widgets/ThemeSwitcher';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { useTranslation } from 'react-i18next';
 
+import { SidebarItemsList } from 'widgets/Sidebar/model/items';
 import styles from './Sidebar.module.scss';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
 
 interface SidebarProps {
   className?: string;
@@ -23,14 +25,17 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
     setCollapsed((prev) => !prev);
   };
 
+  const linkList = useMemo(() => SidebarItemsList.map((item) => (
+      <SidebarItem item={item} collapsed={collapsed} key={item.path} />
+  )), [collapsed]);
+
   return (
       <div
           data-testid="sidebar"
           className={classNames(styles.sidebar, { [styles.collapsed]: collapsed }, [className])}
       >
           <nav className={styles.nav}>
-              <AppLink theme={AppLinkTheme.PRIMARY} to="/">{t('Главная')}</AppLink>
-              <AppLink theme={AppLinkTheme.PRIMARY} to="about">{t('О нас')}</AppLink>
+              {linkList}
           </nav>
           <Button
               data-testid="sidebar-toggle"
@@ -39,15 +44,15 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
               onClick={onToggle}
           // eslint-disable-next-line i18next/no-literal-string
           >
-              →
+              {collapsed ? '>' : '<-'}
           </Button>
           <div
               className={
                 classNames(styles.switchers, { [styles.collapsedSwitchers]: collapsed }, [className])
             }
           >
-              <ThemeSwithcer />
-              <LangSwitcher />
+              <ThemeSwithcer collapsed={collapsed} />
+              <LangSwitcher collapsed={collapsed} />
           </div>
       </div>
   );

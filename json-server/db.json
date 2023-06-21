@@ -6,12 +6,21 @@
         { "id": 4, "title": "Post 4", "author": "ignat" }
     ],
     "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-    "profile": { "name": "mukade" },
     "users": [
         {
             "id": "1",
             "username": "admin",
             "password": "123"
         }
-    ]
+    ],
+    "profile": {
+        "name": "Тимур",
+        "lastname": "Гайнутдинов",
+        "age": "20",
+        "country": "Russia",
+        "city": "Kazan",
+        "username": "kuromukade",
+        "avatar": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juvenile_Ragdoll.jpg",
+        "currency": "RUB"
+    }
 }

@@ -4,14 +4,18 @@
     background: var(--inverted-bg-color);
     position: relative;
     transition: width 0.3s ease;
+    display: flex;
+    font: var(--font-l);
+    justify-content: center;
 }
 
 .nav {
     margin-top: 64px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: left;
+    text-align: left;
+    gap: 24px;
 }
 
 .toggle {
@@ -39,8 +43,7 @@
     bottom: 20px;
     width: 100%;
     padding: 0 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     gap: 16px;
 }
