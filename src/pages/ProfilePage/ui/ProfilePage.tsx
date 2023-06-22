@@ -3,8 +3,10 @@ import React, { FC, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames';
 
 import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
-import { ProfileCard, fetchProfileData, profileReducer } from 'entities/Profile';
+import { fetchProfileData, profileReducer } from 'entities/Profile';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+
+import { EditableProfileCard } from 'features/EditableProfileCard';
 
 import styles from './ProfilePage.module.scss';
 
@@ -22,7 +24,7 @@ const ProfilePage: FC = () => {
 
   return (
       <div className={classNames(styles.wrapper, {}, [])}>
-          <ProfileCard />
+          <EditableProfileCard />
       </div>
   );
 };
