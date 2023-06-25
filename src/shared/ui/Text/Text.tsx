@@ -4,6 +4,8 @@ import { classNames } from 'shared/lib/classNames';
 
 import styles from './Text.module.scss';
 
+export type TextSize = 'BIG' | 'MEDIUM' | 'LOW';
+
 export enum TextTheme {
     PRIMARY = 'primary',
     ERROR = 'error',
@@ -15,13 +17,20 @@ interface TextProps {
    title?: string;
    text?: string;
    theme?: TextTheme;
+   textSize?: TextSize;
 }
 
 export const Text: FC<TextProps> = ({
-  className, title, text, theme,
-}) => (
-    <div className={classNames(styles.wrapper, { [styles[theme]]: true }, [className])}>
-        {title && <p className={styles.title}>{title}</p>}
-        {text && <p className={styles.text}>{text}</p>}
-    </div>
-);
+  className, title, text, theme = TextTheme.PRIMARY, textSize = 'LOW',
+}) => {
+  const mods: Mods = {
+    [styles[theme]]: true,
+    [styles[textSize]]: true,
+  };
+  return (
+      <div className={classNames(styles.wrapper, mods, [className])}>
+          {title && <p className={styles.title}>{title}</p>}
+          {text && <p className={styles.text}>{text}</p>}
+      </div>
+  );
+};

@@ -1,24 +1,26 @@
-.wrapper {
+.ProfileCard {
+    padding: 20px;
+    border: 2px solid var(--inverted-bg-color);
 }
 
-.profileHeader {
+.input {
+    margin-top: 10px;
+}
+
+.loading,
+.error {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
 }
 
-.profileData {
-    margin-top: 64px;
+.avatarWrapper {
     display: flex;
-    flex-direction: column;
-    gap: 32px;
+    width: 100%;
+    justify-content: center;
 }
 
-.inputWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.inputText {
-    font: var(--font-l);
+.editing {
+    border: 2px solid var(--inverted-primary-color);
 }

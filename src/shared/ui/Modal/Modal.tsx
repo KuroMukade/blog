@@ -20,7 +20,7 @@ interface ModalProps {
 export const Modal: FC<ModalProps> = ({
   className, children, onClose, isOpen, tabIndex, lazy = true,
 }) => {
-  const mods: Record<string, boolean> = {
+  const mods: Mods = {
     [styles.opened]: isOpen,
   };
 

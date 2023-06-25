@@ -5,24 +5,23 @@ import React, {
 import { classNames } from 'shared/lib/classNames';
 import styles from './Input.module.scss';
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'readOnly'>;
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'readOnly'>;
 
 interface InputProps extends HTMLInputProps {
    className?: string;
-   value?: string;
    onChange?: (value: string) => void;
-   readOnly?: boolean;
+   readonly?: boolean;
 }
 
 export const Input = memo(({
-  className, onChange, value, type = 'text', placeholder = '', readOnly = false,
+  className, onChange, value, type = 'text', placeholder = '', readonly = false,
 }: InputProps) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
 
-  const mods: Record<string, boolean> = {
-    [styles.readonly]: readOnly,
+  const mods: Mods = {
+    [styles.readonly]: readonly,
   };
 
   return (
@@ -30,7 +29,7 @@ export const Input = memo(({
           value={value}
           type={type}
           placeholder={placeholder}
-          readOnly={readOnly}
+          readOnly={readonly}
           onChange={onChangeHandler}
           className={classNames(styles.input, mods, [className])}
       />
