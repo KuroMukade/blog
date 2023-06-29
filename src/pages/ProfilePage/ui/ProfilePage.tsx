@@ -7,6 +7,7 @@ import {
   getProfileForm,
   getProfileIsLoading,
   getProfileReadonly,
+  getProfileValidateErrors,
   profileActions,
   ProfileCard,
   profileReducer,
@@ -16,6 +17,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 const reducers: ReducersList = {
@@ -36,6 +38,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   const isLoading = useSelector(getProfileIsLoading);
   const error = useSelector(getProfileError);
   const readonly = useSelector(getProfileReadonly);
+  const validateErrors = useSelector(getProfileValidateErrors);
 
   useEffect(() => {
     dispatch(fetchProfileData());
@@ -76,6 +79,9 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   return (
       <div className={classNames('', {}, [className])}>
           <ProfilePageHeader />
+          {validateErrors?.length && validateErrors.map((err) => (
+              <Text key={err} theme={TextTheme.ERROR} text={err} />
+          ))}
           <ProfileCard
               data={formData}
               isLoading={isLoading}

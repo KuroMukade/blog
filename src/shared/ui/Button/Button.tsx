@@ -19,6 +19,7 @@ export enum GrowthColor {
   DEFAULT = 'default',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
+  CLEAR = 'clear',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -30,7 +31,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = memo(({
-  className, theme = ThemeButton.CLEAR, children, disabled, size = ButtonSize.M, growthColor, ...restBtnProps
+  className,
+  theme = ThemeButton.CLEAR,
+  children,
+  disabled,
+  size = ButtonSize.M,
+  growthColor = GrowthColor.CLEAR,
+  ...restBtnProps
 }: ButtonProps) => {
   const mods: Record<string, boolean | undefined> = {
     [styles[theme]]: true,
