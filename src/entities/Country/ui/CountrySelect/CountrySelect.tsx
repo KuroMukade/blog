@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, useCallback,
+  memo, useCallback,
 } from 'react';
 
 import { classNames } from 'shared/lib/classNames';

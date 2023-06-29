@@ -1,9 +1,9 @@
 import { Profile, ValidateProfileError } from '../../types/profile';
 
 export const validateProfile = (profile?: Profile) => {
-    if (!profile) {
-        return [ValidateProfileError.NO_DATA];
-    }
+  if (!profile) {
+    return [ValidateProfileError.NO_DATA];
+  }
   const {
     age, avatar, city, country, currency, first, lastname, username,
   } = profile;
