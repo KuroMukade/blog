@@ -4,7 +4,7 @@ export function buildCssLoader(isDev: boolean) {
     return {
         test: /\.s[ac]ss$/i,
         use: [
-            // dont compile css if dev
+            // don't compile css if dev
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
 
             // setup css modules
