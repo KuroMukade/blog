@@ -17,6 +17,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
             path: paths.build,
             clean: true,
             assetModuleFilename: '[hash][ext][query]',
+            publicPath: '/',
         },
         plugins: buildPlugins(options),
         module: {

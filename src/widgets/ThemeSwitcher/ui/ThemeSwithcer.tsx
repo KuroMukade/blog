@@ -18,6 +18,21 @@ export const ThemeSwithcer = ({ className, collapsed }: ThemeSwithcerProps) => {
 
   const { t } = useTranslation();
 
+  let themeToShow;
+
+  switch (theme) {
+    case Theme.DARK:
+      themeToShow = t('Светлая тема');
+      break;
+    case Theme.LIGHT:
+      themeToShow = t('Легкая тема');
+      break;
+    case Theme.SIMPLE:
+      themeToShow = t('Темная тема');
+      break;
+    default: themeToShow = Theme.DARK;
+  }
+
   return (
       <div
           role="button"
@@ -41,7 +56,7 @@ export const ThemeSwithcer = ({ className, collapsed }: ThemeSwithcerProps) => {
             )
           }
           >
-              {!collapsed && (theme === Theme.LIGHT ? t('Светлая тема') : t('Темная тема'))}
+              {!collapsed && themeToShow}
           </span>
       </div>
   );
