@@ -1,13 +1,21 @@
-import React, { memo, useEffect } from 'react';
+import { memo, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { classNames } from 'shared/lib/classNames';
 
-import { useTranslation } from 'react-i18next';
 import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
-import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useSelector } from 'react-redux';
-import { getArticleDetailsData, getArticleDetailsError, getArticleDetailsIsLoading } from 'entities/Article/model/selectors/articleDetails';
+
+import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById/fetchArticleById';
+
+import { ArticleSkeleton } from '../ArticleSkeleton/ArticleSkeleton';
+
+import {
+  getArticleDetailsData,
+  getArticleDetailsError,
+  getArticleDetailsIsLoading,
+} from '../../model/selectors/articleDetails';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 
 import styles from './ArticleDetails.module.scss';
@@ -38,7 +46,11 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
 
   if (isLoading) {
     content = (
-        <div className={classNames(styles.wrapper, {}, [className])}>Loading</div>
+        <div className={classNames(styles.wrapper, {}, [className])}>
+            <ArticleSkeleton />
+            <ArticleSkeleton />
+            <ArticleSkeleton />
+        </div>
     );
   } else if (error) {
     content = (

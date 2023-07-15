@@ -46,7 +46,7 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
 
     const svgLoader: webpack.RuleSetRule = {
         test: /\.svg$/,
-        type: 'asset/resource',
+        type: 'asset',
         generator: {
             filename: './icons/[contenthash].[ext]',
         },
