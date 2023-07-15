@@ -7,7 +7,7 @@ import styles from './Avatar.module.scss';
 interface AvatarProps {
    alt: string;
    className?: string;
-   src?: string;
+   src: string;
    size?: string | number;
    rounded?: boolean;
 }

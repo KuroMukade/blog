@@ -2,5 +2,84 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 70px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    
+    .headerLeftSection {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .headerRightSection {
+        display: flex;
+        gap: 25px;
+    }
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .title {
+        font: var(--font-xl);
+    }
+
+    .subtitle {
+        font-size: var(--font-size-l);
+    }
+
+    .extra {
+        display: flex;
+        justify-content: space-between;
+        color: #B8B8B8;
+        
+        .extraLeftSide {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            
+            .likes {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .comments {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+    
+        .extraRightSide {
+            display: flex;
+            gap: 20px;
+            .time {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .views {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+    }
 }
