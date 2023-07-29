@@ -1,11 +1,10 @@
 .navbar {
     width: 100%;
     height: var(--navbar-height);
-    border-bottom: var(--color-primary) 2px solid;
+    border-bottom: 1px solid var(--border-color);
     background-color: var(--bg-color);
-    gap: 16px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding: 12px 24px;
+    justify-content: space-between;
+    padding: 35px 50px;
 }

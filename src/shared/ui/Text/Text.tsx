@@ -4,7 +4,7 @@ import { classNames } from 'shared/lib/classNames';
 
 import styles from './Text.module.scss';
 
-export type TextSize = 'BIG' | 'MEDIUM' | 'LOW' | 'XL' | 'X' | 'L' | 'S' | 'M';
+export type TextSize = 'XL' | 'X' | 'L' | 'S' | 'M';
 
 export enum TextTheme {
     PRIMARY = 'primary',

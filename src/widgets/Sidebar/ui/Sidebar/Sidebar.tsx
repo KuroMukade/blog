@@ -1,11 +1,8 @@
-import React, { FC, useMemo, useState } from 'react';
+import { FC, useMemo } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
-import { Button } from 'shared/ui/Button/Button';
 import { LangSwitcher } from 'widgets/LangSwitcher';
 import { ThemeSwithcer } from 'widgets/ThemeSwitcher';
-
-import { useTranslation } from 'react-i18next';
 
 import { SidebarItemsList } from 'widgets/Sidebar/model/items';
 import { useSelector } from 'react-redux';
@@ -15,18 +12,11 @@ import { SidebarItem } from '../SidebarItem/SidebarItem';
 
 interface SidebarProps {
   className?: string;
+  collapsed: boolean;
 }
 
-export const Sidebar: FC<SidebarProps> = ({ className }) => {
-  const [collapsed, setCollapsed] = useState(false);
-
+export const Sidebar: FC<SidebarProps> = ({ className, collapsed }) => {
   const auth = useSelector(getUserAuthData);
-
-  const { t } = useTranslation();
-
-  const onToggle = () => {
-    setCollapsed((prev) => !prev);
-  };
 
   const linkList = useMemo(() => SidebarItemsList.map((item) => {
     if (item.authOnly && !auth) {
@@ -43,15 +33,6 @@ export const Sidebar: FC<SidebarProps> = ({ className }) => {
           <nav className={styles.nav}>
               {linkList}
           </nav>
-          <Button
-              data-testid="sidebar-toggle"
-              type="button"
-              className={styles.toggle}
-              onClick={onToggle}
-          // eslint-disable-next-line i18next/no-literal-string
-          >
-              {collapsed ? '>' : '<-'}
-          </Button>
           <div
               className={
                 classNames(styles.switchers, { [styles.collapsedSwitchers]: collapsed }, [className])

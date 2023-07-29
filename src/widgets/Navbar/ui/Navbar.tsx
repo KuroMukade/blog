@@ -1,3 +1,5 @@
+import burgerIcon from 'shared/assets/icons/burger.svg';
+
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -6,16 +8,17 @@ import { LoginModal } from 'features/AuthByUsername';
 
 import { getUserAuthData, userActions } from 'entities/User';
 
-import { Button, GrowthColor, ThemeButton } from 'shared/ui/Button/Button';
+import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { classNames } from 'shared/lib/classNames';
 
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
   className?: string;
+  onBurgerClick?: () => void;
 }
 
-export const Navbar = ({ className }: NavbarProps) => {
+export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
   const { t } = useTranslation();
 
   const [isAuthOpen, setAuthOpen] = useState(false);
@@ -42,6 +45,9 @@ export const Navbar = ({ className }: NavbarProps) => {
 
   return (
       <div className={classNames(styles.navbar, {}, [className])}>
+          <Button onClick={onBurgerClick}>
+              <img src={burgerIcon} alt="toggle sidebar" />
+          </Button>
           <Button
               theme={ThemeButton.OUTLINE}
               onClick={onToggleModal}

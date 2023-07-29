@@ -1,5 +1,9 @@
 .link {
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font: var(--font-s);
 }
 
 .icon {

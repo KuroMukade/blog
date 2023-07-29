@@ -25,50 +25,32 @@
     }
 }
 
-.LOW {
-    .title {
-        font-size: 16px;
-    }
-}
-
-.MEDIUM {
-    .title {
-        font-size: 24px;
-    }
-}
-
-.HIGH {
-    .title {
-        font-size: 32px;
-    };
-}
-
 .XL {
     .title {
-        font-size: 32px;
+        font: var(--font-xl);
     };
 }
 
 .X {
     .title {
-        font-size: 16px;
+        font: var(--font-x);
     }
 }
 
 .L {
     .title {
-        font-size: 24px;
+        font: var(--font-l);
     }
-}
-
-.M {
-    .title {
-        font-size: 32px;
-    };
 }
 
 .S {
     .title {
-        font-size: 32px;
+        font: var(--font-s);
+    };
+}
+
+.M {
+    .title {
+        font: var(--font-m);
     };
 }

@@ -2,6 +2,7 @@
 @import "./variables/global";
 @import "./themes/dark";
 @import "./themes/light";
+@import "./themes/simple";
 
 body {
     font: var(--font-m);
@@ -21,6 +22,6 @@ body {
 
 .page-wrapper {
     flex-grow: 1;
-    padding: 50px auto 100px auto;
+    padding: 50px 0 100px 0;
     overflow-y: auto;
 }

@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { AppRouter } from 'app/providers/router';
 
@@ -23,12 +23,14 @@ const App = () => {
     dispatch(userActions.initAuthData());
   }, [dispatch]);
 
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
       <div className={classNames('app', {}, [theme])}>
           <Suspense fallback={<Loader />}>
-              <Navbar />
+              <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
               <div className="content-page">
-                  <Sidebar />
+                  <Sidebar collapsed={collapsed} />
                   {inited && <AppRouter />}
               </div>
           </Suspense>

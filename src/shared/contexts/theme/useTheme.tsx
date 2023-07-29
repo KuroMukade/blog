@@ -26,6 +26,7 @@ export function useTheme(): UseThemeResult {
     }
 
     setTheme?.(newTheme);
+    // console.log(newTheme);
     localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
   };
 

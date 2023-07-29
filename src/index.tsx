@@ -16,7 +16,7 @@ render(
     <BrowserRouter>
         <StoreProvider>
             <ErrorBoundary>
-                <ThemeProvider initialTheme={Theme.LIGHT}>
+                <ThemeProvider initialTheme={Theme.SIMPLE}>
                     <App />
                 </ThemeProvider>
             </ErrorBoundary>
