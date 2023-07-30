@@ -5,7 +5,7 @@ import heartIcon from 'shared/assets/icons/heart.svg';
 import messageIcon from 'shared/assets/icons/message.svg';
 import eyeIcon from 'shared/assets/icons/eye.svg';
 
-import { memo, useEffect } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -27,6 +27,10 @@ import {
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 
 import styles from './ArticleDetails.module.scss';
+import { ArticleBlock } from '../../model/types/article';
+import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
+import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
+import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 
 interface ArticleDetailsProps {
    className?: string;
@@ -44,7 +48,20 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
 
   const isLoading = useSelector(getArticleDetailsIsLoading);
   const error = useSelector(getArticleDetailsError);
-  const data = useSelector(getArticleDetailsData);
+  const article = useSelector(getArticleDetailsData);
+
+  const renderBlock = (block: ArticleBlock) => {
+    switch (block.type) {
+      case 'CODE':
+        return <ArticleCodeBlockComponent block={block} key={block.id} />;
+      case 'IMAGE':
+        return <ArticleImageBlockComponent block={block} key={block.id} />;
+      case 'TEXT':
+        return <ArticleTextBlockComponent block={block} key={block.id} />;
+      default:
+        return null;
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchArticleById(id));
@@ -70,8 +87,8 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
             <div className={styles.heading}>
                 <div className={styles.header}>
                     <div className={styles.headerLeftSection}>
-                        <Avatar src={data?.img!} size="26px" rounded alt="profile avatar" />
-                        <span className={styles.date}>{data?.createdAt}</span>
+                        <Avatar src={article?.img!} size="26px" rounded alt="profile avatar" />
+                        <span className={styles.date}>{article?.createdAt}</span>
                     </div>
                     <div className={styles.headerRightSection}>
                         <img src={addUserIcon} alt="add-user" />
@@ -79,8 +96,8 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
                     </div>
                 </div>
                 <div className={styles.body}>
-                    <h1 className={styles.title}>{data?.title}</h1>
-                    <p className={styles.subtitle}>{data?.subtitle}</p>
+                    <h1 className={styles.title}>{article?.title}</h1>
+                    <p className={styles.subtitle}>{article?.subtitle}</p>
                     <div className={styles.extra}>
                         <div className={styles.extraLeftSide}>
                             <img src={archiveIcon} alt="archive article" />
@@ -103,6 +120,7 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
                     </div>
                 </div>
             </div>
+            {article?.blocks.map(renderBlock)}
         </div>
     );
   }

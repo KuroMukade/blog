@@ -38,6 +38,9 @@ export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
   if (authData) {
     return (
         <div className={classNames(styles.navbar, {}, [className])}>
+            <Button onClick={onBurgerClick}>
+                <img src={burgerIcon} alt="toggle sidebar" />
+            </Button>
             <Button theme={ThemeButton.OUTLINE} onClick={onLogout}>{t('Выйти')}</Button>
         </div>
     );

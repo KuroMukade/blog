@@ -1,9 +1,9 @@
 .switcher {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     color: black;
-    padding-left: 6px;
+    font: var(--font-s);
 }
 
 .text {

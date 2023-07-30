@@ -19,16 +19,24 @@ export const ThemeSwithcer = ({ className, collapsed }: ThemeSwithcerProps) => {
   const { t } = useTranslation();
 
   let themeToShow;
+  let style;
+  let icon;
 
   switch (theme) {
     case Theme.DARK:
       themeToShow = t('Светлая тема');
+      style = styles.themeDark;
+      icon = LightIcon;
       break;
     case Theme.LIGHT:
       themeToShow = t('Легкая тема');
+      style = styles.themeLight;
+      icon = DarkIcon;
       break;
     case Theme.SIMPLE:
       themeToShow = t('Темная тема');
+      style = styles.themeSimple;
+      icon = DarkIcon;
       break;
     default: themeToShow = Theme.DARK;
   }
@@ -47,15 +55,8 @@ export const ThemeSwithcer = ({ className, collapsed }: ThemeSwithcerProps) => {
           onKeyDown={toggleTheme}
           onClick={toggleTheme}
       >
-          <img className={styles.img} src={theme === Theme.DARK ? DarkIcon : LightIcon} alt={theme} />
-          <span className={
-            classNames(
-              styles.themeName,
-              {},
-              [theme === Theme.LIGHT ? styles.themeLight : styles.themeDark],
-            )
-          }
-          >
+          <img className={styles.img} src={icon} alt={theme} />
+          <span className={classNames(styles.themeName, {}, [style])}>
               {!collapsed && themeToShow}
           </span>
       </div>

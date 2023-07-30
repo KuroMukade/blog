@@ -1,0 +1,18 @@
+.wrapper {
+    border: 1px solid var(--border-color);
+    background: var(--bg-color-secondary);
+    position: relative;
+    overflow-x: auto;
+    width: 900px;
+    padding: 12px 10px;
+}
+
+.code {
+    font: var(--font-code);
+}
+
+.copy {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}

@@ -23,7 +23,7 @@ export interface ArticleTextBlock extends ArticleBlockBase {
 
 export type ArticleType = 'IT' | 'SCIENCE' | 'ECONOMICS';
 
-export type ArticleBlock = ArticleCodeBlock | ArticleCodeBlock | ArticleImageBlock;
+export type ArticleBlock = ArticleCodeBlock | ArticleTextBlock | ArticleImageBlock;
 
 export interface Article {
     id: string;
