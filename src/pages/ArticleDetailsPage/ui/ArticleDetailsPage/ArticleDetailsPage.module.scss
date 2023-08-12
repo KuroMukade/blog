@@ -4,4 +4,13 @@
     margin-right: auto;
     max-width: 900px;
     padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }

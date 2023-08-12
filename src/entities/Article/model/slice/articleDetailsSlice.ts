@@ -4,7 +4,7 @@ import { fetchArticleById } from '../services/fetchArticleById/fetchArticleById'
 import { Article } from '../types/article';
 
 const initialState: ArticleDetailsSchema = {
-  isLoading: false,
+  isLoading: true,
   error: undefined,
   data: undefined,
 };

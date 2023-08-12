@@ -125,7 +125,7 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
     );
   }
 
-  useDynamicModuleLoader('articleDetails', reducers, true);
+  useDynamicModuleLoader('articleDetails', reducers, false);
 
   return (
       <div className={classNames(styles.wrapper, {}, [className])}>
