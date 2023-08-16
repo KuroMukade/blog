@@ -54,8 +54,9 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
       <div className={classNames(styles.wrapper, {}, [className])}>
           <ArticleDetails id={id} />
           <div className={styles.comments}>
-              <Text textSize="X" title="Комментарии" />
+              <Text textSize="X" title={`Комментарии: ${comments.length}`} />
               <CommentList
+                  className={styles.commentList}
                   isLoading={commentsIsLoading}
                   comments={comments}
               />

@@ -7,6 +7,7 @@ import styles from './Button.module.scss';
 export enum ThemeButton {
   CLEAR = 'clear',
   OUTLINE = 'outlined',
+  PRIMARY = 'primary',
 }
 
 export enum ButtonSize {
@@ -15,18 +16,10 @@ export enum ButtonSize {
   XL = 'size_xl',
 }
 
-export enum GrowthColor {
-  DEFAULT = 'default',
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  CLEAR = 'clear',
-}
-
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    className?: string;
    theme?: ThemeButton;
    size?: ButtonSize;
-   growthColor?: GrowthColor;
    disabled?: boolean;
 }
 
@@ -36,13 +29,11 @@ export const Button = memo(({
   children,
   disabled,
   size = ButtonSize.M,
-  growthColor = GrowthColor.CLEAR,
   ...restBtnProps
 }: ButtonProps) => {
   const mods: Record<string, boolean | undefined> = {
     [styles[theme]]: true,
     [styles[size]]: true,
-    [styles[growthColor]]: growthColor && true,
     [styles.disabled]: disabled,
   };
 

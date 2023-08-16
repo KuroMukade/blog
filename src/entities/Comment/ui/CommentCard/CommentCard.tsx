@@ -12,6 +12,8 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { Comment } from '../../model/types/comment';
 
 import styles from './CommentCard.module.scss';
+import { AppLink } from 'shared/ui/AppLink/AppLink';
+import { RoutePath } from 'shared/config/routeConfig';
 
 interface CommentCardProps {
    className?: string;
@@ -33,7 +35,9 @@ export const CommentCard = memo((props: CommentCardProps) => {
   return (
       <div className={classNames(styles.wrapper, {}, [className])}>
           <div className={styles.header}>
-              {comment.user?.avatar && <Avatar size={40} src={comment.user.avatar} alt="user-logo" />}
+              <AppLink className={styles.link} to={`${RoutePath.profile}${comment.user.id}`}>
+                  {comment.user?.avatar && <Avatar size={40} src={comment.user.avatar} alt="user-logo" />}
+              </AppLink>
               <div className={styles.commentInfo}>
                   <p className={styles.username}>{comment.user?.username}</p>
                   <p className={styles.date}>{comment?.createdAt}</p>

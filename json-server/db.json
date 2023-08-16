@@ -131,15 +131,30 @@
       "role": "USER"
     }
   ],
-  "profile": {
-    "name": "Тимур",
-    "lastname": "Гайнутдинов",
-    "age": 16,
-    "country": "Russia",
-    "city": "Kazan",
-    "username": "kuromukade",
-    "avatar": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juvenile_Ragdoll.jpg",
-    "currency": "RUB",
-    "first": "Тимур1"
-  }
+  "profile": [
+    {
+      "id": "1",
+      "name": "Тимур",
+      "lastname": "Гайнутдинов",
+      "age": 16,
+      "country": "Russia",
+      "city": "Kazan",
+      "username": "kuromukade",
+      "avatar": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juvenile_Ragdoll.jpg",
+      "currency": "RUB",
+      "first": "Тимур1"
+    },
+    {
+      "id": "2",
+      "name": "Тимур",
+      "lastname": "Гайнутдинов",
+      "age": 16,
+      "country": "Russia",
+      "city": "Kazan",
+      "username": "kuromukade",
+      "avatar": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juvenile_Ragdoll.jpg",
+      "currency": "RUB",
+      "first": "Тимур1"
+    }
+  ]
 }
