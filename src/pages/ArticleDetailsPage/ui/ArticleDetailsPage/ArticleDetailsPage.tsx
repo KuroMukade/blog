@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -11,7 +11,9 @@ import { ArticleDetails } from 'entities/Article';
 import { CommentList } from 'entities/Comment';
 
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { fetchCommentsByArticleId } from 'pages/ArticleDetailsPage/model/services/fetchCommentsByArticleId';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
+
+import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId';
 import {
   articleCommentsReducers,
   getArticleComments,
@@ -38,9 +40,9 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
   const comments = useSelector(getArticleComments.selectAll);
   const commentsIsLoading = useSelector(getArticleCommentsLoading);
 
-  useEffect(() => {
+  useInitialEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
-  }, [dispatch, id]);
+  });
 
   if (!id) {
     return (
@@ -54,7 +56,7 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
       <div className={classNames(styles.wrapper, {}, [className])}>
           <ArticleDetails id={id} />
           <div className={styles.comments}>
-              <Text textSize="X" title={`Комментарии: ${comments.length}`} />
+              <Text textSize="X" title={`${t('Комментарии')}: ${comments.length}`} />
               <CommentList
                   className={styles.commentList}
                   isLoading={commentsIsLoading}

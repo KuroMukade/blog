@@ -15,4 +15,7 @@
     --inverted-bg-color: #000000;
     --inverted-primary-color: #fafcfe;
     --inverted-secondary-color: #000000;
+    ::selection {
+        background-color: var(--color-secondary);
+    }
 }

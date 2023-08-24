@@ -1,9 +1,9 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
 
 import { Input } from 'shared/ui/Input/Input';
-import { Button, GrowthColor, ThemeButton } from 'shared/ui/Button/Button';
+import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
 import { useTranslation } from 'react-i18next';
 
@@ -80,7 +80,6 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
               />
           </div>
           <Button
-              growthColor={GrowthColor.DEFAULT}
               className={styles.btn}
               disabled={isLoading}
               onClick={onLoginClick}
