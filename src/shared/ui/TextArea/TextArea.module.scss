@@ -1,0 +1,12 @@
+.wrapper {
+    box-sizing: border-box;
+    background-color: #F8F8F8;
+    color: #656565;
+    font: var(--font-m);
+    border: var(--color-secondary) 1px solid;
+    border-radius: 14px;
+    outline: none;
+    max-width: 100%;
+    resize: none;
+    padding: 20px;
+}

@@ -15,5 +15,5 @@ export const parametrs = {
 };
 
 addDecorator(StyleDecorator);
-addDecorator(ThemeDecorator(Theme.LIGHT));
+addDecorator(ThemeDecorator(Theme.SIMPLE));
 addDecorator(RouterDecorator);

@@ -1,3 +1,16 @@
 .wrapper {
-    
+    position: relative;    
+}
+
+.textarea {
+    width: 100%;
+    min-height: 150px;
+    resize: vertical;
+    max-height: 200px;
+}
+
+.btn {
+    position: absolute;
+    bottom: 18px;
+    right: 20px;
 }

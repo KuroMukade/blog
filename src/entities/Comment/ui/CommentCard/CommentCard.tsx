@@ -1,19 +1,19 @@
+import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import heartIcon from 'shared/assets/icons/heart.svg';
 import dotsIcon from 'shared/assets/icons/dots.svg';
 
-import { memo } from 'react';
-
 import { classNames } from 'shared/lib/classNames';
-
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text } from 'shared/ui/Text/Text';
-import { Loader } from 'shared/ui/Loader/Loader';
+import { RoutePath } from 'shared/config/routeConfig';
+import { AppLink } from 'shared/ui/AppLink/AppLink';
+import { CommentCardSkeleton } from '../CommentCardSkeleton/CommentCardSkeleton';
 
 import { Comment } from '../../model/types/comment';
 
 import styles from './CommentCard.module.scss';
-import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { RoutePath } from 'shared/config/routeConfig';
 
 interface CommentCardProps {
    className?: string;
@@ -24,10 +24,12 @@ interface CommentCardProps {
 export const CommentCard = memo((props: CommentCardProps) => {
   const { className, comment, isLoading } = props;
 
+  const { t } = useTranslation('commentCard');
+
   if (isLoading) {
     return (
         <div className={styles.header}>
-            <Loader />
+            `<CommentCardSkeleton />`
         </div>
     );
   }
@@ -46,7 +48,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
           <Text className={styles.text} text={comment.text} />
           <div className={styles.additional}>
               <img src={heartIcon} alt="" />
-              <p>Ответить</p>
+              <p>{t('Ответить')}</p>
               <img src={dotsIcon} alt="" />
           </div>
       </div>

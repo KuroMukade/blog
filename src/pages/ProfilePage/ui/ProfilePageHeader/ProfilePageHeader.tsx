@@ -1,15 +1,23 @@
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Text } from 'shared/ui/Text/Text';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfileReadonly, profileActions, updateProfileData } from 'entities/Profile';
-import { useCallback } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import cls from './ProfilePageHeader.module.scss';
+
+import {
+  getProfileReadonly, profileActions, updateProfileData,
+} from 'entities/Profile';
+
+import { getCanEditSelector } from '../../model/selectors/getCanEditSelector';
+
+import styles from './ProfilePageHeader.module.scss';
 
 interface ProfilePageHeaderProps {
     className?: string;
+    id: string;
 }
 
 export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
@@ -21,6 +29,8 @@ export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
 
   const readonly = useSelector(getProfileReadonly);
   const dispatch = useAppDispatch();
+
+  const canEdit = useSelector(getCanEditSelector);
 
   const onEdit = useCallback(() => {
     dispatch(profileActions.setReadonly(false));
@@ -35,36 +45,40 @@ export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {
   }, [dispatch]);
 
   return (
-      <div className={classNames(cls.ProfilePageHeader, {}, [className])}>
-          <Text title={t('Профиль')} />
-          {readonly
-            ? (
-                <Button
-                    className={cls.editBtn}
-                    theme={ThemeButton.OUTLINE}
-                    onClick={onEdit}
-                >
-                    {t('Редактировать')}
-                </Button>
-            )
-            : (
-                <>
+      <div className={classNames(styles.ProfilePageHeader, {}, [className])}>
+          <Text textSize="X" title={t('Профиль')} />
+          {canEdit && (
+          <div className={styles.container}>
+              {readonly
+                ? (
                     <Button
-                        className={cls.editBtn}
+                        className={styles.editBtn}
                         theme={ThemeButton.OUTLINE}
-                        onClick={onCancelEdit}
+                        onClick={onEdit}
                     >
-                        {t('Отменить')}
+                        {t('Редактировать')}
                     </Button>
-                    <Button
-                        className={cls.saveBtn}
-                        theme={ThemeButton.OUTLINE}
-                        onClick={onSave}
-                    >
-                        {t('Сохранить')}
-                    </Button>
-                </>
-            )}
+                )
+                : (
+                    <>
+                        <Button
+                            className={styles.editBtn}
+                            theme={ThemeButton.OUTLINE}
+                            onClick={onCancelEdit}
+                        >
+                            {t('Отменить')}
+                        </Button>
+                        <Button
+                            className={styles.saveBtn}
+                            theme={ThemeButton.OUTLINE}
+                            onClick={onSave}
+                        >
+                            {t('Сохранить')}
+                        </Button>
+                    </>
+                )}
+          </div>
+          )}
       </div>
   );
 };

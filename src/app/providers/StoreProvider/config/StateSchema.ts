@@ -10,7 +10,7 @@ import { Dispatch, CombinedState } from 'redux';
 import { NavigateOptions, To } from 'react-router-dom';
 import { ArticleDetailsSchema } from 'entities/Article';
 import { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage';
-import { AddCommentFormSchema } from 'features/addCommentForm/inedx';
+import { AddCommentFormSchema } from 'features/addCommentForm';
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -42,6 +42,7 @@ export interface ThunkExtraArg {
 
 export interface ThunkConfig<T> {
     rejectValue: T;
+    state: StateSchema;
     extra: ThunkExtraArg;
     dispatch?: Dispatch;
 }

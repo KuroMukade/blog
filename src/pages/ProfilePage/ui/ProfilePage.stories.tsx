@@ -29,12 +29,14 @@ Normal.decorators = [StoreDecorator({
       first: 'asd',
       city: 'asf',
       currency: Currency.USD,
+      avatar: 'https://animalreader.ru/wp-content/uploads/2015/12/tukan-i-ego-universalnyj-kljuv-animal-reader.-ru-004.jpg',
     },
   },
 })];
 
 export const Dark = Template.bind({});
 Dark.args = {};
+
 Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
   profile: {
     form: {
@@ -45,6 +47,7 @@ Dark.decorators = [ThemeDecorator(Theme.DARK), StoreDecorator({
       first: 'asd',
       city: 'asf',
       currency: Currency.USD,
+      avatar: 'https://animalreader.ru/wp-content/uploads/2015/12/tukan-i-ego-universalnyj-kljuv-animal-reader.-ru-004.jpg',
     },
   },
 })];

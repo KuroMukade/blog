@@ -34,7 +34,7 @@
       "text": "some comment 2",
       "createdAt": "30.07.2023",
       "articleId": "1",
-      "userId": "2"
+      "userId": "1"
     },
     {
       "id": "3",
@@ -42,6 +42,88 @@
       "createdAt": "30.07.2023",
       "articleId": "1",
       "userId": "1"
+    },
+    {
+      "articleId": "1",
+      "userId": "1",
+      "id": "npfAfGW"
+    },
+    {
+      "articleId": "1",
+      "userId": "1",
+      "id": "yvVivJi"
+    },
+    {
+      "articleId": "1",
+      "userId": "1",
+      "text": "Да",
+      "id": "UPyMe0h"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "asdadasd",
+      "id": "FEApJuR"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "asdsad",
+      "id": "aKb2hiz"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "фывфвфы",
+      "id": "gY8HLvc"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "Всем ку кто хочет цп в тг пишите",
+      "id": "Uw6c7b8"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "hi",
+      "id": "r6GaRMC"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "sdf",
+      "id": "KjgIp3_"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "asdsad",
+      "id": "TmCd6ff"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "asdasd",
+      "id": "fXLhcEx"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "фывыфвыфв",
+      "id": "72ipCOY"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "фвыфвыфв",
+      "id": "xoh73QF"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "ASD",
+      "id": "hZs2KfH"
     }
   ],
   "articles": [
@@ -53,7 +135,9 @@
       "img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",
       "views": "1022",
       "createdAt": "26.02.2022",
-      "type": ["IT"],
+      "type": [
+        "IT"
+      ],
       "blocks": [
         {
           "id": "1",
@@ -114,7 +198,8 @@
           ]
         }
       ]
-    }],
+    }
+  ],
   "users": [
     {
       "id": "1",
@@ -127,7 +212,7 @@
       "id": "2",
       "username": "user",
       "password": "123",
-      "avatar": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juvenile_Ragdoll.jpg",
+      "avatar": "https://animalreader.ru/wp-content/uploads/2015/12/tukan-i-ego-universalnyj-kljuv-animal-reader.-ru-004.jpg",
       "role": "USER"
     }
   ],
@@ -146,15 +231,15 @@
     },
     {
       "id": "2",
-      "name": "Тимур",
-      "lastname": "Гайнутдинов",
-      "age": 16,
-      "country": "Russia",
-      "city": "Kazan",
-      "username": "kuromukade",
-      "avatar": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juvenile_Ragdoll.jpg",
-      "currency": "RUB",
-      "first": "Тимур1"
+      "name": "Тукан",
+      "lastname": "Баклан",
+      "age": 4,
+      "country": "Africa",
+      "city": "Amazonka",
+      "username": "Tukan",
+      "avatar": "https://animalreader.ru/wp-content/uploads/2015/12/tukan-i-ego-universalnyj-kljuv-animal-reader.-ru-004.jpg",
+      "currency": "USD",
+      "first": "Тукай"
     }
   ]
 }

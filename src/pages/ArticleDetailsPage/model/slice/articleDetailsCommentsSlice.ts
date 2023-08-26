@@ -2,7 +2,7 @@ import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolki
 import { Comment } from 'entities/Comment';
 import { StateSchema } from 'app/providers/StoreProvider';
 import { ArticleDetailsCommentsSchema } from '../types/articleDetailsSchema';
-import { fetchCommentsByArticleId } from '../services/fetchCommentsByArticleId';
+import { fetchCommentsByArticleId } from '../services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 
 const commentsAdapter = createEntityAdapter<Comment>({
   selectId: (comment) => comment.id,
@@ -41,5 +41,5 @@ const articleDetailsCommentsSlice = createSlice({
   },
 });
 
-export const { reducer: articleCommentsReducers } = articleDetailsCommentsSlice;
+export const { reducer: articleCommentsReducer } = articleDetailsCommentsSlice;
 export const { actions: articleCommentsActions } = articleDetailsCommentsSlice;

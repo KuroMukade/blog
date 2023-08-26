@@ -63,7 +63,7 @@ module.exports = {
       'error',
       {
         markupOnly: true,
-        ignoreAttribute: ['data-testid', 'to'],
+        ignoreAttribute: ['data-testid', 'to', 'alt', 'viewBox', 'foregroundColor', 'backgroundColor'],
       },
     ],
     'jsx-a11y/no-static-element-interactions': 'off',

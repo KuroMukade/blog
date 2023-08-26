@@ -3,23 +3,23 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { classNames } from 'shared/lib/classNames';
-
-import { Input } from 'shared/ui/Input/Input';
+import { TextArea } from 'shared/ui/TextArea/TextArea';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { Button } from 'shared/ui/Button/Button';
+import { Button, ThemeButton } from 'shared/ui/Button/Button';
+import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
 
 import {
   addCommentFormActions,
   addCommentFormReducer,
-} from 'features/addCommentForm/model/slice/addCommentFormSlice';
+} from '../../model/slice/addCommentFormSlice';
 
-import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
 import { getAddCommentFormError, getAddCommentFormText } from '../../model/selectors/addCommentFormSelectors';
 
 import styles from './AddCommentForm.module.scss';
 
 interface AddCommentFormProps {
    className?: string;
+   onSendComment: (text: string) => void;
 }
 
 const reducers: ReducersList = {
@@ -28,9 +28,9 @@ const reducers: ReducersList = {
 
 export const AddCommentForm = memo((props: AddCommentFormProps) => {
   useDynamicModuleLoader('addCommentForm', reducers);
-  const { className } = props;
+  const { className, onSendComment } = props;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation('commentForm');
 
   const text = useSelector(getAddCommentFormText);
   const error = useSelector(getAddCommentFormError);
@@ -41,14 +41,29 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
     dispatch(addCommentFormActions.setText(value));
   }, [dispatch]);
 
+  const onSendClick = useCallback(() => {
+    onSendComment(text || '');
+    onCommentTextChange('');
+  }, [text, onSendComment, onCommentTextChange]);
+
   return (
       <div className={classNames(styles.wrapper, {}, [className])}>
-          <Input
+          <TextArea
               placeholder={t('Введите текст комментария')}
               value={text}
-              onChange={(onCommentTextChange)}
+              className={styles.textarea}
+              onChange={onCommentTextChange}
+              button={(
+                  <Button
+                      onClick={onSendClick}
+                      theme={ThemeButton.SECONDARY}
+                      className={styles.btn}
+                  >
+                      {t('Отправить')}
+
+                  </Button>
+              )}
           />
-          <Button />
       </div>
   );
 });

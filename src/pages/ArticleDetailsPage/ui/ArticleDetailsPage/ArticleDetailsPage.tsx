@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -6,16 +6,22 @@ import { useParams } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames';
 import { Text } from 'shared/ui/Text/Text';
 import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 
 import { ArticleDetails } from 'entities/Article';
 import { CommentList } from 'entities/Comment';
 
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
+import { AddCommentForm } from 'features/addCommentForm';
 
-import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId';
 import {
-  articleCommentsReducers,
+  addCommentForArticle,
+} from '../../model/services/addCommentForArticle/addCommentForArticle';
+import {
+  fetchCommentsByArticleId,
+} from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
+import {
+  articleCommentsReducer,
   getArticleComments,
 } from '../../model/slice/articleDetailsCommentsSlice';
 
@@ -27,7 +33,7 @@ interface ArticleDetailsPageProps {
    className?: string;
 }
 
-const reducers: ReducersList = { articleDetailsComments: articleCommentsReducers };
+const reducers: ReducersList = { articleDetailsComments: articleCommentsReducer };
 
 export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) => {
   const { t } = useTranslation('articles');
@@ -39,6 +45,10 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
 
   const comments = useSelector(getArticleComments.selectAll);
   const commentsIsLoading = useSelector(getArticleCommentsLoading);
+
+  const onSendComment = useCallback((text: string) => {
+    dispatch(addCommentForArticle(text));
+  }, [dispatch]);
 
   useInitialEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
@@ -57,6 +67,7 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
           <ArticleDetails id={id} />
           <div className={styles.comments}>
               <Text textSize="X" title={`${t('Комментарии')}: ${comments.length}`} />
+              <AddCommentForm onSendComment={onSendComment} />
               <CommentList
                   className={styles.commentList}
                   isLoading={commentsIsLoading}
