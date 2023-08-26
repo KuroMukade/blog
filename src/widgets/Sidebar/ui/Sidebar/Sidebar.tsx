@@ -1,29 +1,28 @@
-import { FC, useMemo } from 'react';
+import { memo, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { classNames } from 'shared/lib/classNames';
+
 import { LangSwitcher } from 'widgets/LangSwitcher';
 import { ThemeSwithcer } from 'widgets/ThemeSwitcher';
 
-import { SidebarItemsList } from 'widgets/Sidebar/model/items';
-import { useSelector } from 'react-redux';
-import { getUserAuthData } from 'entities/User';
-import styles from './Sidebar.module.scss';
+import { getSidebarItems } from '../../model/selectors/getSidebarItems';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
+
+import styles from './Sidebar.module.scss';
 
 interface SidebarProps {
   className?: string;
   collapsed: boolean;
 }
 
-export const Sidebar: FC<SidebarProps> = ({ className, collapsed }) => {
-  const auth = useSelector(getUserAuthData);
+export const Sidebar = memo(({ className, collapsed }: SidebarProps) => {
+  const sidebarItems = useSelector(getSidebarItems);
 
-  const linkList = useMemo(() => SidebarItemsList.map((item) => {
-    if (item.authOnly && !auth) {
-      return null;
-    }
-    return <SidebarItem item={item} collapsed={collapsed} key={item.path} />;
-  }), [collapsed, auth]);
+  const linkList = useMemo(() => sidebarItems.map((item) => {
+    const { path } = item;
+    return <SidebarItem item={item} collapsed={collapsed} key={path} />;
+  }), [collapsed, sidebarItems]);
 
   return (
       <div
@@ -43,4 +42,4 @@ export const Sidebar: FC<SidebarProps> = ({ className, collapsed }) => {
           </div>
       </div>
   );
-};
+});
