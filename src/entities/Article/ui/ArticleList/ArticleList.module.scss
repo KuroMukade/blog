@@ -1,0 +1,16 @@
+.GRID {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.LIST {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 80px;
+}
+
+.wrapper {
+    display: flex;
+}

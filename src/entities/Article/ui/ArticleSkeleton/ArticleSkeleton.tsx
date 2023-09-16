@@ -1,10 +1,5 @@
-import {
-  ReactElement, ReactNode, SVGProps, memo,
-} from 'react';
-import { classNames } from 'shared/lib/classNames';
+import { memo } from 'react';
 import ContentLoader from 'react-content-loader';
-
-import styles from './Skeleton.module.scss';
 
 interface ArticleSkeletonProps {
   className?: string;
@@ -12,6 +7,7 @@ interface ArticleSkeletonProps {
 
 export const ArticleSkeleton = memo(({ className }: ArticleSkeletonProps) => (
     <ContentLoader
+        className={className}
         speed={1.5}
         width={900}
         height={754}

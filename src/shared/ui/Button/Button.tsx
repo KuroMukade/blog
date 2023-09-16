@@ -45,7 +45,7 @@ export const Button = memo(({
             classNames(
               styles.button,
               mods,
-              [className, styles.withGrowth],
+              [className],
             )
           }
           disabled={disabled}

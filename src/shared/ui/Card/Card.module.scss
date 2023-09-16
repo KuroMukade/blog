@@ -1,0 +1,14 @@
+.card {
+    position: relative;
+    max-width: 950px;
+    display: flex;
+    gap: 30px;
+    border-radius: 6px;
+    transition: .3s ease-in-out all;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(0.95);
+        transition: .3s ease-in-out all;
+    }
+}

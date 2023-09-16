@@ -1,3 +1,5 @@
+import { User } from 'entities/User';
+
 export type ArticleBlockType = 'TEXT' | 'IMAGE' | 'CODE';
 
 export interface ArticleBlockBase {
@@ -23,10 +25,13 @@ export interface ArticleTextBlock extends ArticleBlockBase {
 
 export type ArticleType = 'IT' | 'SCIENCE' | 'ECONOMICS';
 
+export type ArticleView = 'GRID' | 'LIST';
+
 export type ArticleBlock = ArticleCodeBlock | ArticleTextBlock | ArticleImageBlock;
 
 export interface Article {
     id: string;
+    users: User;
     title: string;
     subtitle: string;
     img: string;
