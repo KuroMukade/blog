@@ -19,11 +19,3 @@ body {
     display: flex;
     background-color: var(--bg-color);
 }
-
-.page-wrapper {
-    flex-grow: 1;
-    padding: 50px 0 100px 0;
-    overflow-y: auto;
-    height: calc(100vh - var(--navbar-height));
-    width: 100%;
-}

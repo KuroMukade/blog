@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames';
 
 import { Article, ArticleView } from '../../model/types/article';
-import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 
 import styles from './ArticleList.module.scss';
+import { ArticleListViewController } from '../ArticleListViewController/ArticleListViewController';
 
 interface ArticleListProps {
    className?: string;
@@ -20,13 +20,12 @@ export const ArticleList = memo((props: ArticleListProps) => {
   } = props;
 
   const renderArticle = (article: Article, view: ArticleView) => (
-      <ArticleListItem key={article.id} article={article} view={view} />
+      <ArticleListViewController key={article.id} article={article} view={view} />
   );
 
-  if (isLoading || !view) {
+  if (!view) {
     return (
         <div className={classNames(styles.wrapper, {}, [className])} />
-
     );
   }
 
@@ -39,9 +38,9 @@ export const ArticleList = memo((props: ArticleListProps) => {
 
   return (
       <div className={classNames(styles.wrapper, {}, [className, styles[view!]])}>
-          {articles.map((article) => (
-            renderArticle(article, view)
-          ))}
+          {articles.length > 0
+            ? articles.map((article) => renderArticle(article, view))
+            : <div className={classNames(styles.wrapper, {}, [className])} />}
       </div>
   );
 });

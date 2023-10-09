@@ -6,6 +6,7 @@ import styles from './Avatar.module.scss';
 
 interface AvatarProps {
    alt: string;
+   onError?: () => void;
    className?: string;
    src: string;
    size?: string | number;
@@ -13,7 +14,7 @@ interface AvatarProps {
 }
 
 export const Avatar: FC<AvatarProps> = ({
-  className, src, size = '100%', alt, rounded = true,
+  className, onError, src, size = '100%', alt, rounded = true,
 }) => {
   const mods: Mods = {
     [styles.rounded]: rounded,
@@ -26,6 +27,7 @@ export const Avatar: FC<AvatarProps> = ({
 
   return (
       <img
+          onError={onError}
           style={imgStyles}
           className={classNames(styles.avatar, mods, [className])}
           src={src}

@@ -7,9 +7,7 @@ import { Text } from 'shared/ui/Text/Text';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
-import {
-  getProfileReadonly, profileActions, updateProfileData,
-} from 'entities/Profile';
+import { getProfileReadonly, profileActions, updateProfileData } from 'entities/Profile';
 
 import { getCanEditSelector } from '../../model/selectors/getCanEditSelector';
 
@@ -17,7 +15,6 @@ import styles from './ProfilePageHeader.module.scss';
 
 interface ProfilePageHeaderProps {
     className?: string;
-    id: string;
 }
 
 export const ProfilePageHeader = (props: ProfilePageHeaderProps) => {

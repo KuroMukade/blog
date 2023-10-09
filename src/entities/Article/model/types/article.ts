@@ -31,7 +31,7 @@ export type ArticleBlock = ArticleCodeBlock | ArticleTextBlock | ArticleImageBlo
 
 export interface Article {
     id: string;
-    users: User;
+    user: User;
     title: string;
     subtitle: string;
     img: string;

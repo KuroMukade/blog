@@ -14,16 +14,12 @@ import { CommentList } from 'entities/Comment';
 
 import { AddCommentForm } from 'features/addCommentForm';
 
-import {
-  addCommentForArticle,
-} from '../../model/services/addCommentForArticle/addCommentForArticle';
+import { Page } from 'shared/ui/Page/Page';
+import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import {
   fetchCommentsByArticleId,
 } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
-import {
-  articleCommentsReducer,
-  getArticleComments,
-} from '../../model/slice/articleDetailsCommentsSlice';
+import { articleCommentsReducer, getArticleComments } from '../../model/slice/articleDetailsCommentsSlice';
 
 import { getArticleCommentsLoading } from '../../model/selectors/comments';
 
@@ -63,7 +59,7 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
   }
 
   return (
-      <div className={classNames(styles.wrapper, {}, [className])}>
+      <Page className={classNames(styles.wrapper, {}, [className])}>
           <ArticleDetails id={id} />
           <div className={styles.comments}>
               <Text textSize="X" title={`${t('Комментарии')}: ${comments.length}`} />
@@ -74,6 +70,6 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
                   comments={comments}
               />
           </div>
-      </div>
+      </Page>
   );
 });

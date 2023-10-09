@@ -3,7 +3,7 @@ import { StateSchema } from 'app/providers/StoreProvider';
 import { Article, ArticleView } from 'entities/Article';
 import { ARTICLE_STORAGE_KEY } from 'shared/constants/localstorage';
 import { ArticlesPageSchema } from '../types/articlesPageSchema';
-import { fetchArticles } from '../services/fetchArticles/fetchArticles';
+import { fetchArticlesList } from '../services/fetchArticlesList/fetchArticlesList';
 
 const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article) => article.id,
@@ -18,6 +18,9 @@ export const articlesPageSlice = createSlice({
   initialState: articlesAdapter.getInitialState<ArticlesPageSchema>({
     isLoading: false,
     error: undefined,
+    hasMore: true,
+    limit: undefined,
+    page: 1,
     ids: [],
     entities: {},
     view: 'GRID',
@@ -27,6 +30,9 @@ export const articlesPageSlice = createSlice({
       state.view = action.payload;
       localStorage.setItem(ARTICLE_STORAGE_KEY, action.payload);
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
     initState: (state) => {
       const view = localStorage.getItem(ARTICLE_STORAGE_KEY) as ArticleView;
       if (view) {
@@ -34,20 +40,22 @@ export const articlesPageSlice = createSlice({
       } else {
         state.view = 'GRID';
       }
+      state.limit = view === 'LIST' ? 4 : 9;
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchArticles.pending, (state) => {
+      .addCase(fetchArticlesList.pending, (state) => {
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(fetchArticles.fulfilled, (state, action) => {
+      .addCase(fetchArticlesList.fulfilled, (state, action) => {
         state.error = undefined;
         state.isLoading = false;
-        articlesAdapter.setAll(state, action.payload);
+        articlesAdapter.addMany(state, action.payload);
+        state.hasMore = action.payload.length > 0;
       })
-      .addCase(fetchArticles.rejected, (state, action) => {
+      .addCase(fetchArticlesList.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
       });

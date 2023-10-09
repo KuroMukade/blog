@@ -6,8 +6,9 @@ import { useParams } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useDynamicModuleLoader, ReducersList } from 'shared/lib/hooks/useDynamicModuleLoader';
+import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { Page } from 'shared/ui/Page/Page';
 
 import {
   fetchProfileData,
@@ -84,7 +85,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   }, [dispatch]);
 
   return (
-      <div className={classNames('', {}, [className])}>
+      <Page className={classNames('', {}, [className])}>
           <ProfilePageHeader />
           {validateErrors?.length && validateErrors.map((err) => (
               <Text key={err} theme={TextTheme.ERROR} text={err} />
@@ -103,7 +104,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
               onChangeCurrency={onChangeCurrency}
               onChangeCountry={onChangeCountry}
           />
-      </div>
+      </Page>
   );
 };
 
