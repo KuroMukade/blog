@@ -11,7 +11,10 @@ import { ArticleList, ArticleView } from 'entities/Article';
 
 import { ViewSelector } from 'features/viewSelector';
 import { Page } from 'shared/ui/Page/Page';
-import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
+import {
+  fetchArticlesNextPage,
+} from 'pages/ArticlesPage/model/services/fetchArticlesNextPage/fetchArticlesNextPage';
+import { initArticlesPage } from 'pages/ArticlesPage/model/services/initArticlesPage/initArticlesPage';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/articlesPageSlice';
 import {
   getArticlesError,
@@ -34,7 +37,7 @@ const initialReducers: ReducersList = {
 export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   const { t } = useTranslation('article');
 
-  useDynamicModuleLoader('articlesPage', initialReducers);
+  useDynamicModuleLoader('articlesPage', initialReducers, false);
 
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesIsLoading);
@@ -49,16 +52,11 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   }, [dispatch]);
 
   const onLoadNextPart = useCallback(() => {
-    if (isLoading) {
-      console.log('loading');
-    }
-  }, [dispatch, page, hasMore, isLoading]);
+    dispatch(fetchArticlesNextPage());
+  }, [dispatch]);
 
   useInitialEffect(() => {
-    dispatch(articlesPageActions.initState());
-    dispatch(fetchArticlesList({
-      page: 1,
-    }));
+    dispatch(initArticlesPage());
   });
 
   return (

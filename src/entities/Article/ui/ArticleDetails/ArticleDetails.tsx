@@ -5,7 +5,7 @@ import heartIcon from 'shared/assets/icons/heart.svg';
 import messageIcon from 'shared/assets/icons/message.svg';
 import eyeIcon from 'shared/assets/icons/eye.svg';
 
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 

@@ -32,6 +32,7 @@ export const Select: FC<SelectProps> = ({
 
   const optionsList = useMemo(() => options?.map((option) => (
       <option
+          key={option.value}
           className={styles.option}
           value={option.value}
           content={option.content}

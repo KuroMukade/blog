@@ -1,8 +1,8 @@
 import {
-  AnyAction, EnhancedStore, ReducersMapObject, Reducer,
+  AnyAction, EnhancedStore, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { Dispatch, CombinedState } from 'redux';
+import { CombinedState, Dispatch } from 'redux';
 import { NavigateOptions, To } from 'react-router-dom';
 
 import { CounterSchema } from 'entities/Counter';

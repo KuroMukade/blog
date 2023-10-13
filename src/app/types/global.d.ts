@@ -23,3 +23,7 @@ type DeepPartial<T> = T extends object ? {
 } : T;
 
 declare type Mods = Record<string, boolean>;
+
+declare type OptionalRecord<K extends keyof any, T> = {
+  [P in K]?: T;
+};
