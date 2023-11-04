@@ -9,42 +9,43 @@ import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynami
 
 import { ArticleList, ArticleView } from 'entities/Article';
 
-import { ViewSelector } from 'features/viewSelector';
-import { Page } from 'shared/ui/Page/Page';
-import {
-  fetchArticlesNextPage,
-} from 'pages/ArticlesPage/model/services/fetchArticlesNextPage/fetchArticlesNextPage';
-import { initArticlesPage } from 'pages/ArticlesPage/model/services/initArticlesPage/initArticlesPage';
+import { ViewSelector } from 'features/ViewSelector';
+import { articleFiltersReducer, ArticleOrderFilter, ArticleSearchFilter } from 'features/ArticleFilters';
+
+import { Page } from 'widgets/Page/Page';
+
+import { fetchArticlesNextPage } from '../model/services/fetchArticlesNextPage/fetchArticlesNextPage';
+import { initArticlesPage } from '../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/articlesPageSlice';
 import {
   getArticlesError,
-  getArticlesHasMore,
   getArticlesIsLoading,
-  getArticlesPageNum,
   getArticlesView,
 } from '../model/selectors/articlesSelectors';
 
-import styles from './ArticlesPage.module.scss';
+import s from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
    className?: string
 }
 
-const initialReducers: ReducersList = {
+const initialPageReducers: ReducersList = {
   articlesPage: articlesPageReducer,
+};
+
+const initialFiltersReducers: ReducersList = {
+  articlesFilters: articleFiltersReducer,
 };
 
 export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   const { t } = useTranslation('article');
 
-  useDynamicModuleLoader('articlesPage', initialReducers, false);
-
+  useDynamicModuleLoader('articlesPage', initialPageReducers, false);
+  useDynamicModuleLoader('articlesFilters', initialFiltersReducers, false);
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesIsLoading);
   const view = useSelector(getArticlesView);
   const error = useSelector(getArticlesError);
-  const page = useSelector(getArticlesPageNum);
-  const hasMore = useSelector(getArticlesHasMore);
   const dispatch = useAppDispatch();
 
   const onViewChange = useCallback((view: ArticleView) => {
@@ -60,7 +61,9 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   });
 
   return (
-      <Page onScrollEnd={onLoadNextPart} className={classNames(styles.wrapper, {}, [className])}>
+      <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>
+          <ArticleSearchFilter />
+          <ArticleOrderFilter />
           <ViewSelector view={view} onViewClick={onViewChange} />
           <ArticleList isLoading={isLoading} error={error} articles={articles} view={view} />
       </Page>

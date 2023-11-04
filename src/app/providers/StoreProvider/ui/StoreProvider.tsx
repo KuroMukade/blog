@@ -16,8 +16,6 @@ export const StoreProvider: FC<StoreProviderProps> = ({ children, initialState, 
     asyncReducers as ReducersMapObject<StateSchema>,
   );
 
-  console.log('store');
-
   return (
       <Provider store={store}>
           {children}

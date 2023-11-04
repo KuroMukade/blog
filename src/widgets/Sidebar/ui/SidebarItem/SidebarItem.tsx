@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
-import { SidebarItemType } from '../../model/items';
+import { SidebarItemType } from '../../model/types/sidebar';
 
 import styles from './SidebarItem.module.scss';
 
@@ -14,7 +14,7 @@ export const SidebarItem = memo(({
   item, collapsed,
 }: SidebarItemProps) => (
     <AppLink className={styles.link} theme={AppLinkTheme.PRIMARY} to={item.path}>
-        <img className={styles.icon} src={item.icon} alt="" />
+        <img src={item.icon} alt="" />
         {!collapsed && (
             <span className={styles.text}>
                 {item.text}

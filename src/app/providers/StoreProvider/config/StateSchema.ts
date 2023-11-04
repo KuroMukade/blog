@@ -1,24 +1,27 @@
 import {
-  AnyAction, EnhancedStore, Reducer, ReducersMapObject,
+  type AnyAction, type EnhancedStore, type Reducer, type ReducersMapObject,
 } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
-import { CombinedState, Dispatch } from 'redux';
-import { NavigateOptions, To } from 'react-router-dom';
+import type { AxiosInstance } from 'axios';
+import type { CombinedState, Dispatch } from 'redux';
+import type { NavigateOptions, To } from 'react-router-dom';
 
-import { CounterSchema } from 'entities/Counter';
-import { ProfileSchema } from 'entities/Profile';
-import { UserSchema } from 'entities/User';
-import { ArticleDetailsSchema } from 'entities/Article';
+import type { CounterSchema } from 'entities/Counter';
+import type { ProfileSchema } from 'entities/Profile';
+import type { UserSchema } from 'entities/User';
+import type { ArticleDetailsSchema } from 'entities/Article';
 
-import { LoginSchema } from 'features/AuthByUsername';
-import { AddCommentFormSchema } from 'features/addCommentForm';
+import type { LoginSchema } from 'features/AuthByUsername';
+import type { AddCommentFormSchema } from 'features/AddCommentForm';
+import type { SaveScrollSchema } from 'features/SaveScroll';
 
-import { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage';
-import { ArticlesPageSchema } from 'pages/ArticlesPage';
+import type { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage';
+import type { ArticlesPageSchema } from 'pages/ArticlesPage';
+import { ArticleFiltersSchema } from 'features/ArticleFilters';
 
 export interface StateSchema {
     counter: CounterSchema;
     user: UserSchema;
+    saveScroll: SaveScrollSchema;
     // Async reducers
     loginForm?: LoginSchema;
     profile?: ProfileSchema;
@@ -26,6 +29,7 @@ export interface StateSchema {
     articleDetailsComments?: ArticleDetailsCommentsSchema;
     addCommentForm?: AddCommentFormSchema;
     articlesPage?: ArticlesPageSchema;
+    articlesFilters?: ArticleFiltersSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

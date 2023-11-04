@@ -1,8 +1,7 @@
-import React, {
-  FC, InputHTMLAttributes, memo,
-} from 'react';
+import React, { InputHTMLAttributes, memo } from 'react';
 
 import { classNames } from 'shared/lib/classNames';
+
 import styles from './Input.module.scss';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'readOnly'>;

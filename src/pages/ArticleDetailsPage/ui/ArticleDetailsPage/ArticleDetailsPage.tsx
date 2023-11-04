@@ -12,9 +12,9 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { ArticleDetails } from 'entities/Article';
 import { CommentList } from 'entities/Comment';
 
-import { AddCommentForm } from 'features/addCommentForm';
+import { AddCommentForm } from 'features/AddCommentForm';
 
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page/Page';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import {
   fetchCommentsByArticleId,

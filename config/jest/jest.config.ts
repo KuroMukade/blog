@@ -29,7 +29,7 @@ const config: Config = {
     __API__: '',
     __PROJECT__: 'jest',
   },
-  rootDir: '../../',
+  rootDir: path.resolve(__dirname, '../../'),
   testMatch: [
     '**/__tests__/**/*.[jt]s?(x)',
     '**/?(*.)+(spec|test).[jt]s?(x)',
