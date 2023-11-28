@@ -11,7 +11,7 @@ import { getSaveScrollScrollByPath, saveScrollActions } from 'features/SaveScrol
 
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useSelector } from 'react-redux';
-import { StateSchema } from 'app/providers/StoreProvider';
+import type { StateSchema } from 'app/providers/StoreProvider';
 import { useThrottle } from 'shared/lib/hooks/useThrottle';
 import s from './Page.module.scss';
 

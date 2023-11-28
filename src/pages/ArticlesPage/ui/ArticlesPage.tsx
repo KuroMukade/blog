@@ -62,10 +62,12 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
 
   return (
       <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>
-          <ArticleSearchFilter />
-          <ArticleOrderFilter />
-          <ViewSelector view={view} onViewClick={onViewChange} />
-          <ArticleList isLoading={isLoading} error={error} articles={articles} view={view} />
+          <div className={s.content}>
+              <ArticleSearchFilter />
+              <ArticleOrderFilter />
+              <ViewSelector view={view} onViewClick={onViewChange} />
+              <ArticleList isLoading={isLoading} error={error} articles={articles} view={view} />
+          </div>
       </Page>
   );
 };

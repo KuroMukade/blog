@@ -18,7 +18,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'i18next', 'react-hooks'],
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'i18next',
+    'react-hooks',
+    'mukade-fsd-plugin',
+  ],
   rules: {
     'max-len': [
       'error',
@@ -69,6 +75,8 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'no-param-reassign': 'off',
+    'mukade-fsd-plugin/public-api-import-checker': 'error',
+    'mukade-fsd-plugin/relative-path-import-checker': 'error',
   },
   globals: {
     __IS_DEV__: true,
