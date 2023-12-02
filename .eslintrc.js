@@ -5,12 +5,20 @@ module.exports = {
     jest: true,
   },
   extends: [
+    '@feature-sliced',
     'plugin:react/recommended',
     'airbnb',
     'plugin:i18next/recommended',
     'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/parser',
+  settings: {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -23,7 +31,6 @@ module.exports = {
     '@typescript-eslint',
     'i18next',
     'react-hooks',
-    'mukade-fsd-plugin',
   ],
   rules: {
     'max-len': [
@@ -75,8 +82,6 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'no-param-reassign': 'off',
-    'mukade-fsd-plugin/public-api-import-checker': 'error',
-    'mukade-fsd-plugin/relative-path-import-checker': 'error',
   },
   globals: {
     __IS_DEV__: true,

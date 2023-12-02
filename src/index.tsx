@@ -1,6 +1,5 @@
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-
 import { Theme, ThemeProvider } from 'shared/contexts/theme';
 
 import 'shared/config/i18n';
