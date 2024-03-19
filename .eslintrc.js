@@ -5,19 +5,16 @@ module.exports = {
     jest: true,
   },
   extends: [
-    '@feature-sliced',
     'plugin:react/recommended',
     'airbnb',
-    'plugin:i18next/recommended',
-    'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/parser',
   settings: {
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
-    }
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
   },
   parserOptions: {
     ecmaFeatures: {
@@ -29,7 +26,6 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
-    'i18next',
     'react-hooks',
   ],
   rules: {
@@ -72,13 +68,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-underscore-dangle': 'off',
     'linebreak-style': ['error', 'windows'],
-    'i18next/no-literal-string': [
-      'error',
-      {
-        markupOnly: true,
-        ignoreAttribute: ['data-testid', 'to', 'alt', 'viewBox', 'foregroundColor', 'backgroundColor'],
-      },
-    ],
+    'i18next/no-literal-string': 0,
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'no-param-reassign': 'off',
@@ -87,13 +77,7 @@ module.exports = {
     __IS_DEV__: true,
     __API__: true,
     __PROJECT__: true,
+    __NODEJS__: true,
+    __PROFILE_MF_URL__: true,
   },
-  overrides: [
-    {
-      files: ['**/src/**/*.test.{ts,tsx}'],
-      rules: {
-        'i18next/no-literal-string': 'off',
-      },
-    },
-  ],
 };
