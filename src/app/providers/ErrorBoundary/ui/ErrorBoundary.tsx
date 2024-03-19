@@ -4,6 +4,8 @@ import {
 import { PageError } from 'widgets/PageError';
 
 interface ErrorBoundaryProps {
+    fallback: ReactNode;
+    errorHandler?: (error: any, errorInfo: any) => void;
     children: ReactNode;
 }
 
@@ -23,16 +25,18 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
+    const { errorHandler } = this.props;
     console.log(error, errorInfo);
+    errorHandler?.(error, errorInfo);
   }
 
   render(): ReactNode {
     const { hasError } = this.state;
-    const { children } = this.props;
+    const { fallback, children } = this.props;
 
     if (hasError) {
       return (
-          <Suspense fallback="">
+          <Suspense fallback={fallback}>
               <PageError />
           </Suspense>
       );

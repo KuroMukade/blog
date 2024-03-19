@@ -1,5 +1,5 @@
 import {
-  MutableRefObject, ReactNode, UIEvent, useRef,
+  MutableRefObject, ReactNode, UIEvent, useRef, useEffect,
 } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -9,8 +9,8 @@ import { useInfiniteScroll } from 'shared/lib/hooks/useInfiniteScroll';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getSaveScrollScrollByPath, saveScrollActions } from 'features/SaveScroll';
 
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useSelector } from 'react-redux';
+
 import type { StateSchema } from 'app/providers/StoreProvider';
 import { useThrottle } from 'shared/lib/hooks/useThrottle';
 import s from './Page.module.scss';
@@ -40,7 +40,7 @@ export const Page = (props: PageProps) => {
     }));
   }, 499);
 
-  useInitialEffect(() => {
+  useEffect(() => {
     wrapperRef.current.scrollTop = scrollPosition;
   });
 

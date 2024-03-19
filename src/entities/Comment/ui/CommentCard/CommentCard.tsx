@@ -29,7 +29,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
   if (isLoading) {
     return (
         <div className={styles.header}>
-            `<CommentCardSkeleton />`
+            <CommentCardSkeleton />
         </div>
     );
   }

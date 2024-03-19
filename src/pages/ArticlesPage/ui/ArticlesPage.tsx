@@ -1,9 +1,7 @@
-import React, { FC, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FC, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { classNames } from 'shared/lib/classNames';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
 
@@ -38,8 +36,6 @@ const initialFiltersReducers: ReducersList = {
 };
 
 export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
-  const { t } = useTranslation('article');
-
   useDynamicModuleLoader('articlesPage', initialPageReducers, false);
   useDynamicModuleLoader('articlesFilters', initialFiltersReducers, false);
   const articles = useSelector(getArticles.selectAll);
@@ -56,15 +52,17 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
     dispatch(fetchArticlesNextPage());
   }, [dispatch]);
 
-  useInitialEffect(() => {
+  useEffect(() => {
     dispatch(initArticlesPage());
   });
 
   return (
       <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>
           <div className={s.content}>
-              <ArticleSearchFilter />
-              <ArticleOrderFilter />
+              <div className={s.filters}>
+                  <ArticleSearchFilter />
+                  <ArticleOrderFilter />
+              </div>
               <ViewSelector view={view} onViewClick={onViewChange} />
               <ArticleList isLoading={isLoading} error={error} articles={articles} view={view} />
           </div>

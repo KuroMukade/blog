@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { ThunkConfig } from 'app/providers/StoreProvider';
 
 import { articlesPageActions } from '../../slices/articlesPageSlice';
-import { fetchArticlesList } from '../../services/fetchArticlesList/fetchArticlesList';
+import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
 import {
   getArticlesHasMore,
   getArticlesIsLoading,
@@ -27,7 +28,7 @@ export const fetchArticlesNextPage = createAsyncThunk<
         dispatch(fetchArticlesList({ page: page + 1 }));
       }
     } catch (e) {
-      return rejectWithValue('Произошла ошибка');
+      rejectWithValue('Произошла ошибка');
     }
   },
 );

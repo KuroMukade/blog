@@ -16,8 +16,8 @@ import { Article } from '../../model/types/article';
 import styles from './ArticleListColumnItem.module.scss';
 
 interface ArticleListListItemProps {
-  className?: string;
-  article: Article;
+    className?: string;
+    article: Article;
 }
 
 export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
@@ -45,7 +45,7 @@ export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
                       <AppLink className={styles.cardHeaderLink} to={`profile/${article.user?.id}`}>
-                          <Avatar size="26px" src={article.user?.avatar} />
+                          <Avatar size="26px" src={article.user?.avatar || ''} alt="" />
                           <span>{article.user.username}</span>
                       </AppLink>
                       <span className={styles.cardDate}>{article.createdAt}</span>

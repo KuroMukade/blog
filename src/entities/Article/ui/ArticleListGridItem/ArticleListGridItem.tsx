@@ -1,4 +1,5 @@
 import { memo, useCallback, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import archiveIcon from 'shared/assets/icons/bookmark-mini.svg';
 import heartIcon from 'shared/assets/icons/heart.svg';
@@ -11,15 +12,14 @@ import { classNames } from 'shared/lib/classNames';
 
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig';
 import { Article } from '../../model/types/article';
 
 import styles from './ArticleListGridItem.module.scss';
 
 interface ArticleListItemProps {
-   className?: string;
-   article: Article;
+    className?: string;
+    article: Article;
 }
 
 export const ArticleListGridItem = memo((props: ArticleListItemProps) => {
@@ -41,7 +41,11 @@ export const ArticleListGridItem = memo((props: ArticleListItemProps) => {
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
                       <AppLink className={styles.cardHeaderLink} to={`profile/${article.user?.id}`}>
-                          <Avatar size="26px" src={article.user?.avatar} />
+                          <Avatar
+                              size="26px"
+                              src={article.user?.avatar || ''}
+                              alt={`${article.user.username}'s avatar`}
+                          />
                           <span>{article.user.username}</span>
                       </AppLink>
                       <span className={styles.cardDate}>{article.createdAt}</span>

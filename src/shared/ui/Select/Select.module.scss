@@ -7,11 +7,13 @@
 }
 
 .select {
-    background: none;
+    cursor: pointer;
+    background-color: black;
     outline: none;
-    color: var(--color-primary);
-    padding: 2px 10px 2px 2px;
-    padding-right: 1px solid var(--color-primary);
+    color: white;
+    border-radius: 23px;
+    padding: 2px 1px 2px 2px;
+
 }
 
 .option {

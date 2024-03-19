@@ -1,10 +1,8 @@
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import { lazy, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynamicModuleLoader';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
@@ -24,6 +22,8 @@ import {
 import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
 
+import { importRemote } from 'shared/lib/mf-loader';
+
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 const reducers: ReducersList = {
@@ -34,9 +34,13 @@ interface ProfilePageProps {
     className?: string;
 }
 
-const ProfilePage = ({ className }: ProfilePageProps) => {
-  const { t } = useTranslation();
+const ProfileRemote = lazy(() => importRemote({
+  module: './quiz',
+  scope: 'Quiz',
+  url: __PROFILE_MF_URL__,
+}));
 
+const ProfilePage = ({ className }: ProfilePageProps) => {
   useDynamicModuleLoader('profile', reducers);
 
   const { id } = useParams<{ id: string }>();
@@ -48,7 +52,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   const readonly = useSelector(getProfileReadonly);
   const validateErrors = useSelector(getProfileValidateErrors);
 
-  useInitialEffect(() => {
+  useEffect(() => {
     dispatch(fetchProfileData(id));
   });
 

@@ -1,5 +1,7 @@
 import { Reducer } from '@reduxjs/toolkit';
+
 import { ReduxStoreWithManager } from 'app/providers/StoreProvider';
+
 import { StateSchemaKey } from 'app/providers/StoreProvider/config/StateSchema';
 import { useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
@@ -33,5 +35,5 @@ export function useDynamicModuleLoader(
         });
       }
     };
-  }, [dispatch, key, reducers, removeAfterUnmount, store]);
+  }, [dispatch, key, mountedReducers, reducers, removeAfterUnmount, store]);
 }

@@ -4,7 +4,7 @@ import { classNames } from 'shared/lib/classNames';
 
 import styles from './Select.module.scss';
 
-export interface SelectOption<T extends string> {
+export interface SelectOption<T extends string = string> {
     value: T;
     content: string;
 }
@@ -45,7 +45,13 @@ export const Select = <T extends string>({
           </label>
           )}
           {options && (
-          <select value={value} disabled={readonly} onChange={onSelectValue} id={name}>
+          <select
+              className={styles.select}
+              value={value}
+              disabled={readonly}
+              onChange={onSelectValue}
+              id={name}
+          >
               {optionsList}
           </select>
           )}
