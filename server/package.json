@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.ts",
+  "scripts": {
+    "build:dev": "webpack --env mode=development SSR=true --config ./config/webpack.config.dev.ts"
+  },
+  "author": "kuromukade.dev",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.1",
+    "@babel/node": "^7.23.9",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.24.1",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.1",
+    "@types/compression": "^1.7.5",
+    "@types/express": "^4.17.21",
+    "css-class-generator": "^2.0.0",
+    "loader-utils": "^3.2.1",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.30",
+    "compression": "^1.7.4",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "postcss-loader": "^8.1.1"
+  },
+  "globals": {
+    "__NODEJS__": true
+  }
+}

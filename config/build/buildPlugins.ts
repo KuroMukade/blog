@@ -1,13 +1,17 @@
-import webpack from 'webpack';
+import webpack, { WebpackPluginInstance } from 'webpack';
 
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import {dependencies} from '../../package.json';
 
 import { BuildOptions } from './types/config';
+import { buildMfConfig } from './mf/mfConfig';
 
-export function buildPlugins({ paths, isDev, apiUrl, project }: BuildOptions): webpack.WebpackPluginInstance[] {
+export function buildPlugins({ paths, isDev, apiUrl, project }: BuildOptions): WebpackPluginInstance[] {
+  const isWithAnalyzer = Boolean(process.env.analyze);
+
   return [
     new HTMLWebpackPlugin({
       template: paths.html,
@@ -22,9 +26,13 @@ export function buildPlugins({ paths, isDev, apiUrl, project }: BuildOptions): w
       __IS_DEV__: JSON.stringify(isDev),
       __API__: JSON.stringify(apiUrl),
       __PROJECT__: JSON.stringify(project),
+      __NODEJS__: project === 'server',
+      __PROFILE_MF_URL__: JSON.stringify(process.env.PROFILE_MF_URI) || 'http://localhost:3069',
     }),
-    process.env.analyze && new BundleAnalyzerPlugin({ openAnalyzer: true }),
+    buildMfConfig({remotes: {
+      profile: 'Profile',
+    }, packageVersions: dependencies}),
+    isWithAnalyzer && new BundleAnalyzerPlugin({ openAnalyzer: true }),
     new webpack.HotModuleReplacementPlugin(),
-    // as any filter cuz there is no way to return "" or false to this plugins
-  ].filter(Boolean as any);
+  ].filter(Boolean) as WebpackPluginInstance[];
 }
