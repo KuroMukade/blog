@@ -2,6 +2,7 @@ import React, {
   createContext, FC, ReactNode, useMemo, useState,
 } from 'react';
 import { LOCAL_STORAGE_THEME_KEY } from 'shared/constants/localstorage';
+import { localStore } from 'shared/lib/store';
 
 export enum Theme {
   LIGHT = 'app_light_theme',
@@ -21,7 +22,7 @@ interface ThemeProviderProps {
 
 export const ThemeContext = createContext<ThemeContextProps>({});
 
-const defaultTheme = (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.SIMPLE;
+const defaultTheme = (localStore.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.SIMPLE;
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children, initialTheme }) => {
   const [theme, setTheme] = useState<Theme>(initialTheme || defaultTheme);

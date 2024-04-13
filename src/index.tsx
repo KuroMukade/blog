@@ -1,8 +1,9 @@
-import { render } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
+
 import { BrowserRouter } from 'react-router-dom';
 import { Theme, ThemeProvider } from 'shared/contexts/theme';
 
-import 'shared/config/i18n';
+import 'shared/lib/i18n';
 
 import App from 'app/App';
 
@@ -10,7 +11,8 @@ import { StoreProvider } from 'app/providers/StoreProvider';
 
 import 'app/styles/index.scss';
 
-render(
+hydrateRoot(
+  document.getElementById('root')!,
     <BrowserRouter>
         <StoreProvider>
             <ThemeProvider initialTheme={Theme.SIMPLE}>
@@ -18,5 +20,4 @@ render(
             </ThemeProvider>
         </StoreProvider>
     </BrowserRouter>,
-    document.getElementById('root'),
 );
