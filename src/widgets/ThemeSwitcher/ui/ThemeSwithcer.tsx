@@ -6,6 +6,9 @@ import LightIcon from 'shared/assets/icons/light.svg';
 import DarkIcon from 'shared/assets/icons/dark.svg';
 
 import { useTranslation } from 'react-i18next';
+
+import { TFunction } from 'i18next';
+
 import styles from './ThemeSwithcer.module.scss';
 
 interface ThemeSwithcerProps {
@@ -13,7 +16,7 @@ interface ThemeSwithcerProps {
    collapsed?: boolean;
 }
 
-const getThemeParams = (theme: Theme, t) => {
+const getThemeParams = (theme: Theme, t: TFunction) => {
   if (theme === Theme.DARK) {
     return {
       themeToShow: t('Светлая тема'),

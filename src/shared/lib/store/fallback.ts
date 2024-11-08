@@ -1,10 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import type { Logger } from 'shared/lib/logger';
 
-import { Store } from '../types';
-import { LocalStoreType } from './localStore.types';
-
-export class ServerStorage implements Store<LocalStoreType> {
+export class ServerStorage {
   constructor(private readonly _logger: Logger) {
     this._logger = _logger;
   }
@@ -14,7 +11,7 @@ export class ServerStorage implements Store<LocalStoreType> {
     return null;
   }
 
-  set(key: string, value: T): void {
+  set<T>(key: string, value: T): void {
     this._logger.warn(`Can't set ${key} on server`);
   }
 
@@ -22,7 +19,7 @@ export class ServerStorage implements Store<LocalStoreType> {
     this._logger.warn(`Can't remove ${key} on Server`);
   }
 
-  clear(): void {
+  clearAll(): void {
     this._logger.warn("Can't clear on server");
   }
 }

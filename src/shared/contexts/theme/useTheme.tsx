@@ -1,5 +1,7 @@
 import { useContext } from 'react';
-import { COOKIES_STORAGE_THEME_KEY } from 'shared/constants/cookiestorage';
+
+import { cookieStore } from 'shared/lib/store';
+import { THEME_COOKIE_STORAGE_KEY } from './constants';
 
 import { Theme, ThemeContext } from './ThemeContext';
 
@@ -29,7 +31,7 @@ export function useTheme(): UseThemeResult {
 
     setTheme?.(newTheme);
 
-    cookieStore.set(COOKIES_STORAGE_THEME_KEY, newTheme);
+    cookieStore.set(THEME_COOKIE_STORAGE_KEY, newTheme);
   };
 
   return { theme, toggleTheme };

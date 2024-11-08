@@ -11,7 +11,7 @@ import { $api } from 'shared/api/api';
 import type { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
-const extraArg: ThunkExtraArg = {
+export const extraArg: ThunkExtraArg = {
   api: $api,
 };
 
@@ -20,31 +20,6 @@ export const staticReducers = {
   user: userReducer,
   saveScroll: saveScrollReducer,
 };
-
-export function createSSRStore(
-  initialState?: StateSchema,
-  asyncReducers?: ReducersMapObject<StateSchema>,
-  page?: '',
-) {
-  const rootReducers: ReducersMapObject<StateSchema> = {
-    ...staticReducers,
-    ...asyncReducers,
-  };
-
-  const reducerManager = createReducerManager(rootReducers);
-
-  const store = configureStore({
-    reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
-    devTools: __IS_DEV__,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-      thunk: {
-        extraArgument: extraArg,
-      },
-    }),
-  });
-
-  return store;
-}
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -60,7 +35,7 @@ export function createReduxStore(
   const store = configureStore({
     reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
     devTools: __IS_DEV__,
-    preloadedState: window.__PRELOADED_STATE__,
+    preloadedState: initialState,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       thunk: {
         extraArgument: extraArg,

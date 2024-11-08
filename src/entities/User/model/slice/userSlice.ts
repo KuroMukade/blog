@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { USER_LOCALSTORAGE_KEY } from 'shared/constants/localstorage';
-import { localStore } from 'shared/lib/store';
+
+import { cookieStore } from 'shared/lib/store';
+import { USER_COOKIE_STORAGE_KEY } from '../constants';
 import { User, UserSchema } from '../types/user';
 
 const initialState: UserSchema = {
@@ -14,16 +15,19 @@ export const userSlice = createSlice({
     setAuthData: (state, action: PayloadAction<User>) => {
       state.authData = action.payload;
     },
-    initAuthData: (state) => {
-      const user = localStore.get(USER_LOCALSTORAGE_KEY);
-      if (user) {
-        state.authData = user;
+    initAuthData: (state, action: PayloadAction<User | null>) => {
+      const userData = action?.payload;
+
+      if (userData) {
+        cookieStore.set(USER_COOKIE_STORAGE_KEY, userData);
+        state.authData = userData;
       }
+
       state._inited = true;
     },
     logout: (state) => {
       state.authData = undefined;
-      localStore.remove(USER_LOCALSTORAGE_KEY);
+      cookieStore.remove(USER_COOKIE_STORAGE_KEY);
     },
   },
 });

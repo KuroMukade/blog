@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import { Store } from '../types';
-import type { LocalStoreType } from './localStore.types';
+import type { LocalStoreType } from './types';
 
 export class ClientStorage implements Store<LocalStoreType> {
   get<T extends keyof LocalStoreType>(key: T): LocalStoreType[T] | null {
@@ -17,7 +17,7 @@ export class ClientStorage implements Store<LocalStoreType> {
     localStorage.removeItem(key);
   }
 
-  clear(): void {
+  clearAll(): void {
     localStorage.clear();
   }
 }

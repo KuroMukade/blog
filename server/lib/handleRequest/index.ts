@@ -2,11 +2,10 @@ import { Request, Response } from 'express';
 import { matchPath } from 'react-router-dom';
 import { getStore } from 'lib/store/getStore';
 import i18n from 'lib/i18n/config';
+import { AppRoutesType } from 'routes/index';
 import { render } from '../render';
 
-type AppRoutes = string[]
-
-export const handleRequest = async (url: string, res: Response, req: Request, routes: AppRoutes) => {
+export const handleRequest = async (url: string, res: Response, req: Request, routes: AppRoutesType) => {
   const matchedRoute = routes.find((route) => matchPath(route, url));
   if (!matchedRoute) {
     res.statusCode = 404;
@@ -15,10 +14,13 @@ export const handleRequest = async (url: string, res: Response, req: Request, ro
     return;
   }
 
-  const store = getStore();
+  const { cookies } = req;
+
+  const store = getStore(matchedRoute, url, cookies);
+
   await render(res, {
     url,
-    cookies: req.cookies,
+    cookies,
     i18n,
     store,
     title: 'React SSR blog :D',

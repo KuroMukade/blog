@@ -18,8 +18,8 @@ const renderWithWrapper = (route: AppRoutesProps) => {
           path={route.path}
           element={
             route.authOnly
-              // @ts-ignore
               ? (
+            // @ts-ignore
                   <RequireAuth>
                       <Suspense fallback={<PageLoader />}>
                           {element}
@@ -43,8 +43,10 @@ export const AppRouter = () => {
   const inited = useSelector(getUserInited);
 
   useEffect(() => {
-    dispatch(userActions.initAuthData());
-  }, []);
+    if (!inited) {
+      dispatch(userActions.initAuthData(null));
+    }
+  }, [inited, dispatch]);
 
   return (
       <Routes>

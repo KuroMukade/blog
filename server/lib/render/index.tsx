@@ -4,24 +4,22 @@ import React from 'react';
 import { Response } from 'express';
 
 import App from '@client/app/App';
-
 import { ThemeProvider } from '@client/shared/contexts/theme';
-
 import { CookiesProvider } from '@client/shared/contexts/cookies';
 
 import { renderToPipeableStream, renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router-dom/server';
 
 import {
   createLink, createStyleStream, discoverProjectStyles,
 } from 'used-styles';
 
-import { createCSSChunkCollector } from 'lib/stats/collectCSSChunks';
-import { ServerCookiesManager } from 'lib/cookies/index';
-import { Head } from '../html/head/Head';
-import { Body } from '../html/body/body';
+import { ServerCookiesManager } from 'lib/cookies';
+import { Head } from 'lib/html/head/Head';
+import { Body } from 'lib/html/body/Body';
 
 type Options = {
     url: string;
@@ -50,6 +48,8 @@ export const render = async (res: Response, options: Options) => {
     path.join(__dirname, '../client/manifest.json'),
     'utf-8',
   ));
+
+  // console.log({state: store.getState()});
 
   const { abort, pipe } = renderToPipeableStream((
       <StaticRouter location={url}>

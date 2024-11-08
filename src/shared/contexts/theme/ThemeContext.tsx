@@ -1,9 +1,8 @@
 import React, {
   createContext, FC, ReactNode, useMemo, useState,
 } from 'react';
-import { LOCAL_STORAGE_THEME_KEY } from 'shared/constants/localstorage';
-import { localStore } from 'shared/lib/store';
 import { useCookies } from '../cookies';
+import { THEME_COOKIE_STORAGE_KEY } from './constants';
 
 export enum Theme {
   LIGHT = 'app_light_theme',
@@ -12,8 +11,8 @@ export enum Theme {
 }
 
 interface ThemeContextProps {
-  theme?: Theme;
-  setTheme?: (theme: Theme) => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
 }
 
 interface ThemeProviderProps {
@@ -24,10 +23,8 @@ const DEFAULT_APP_THEME = Theme.LIGHT;
 
 export const ThemeContext = createContext<ThemeContextProps>({
   setTheme: () => {},
-  theme: null,
+  theme: Theme.DARK,
 });
-
-// const defaultTheme = (localStore.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.SIMPLE;
 
 const getInitialTheme = (initTheme: string) => {
   if (initTheme !== Theme.LIGHT && initTheme !== Theme.DARK && initTheme !== Theme.SIMPLE) {
@@ -38,7 +35,7 @@ const getInitialTheme = (initTheme: string) => {
 };
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [initTheme] = useCookies('theme');
+  const [initTheme] = useCookies(THEME_COOKIE_STORAGE_KEY);
 
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme(initTheme));
 

@@ -5,17 +5,17 @@ import cookieParser from 'cookie-parser';
 import { handleRequest } from 'lib/handleRequest';
 import { handleErrors } from 'lib/handleErrors';
 
+import { APP_ROUTES } from './routes/index';
+
 const app = express();
 
 app.use(cookieParser());
-
-const appRoutes = ['/', '/about', '/profile/', '/articles', '/articles/'];
 
 app.use('/static', express.static(path.join(__dirname, '../client')));
 
 const router = express.Router();
 
-router.use('/', (req, res) => handleRequest(req.url, res, req, appRoutes));
+router.use('/', (req, res) => handleRequest(req.url, res, req, APP_ROUTES));
 
 app.use(router);
 
