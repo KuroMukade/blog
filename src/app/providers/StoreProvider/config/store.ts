@@ -21,6 +21,31 @@ export const staticReducers = {
   saveScroll: saveScrollReducer,
 };
 
+export function createSSRStore(
+  initialState?: StateSchema,
+  asyncReducers?: ReducersMapObject<StateSchema>,
+  page?: '',
+) {
+  const rootReducers: ReducersMapObject<StateSchema> = {
+    ...staticReducers,
+    ...asyncReducers,
+  };
+
+  const reducerManager = createReducerManager(rootReducers);
+
+  const store = configureStore({
+    reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
+    devTools: __IS_DEV__,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      thunk: {
+        extraArgument: extraArg,
+      },
+    }),
+  });
+
+  return store;
+}
+
 export function createReduxStore(
   initialState?: StateSchema,
   asyncReducers?: ReducersMapObject<StateSchema>,

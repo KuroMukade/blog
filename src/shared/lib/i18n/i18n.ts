@@ -4,9 +4,9 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 // import LanguageDetector from 'i18next-browser-languagedetector';
 
-const loadPath = 'public/locales/{{lng}}/{{ns}}.json';
+const loadPath = 'static/locales/{{lng}}/{{ns}}.json';
 
-export const LANGUAGES_LIST = ['eng', 'ru'];
+export const LANGUAGES_LIST = ['en', 'ru'];
 export const DEFAULT_LANGUAGE = LANGUAGES_LIST[0];
 
 i18n
@@ -14,11 +14,11 @@ i18n
   // .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'eng',
-    debug: !!__IS_DEV__,
+    fallbackLng: DEFAULT_LANGUAGE,
+    debug: Boolean(__IS_DEV__),
 
     react: {
-      useSuspense: false,
+      useSuspense: true,
     },
 
     interpolation: {

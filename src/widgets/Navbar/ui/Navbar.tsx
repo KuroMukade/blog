@@ -9,7 +9,6 @@ import { LoginModal } from 'features/AuthByUsername';
 import { getUserAuthData, userActions } from 'entities/User';
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { classNames } from 'shared/lib/classNames';
 
 import styles from './Navbar.module.scss';
 
@@ -37,7 +36,7 @@ export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
 
   if (authData) {
     return (
-        <div className={classNames(styles.navbar, {}, [className])}>
+        <div className={styles.navbar}>
             <Button onClick={onBurgerClick}>
                 <img src={burgerIcon} alt="toggle sidebar" />
             </Button>
@@ -47,7 +46,7 @@ export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
   }
 
   return (
-      <div className={classNames(styles.navbar, {}, [className])}>
+      <div className={styles.navbar}>
           <Button onClick={onBurgerClick}>
               <img src={burgerIcon} alt="toggle sidebar" />
           </Button>

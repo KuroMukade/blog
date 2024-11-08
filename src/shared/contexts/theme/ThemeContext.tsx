@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { LOCAL_STORAGE_THEME_KEY } from 'shared/constants/localstorage';
 import { localStore } from 'shared/lib/store';
+import { useCookies } from '../cookies';
 
 export enum Theme {
   LIGHT = 'app_light_theme',
@@ -16,16 +17,30 @@ interface ThemeContextProps {
 }
 
 interface ThemeProviderProps {
-  initialTheme?: Theme;
   children: ReactNode;
 }
 
-export const ThemeContext = createContext<ThemeContextProps>({});
+const DEFAULT_APP_THEME = Theme.LIGHT;
 
-const defaultTheme = (localStore.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.SIMPLE;
+export const ThemeContext = createContext<ThemeContextProps>({
+  setTheme: () => {},
+  theme: null,
+});
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ children, initialTheme }) => {
-  const [theme, setTheme] = useState<Theme>(initialTheme || defaultTheme);
+// const defaultTheme = (localStore.get(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.SIMPLE;
+
+const getInitialTheme = (initTheme: string) => {
+  if (initTheme !== Theme.LIGHT && initTheme !== Theme.DARK && initTheme !== Theme.SIMPLE) {
+    return DEFAULT_APP_THEME;
+  }
+
+  return initTheme;
+};
+
+export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
+  const [initTheme] = useCookies('theme');
+
+  const [theme, setTheme] = useState<Theme>(() => getInitialTheme(initTheme));
 
   const defaultProps = useMemo(
     () => ({

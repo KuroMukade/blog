@@ -1,25 +1,22 @@
 {
     "compilerOptions": {
-      "outDir": "../dist/server",
+      "module": "NodeNext",
+      "esModuleInterop": true,
       "strict": true,
       "noImplicitAny": true,
-      "module": "ESNext",
-      "target": "es2021",
+      "moduleResolution": "NodeNext",
+      "target": "ES6",
       "skipLibCheck": true,
+      "resolveJsonModule": true,
       "jsx": "react",
       "allowJs": true,
-      "moduleResolution": "node",
-      "baseUrl": ".",
-      "esModuleInterop": true,
+      "outDir": "../dist/server",
+      "baseUrl": "./",
+      "paths": {
+        "@client/*": ["../src/*"]
+      },
       "allowSyntheticDefaultImports": true,
       "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "ts-node": {
-      "compilerOptions": {
-        "module": "CommonJS",
-      }
-    },
-    "include": ["./server.ts", "./app", "./config"],
-    "exclude": ["node_modules"]
-  }
-  
+    "include": ["server.ts", "./config", "./lib", "./types"],
+}

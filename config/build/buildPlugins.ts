@@ -1,15 +1,18 @@
 import webpack, { WebpackPluginInstance } from 'webpack';
-
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import {dependencies} from '../../package.json';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import { ImportedPlugin } from 'webpack-imported';
+import { dependencies } from '../../package.json';
 
 import { BuildOptions } from './types/config';
 import { buildMfConfig } from './mf/mfConfig';
 
-export function buildPlugins({ paths, isDev, apiUrl, project }: BuildOptions): WebpackPluginInstance[] {
+export function buildPlugins({
+  paths, isDev, apiUrl, project,
+}: BuildOptions): WebpackPluginInstance[] {
   const isWithAnalyzer = Boolean(process.env.analyze);
 
   return [
@@ -21,18 +24,26 @@ export function buildPlugins({ paths, isDev, apiUrl, project }: BuildOptions): W
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
-    isDev && new ReactRefreshWebpackPlugin({ overlay: false }),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
       __API__: JSON.stringify(apiUrl),
       __PROJECT__: JSON.stringify(project),
-      __NODEJS__: project === 'server',
-      __PROFILE_MF_URL__: JSON.stringify(process.env.PROFILE_MF_URI) || 'http://localhost:3069',
+      __NODEJS__: JSON.stringify(project === 'server'),
+      __PROFILE_MF_URL__: JSON.stringify(process.env.PROFILE_MF_URI) || 'no-route',
     }),
-    buildMfConfig({remotes: {
-      profile: 'Profile',
-    }, packageVersions: dependencies}),
+    buildMfConfig({
+      remotes: {
+        profile: 'Profile',
+      },
+      packageVersions: dependencies,
+    }),
+    new ImportedPlugin('imported.json'),
     isWithAnalyzer && new BundleAnalyzerPlugin({ openAnalyzer: true }),
-    new webpack.HotModuleReplacementPlugin(),
+    new WebpackManifestPlugin({}),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public/locales', to: 'locales' },
+      ],
+    }),
   ].filter(Boolean) as WebpackPluginInstance[];
 }

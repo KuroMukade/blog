@@ -10,6 +10,8 @@
         ]
     ],
     "plugins": [
-        "i18next-extract"
+        ["i18next-extract", {
+            "locales": ["ru", "en"]
+        }]
     ]
 }

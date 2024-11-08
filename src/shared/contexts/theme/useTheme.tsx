@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { LOCAL_STORAGE_THEME_KEY } from 'shared/constants/localstorage';
-import { localStore } from 'shared/lib/store';
+import { COOKIES_STORAGE_THEME_KEY } from 'shared/constants/cookiestorage';
+
 import { Theme, ThemeContext } from './ThemeContext';
 
 interface UseThemeResult {
@@ -28,8 +28,9 @@ export function useTheme(): UseThemeResult {
     }
 
     setTheme?.(newTheme);
-    localStore.set(LOCAL_STORAGE_THEME_KEY, newTheme);
+
+    cookieStore.set(COOKIES_STORAGE_THEME_KEY, newTheme);
   };
 
-  return { theme: theme || Theme.LIGHT, toggleTheme };
+  return { theme, toggleTheme };
 }
