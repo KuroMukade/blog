@@ -49,7 +49,7 @@ export const render = async (res: Response, options: Options) => {
     'utf-8',
   ));
 
-  // console.log({state: store.getState()});
+  console.log({state: store.getState()});
 
   const { abort, pipe } = renderToPipeableStream((
       <StaticRouter location={url}>

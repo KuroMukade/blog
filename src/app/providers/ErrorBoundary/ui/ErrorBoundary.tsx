@@ -20,13 +20,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   static getDerivedStateFromError(error: Error) {
-    console.log(error);
+    console.error(error);
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     const { errorHandler } = this.props;
-    console.log(error, errorInfo);
+    console.error(error, errorInfo);
     errorHandler?.(error, errorInfo);
   }
 

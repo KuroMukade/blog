@@ -19,16 +19,16 @@ interface ThemeSwithcerProps {
 const getThemeParams = (theme: Theme, t: TFunction) => {
   if (theme === Theme.DARK) {
     return {
-      themeToShow: t('Светлая тема'),
+      themeToShow: t('Темная тема'),
       style: styles.themeDark,
-      icon: DarkIcon,
+      icon: LightIcon,
     };
   }
   if (theme === Theme.LIGHT) {
     return {
-      themeToShow: t('Легкая тема'),
+      themeToShow: t('Светлая тема'),
       style: styles.themeLight,
-      icon: LightIcon,
+      icon: DarkIcon,
     };
   }
 
