@@ -1,20 +1,10 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib",
-    "eslint.enable": true,
-    "eslint.validate": [
-        "typescript",
-        "typescriptreact"
-    ],
-    "editor.tabSize": 4,
-    "files.eol": "\r\n",
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     "[typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
     },
     "[typescriptreact]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
     },
-    "i18n-ally.localesPaths": [
-        "public/locales",
-        "src/shared/config/i18n"
-    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

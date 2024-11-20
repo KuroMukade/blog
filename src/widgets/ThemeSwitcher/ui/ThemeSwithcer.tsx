@@ -6,6 +6,9 @@ import LightIcon from 'shared/assets/icons/light.svg';
 import DarkIcon from 'shared/assets/icons/dark.svg';
 
 import { useTranslation } from 'react-i18next';
+
+import { TFunction } from 'i18next';
+
 import styles from './ThemeSwithcer.module.scss';
 
 interface ThemeSwithcerProps {
@@ -13,33 +16,35 @@ interface ThemeSwithcerProps {
    collapsed?: boolean;
 }
 
+const getThemeParams = (theme: Theme, t: TFunction) => {
+  if (theme === Theme.DARK) {
+    return {
+      themeToShow: t('Темная тема'),
+      style: styles.themeDark,
+      icon: LightIcon,
+    };
+  }
+  if (theme === Theme.LIGHT) {
+    return {
+      themeToShow: t('Светлая тема'),
+      style: styles.themeLight,
+      icon: DarkIcon,
+    };
+  }
+
+  return {
+    themeToShow: t('Простая тема'),
+    style: styles.themeSimple,
+    icon: DarkIcon,
+  };
+};
+
 export const ThemeSwithcer = ({ className, collapsed }: ThemeSwithcerProps) => {
   const { theme, toggleTheme } = useTheme();
 
   const { t } = useTranslation();
 
-  let themeToShow;
-  let style;
-  let icon;
-
-  switch (theme) {
-    case Theme.DARK:
-      themeToShow = t('Светлая тема');
-      style = styles.themeDark;
-      icon = LightIcon;
-      break;
-    case Theme.LIGHT:
-      themeToShow = t('Легкая тема');
-      style = styles.themeLight;
-      icon = DarkIcon;
-      break;
-    case Theme.SIMPLE:
-      themeToShow = t('Темная тема');
-      style = styles.themeSimple;
-      icon = DarkIcon;
-      break;
-    default: themeToShow = Theme.DARK;
-  }
+  const { themeToShow, style, icon } = getThemeParams(theme, t);
 
   return (
       <div

@@ -8,6 +8,10 @@ declare module '*.png' {
   export = value;
 }
 
+interface Window {
+  __PRELOADED_STATE__: any,
+}
+
 declare module '*.jpeg';
 
 declare module '*.jpg';
@@ -18,6 +22,7 @@ declare const __IS_DEV__: boolean;
 declare const __API__: string;
 declare const __PROJECT__: 'client' | 'server' | 'jest';
 declare const __PROFILE_MF_URL__: string;
+declare const __NODEJS__: boolean;
 
 type DeepPartial<T> = T extends object ? {
   [P in keyof T]?: DeepPartial<T[P]>

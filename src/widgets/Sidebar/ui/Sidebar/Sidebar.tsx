@@ -1,4 +1,6 @@
 import { memo, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { useSelector } from 'react-redux';
 
 import { classNames } from 'shared/lib/classNames';
@@ -17,7 +19,8 @@ interface SidebarProps {
 }
 
 export const Sidebar = memo(({ className, collapsed }: SidebarProps) => {
-  const sidebarItems = useSelector(getSidebarItems);
+  const { t } = useTranslation();
+  const sidebarItems = useSelector((store) => getSidebarItems(store, t));
 
   const linkList = useMemo(() => sidebarItems.map((item) => {
     const { path } = item;

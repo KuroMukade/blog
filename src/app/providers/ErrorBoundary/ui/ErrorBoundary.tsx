@@ -1,5 +1,5 @@
 import {
-  Component, ErrorInfo, ReactNode, Suspense,
+  Component, ErrorInfo, FC, ReactNode, Suspense,
 } from 'react';
 import { PageError } from 'widgets/PageError';
 
@@ -20,13 +20,12 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   static getDerivedStateFromError(error: Error) {
-    console.log(error);
+    console.error(error);
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     const { errorHandler } = this.props;
-    console.log(error, errorInfo);
     errorHandler?.(error, errorInfo);
   }
 
@@ -36,12 +35,18 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
     if (hasError) {
       return (
-          <Suspense fallback={fallback}>
-              <PageError />
-          </Suspense>
+          <PageError />
       );
     }
 
     return children;
   }
 }
+
+export const ErrorBoundaryWithSSR: FC<ErrorBoundaryProps> = ({ fallback, children, errorHandler }) => {
+  return (
+      <ErrorBoundary errorHandler={errorHandler} fallback={fallback}>
+          <Suspense fallback={fallback}>{children}</Suspense>
+      </ErrorBoundary>
+  );
+};

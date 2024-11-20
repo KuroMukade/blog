@@ -38,6 +38,7 @@ const initialFiltersReducers: ReducersList = {
 export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   useDynamicModuleLoader('articlesPage', initialPageReducers, false);
   useDynamicModuleLoader('articlesFilters', initialFiltersReducers, false);
+
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesIsLoading);
   const view = useSelector(getArticlesView);

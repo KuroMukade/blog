@@ -4,15 +4,15 @@
 @import "./themes/light";
 @import "./themes/simple";
 
-body {
-    font: var(--font-m);
-    color: var(--color-primary);
-}
-
 .app {
     background: var(--bg-color);
     width: 100vw;
     min-height: 100vh;
+}
+
+.app_light_theme, .app_dark_theme, .app_simple_theme {
+    font: var(--font-m);
+    color: var(--color-primary);
 }
 
 .content-page {

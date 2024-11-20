@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 
-import { User, userActions } from 'entities/User';
-import { i18n } from 'shared/config/i18n';
-import { USER_LOCALSTORAGE_KEY } from 'shared/constants/localstorage';
+import { User, userActions, USER_COOKIE_STORAGE_KEY } from 'entities/User';
+import { i18n } from 'shared/lib/i18n';
+
+import { cookieStore } from 'shared/lib/store';
 
 interface LoginByUsernameProps {
     username: string;
@@ -20,7 +21,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
         throw new Error();
       }
 
-      localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(response.data));
+      cookieStore.set(USER_COOKIE_STORAGE_KEY, response.data);
       dispatch(userActions.setAuthData(response.data));
       extra.navigate?.('/profile');
       return response.data;

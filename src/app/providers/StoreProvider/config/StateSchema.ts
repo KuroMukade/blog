@@ -16,7 +16,7 @@ import type { SaveScrollSchema } from 'features/SaveScroll';
 
 import type { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage';
 import type { ArticlesPageSchema } from 'pages/ArticlesPage';
-import { ArticleFiltersSchema } from 'features/ArticleFilters';
+import type { ArticleFiltersSchema } from 'features/ArticleFilters';
 
 export interface StateSchema {
     counter: CounterSchema;

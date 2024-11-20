@@ -6,7 +6,7 @@ import { BuildEnv, BuildPaths } from './config/build/types/config';
 export default (env: BuildEnv) => {
   const paths: BuildPaths = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
-    build: path.resolve(__dirname, 'build'),
+    build: path.resolve(__dirname, 'dist/client'),
     html: path.resolve(__dirname, 'public', 'index.html'),
     src: path.resolve(__dirname, 'src'),
   };
@@ -15,14 +15,15 @@ export default (env: BuildEnv) => {
   const isDev = mode === 'development';
   const PORT = env.port || 3000;
   const apiUrl = env.apiUrl || 'http://localhost:8000';
+  const project = env.platform || 'client';
 
   const config: webpack.Configuration = buildWebpackConfig({
     mode,
     paths,
     isDev,
     apiUrl,
+    project,
     port: PORT,
-    project: 'frontend',
   });
 
   return config;

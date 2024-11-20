@@ -1,0 +1,3 @@
+import i18n, { DEFAULT_LANGUAGE, LANGUAGES_LIST } from './i18n';
+
+export { i18n, DEFAULT_LANGUAGE, LANGUAGES_LIST };

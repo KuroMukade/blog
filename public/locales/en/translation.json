@@ -6,7 +6,13 @@
   "Страница не найдена": "Page not found",
   "Обновить страницу": "Reload page",
   "Вход": "Sign In",
+  "Войти": "Sign In",
+  "Пароль": "Password",
   "Имя": "Name",
+  "Темная тема": "Dark Theme",
+  "Светлая тема": "White Theme",
+  "Простая тема": "Light Theme",
+  "Язык интерфейса": "Language",
   "Авторизация": "Sign In",
   "Вы ввели неверный логин или пароль": "You typed invalid login or password",
   "Выйти": "Log out"

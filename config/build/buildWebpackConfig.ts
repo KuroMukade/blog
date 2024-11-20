@@ -1,30 +1,30 @@
 import webpack from 'webpack';
-import path from 'path';
 import { BuildOptions } from './types/config';
 import { buildPlugins } from './buildPlugins';
-import { buildLoaders } from './buildLoaders';
+import { buildLoaders } from './loaders/buildLoaders';
 import { buildResolvers } from './buildResolvers';
-import { buildDevServer } from './buildDevServer';
 
 export function buildWebpackConfig(options: BuildOptions): webpack.Configuration {
-    const { paths, mode, isDev } = options;
+  const { paths, mode, isDev } = options;
 
-    return {
-        mode,
-        entry: paths.entry,
-        output: {
-            filename: '[name].[contenthash].js',
-            path: paths.build,
-            clean: true,
-            assetModuleFilename: '[hash][ext][query]',
-            publicPath: '/',
-        },
-        plugins: buildPlugins(options),
-        module: {
-            rules: buildLoaders(options), 
-        },
-        resolve: buildResolvers(options),
-        devtool: isDev ? 'inline-source-map' : undefined,
-        devServer: isDev ? buildDevServer(options) : undefined,
-    };
+  return {
+    mode,
+    target: 'web',
+    entry: {
+      initChunk: paths.entry,
+    },
+    output: {
+      filename: '[name].[contenthash].js',
+      path: paths.build,
+      clean: true,
+      assetModuleFilename: '[hash][ext][query]',
+      publicPath: '/static/',
+    },
+    plugins: buildPlugins(options),
+    module: {
+      rules: buildLoaders(options),
+    },
+    resolve: buildResolvers(options),
+    devtool: isDev ? 'inline-source-map' : undefined,
+  };
 }

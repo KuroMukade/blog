@@ -12,13 +12,15 @@ interface SidebarItemProps {
 
 export const SidebarItem = memo(({
   item, collapsed,
-}: SidebarItemProps) => (
-    <AppLink className={styles.link} theme={AppLinkTheme.PRIMARY} to={item.path}>
-        <img src={item.icon} alt="" />
-        {!collapsed && (
-            <span className={styles.text}>
-                {item.text}
-            </span>
-        )}
-    </AppLink>
-));
+}: SidebarItemProps) => {
+  return (
+      <AppLink className={styles.link} theme={AppLinkTheme.PRIMARY} to={item.path}>
+          <img src={item.icon} alt="" />
+          {!collapsed && (
+          <span className={styles.text}>
+              {item.text}
+          </span>
+          )}
+      </AppLink>
+  );
+});

@@ -5,9 +5,7 @@ import { Button } from 'shared/ui/Button/Button';
 import { counterActions } from '../model/slice/counterSlice';
 import { getCounterValue } from '../model/selectors/getCounterValue/getCounterValue';
 
-interface CounterProps {}
-
-export const Counter: FC<CounterProps> = () => {
+export const Counter: FC = () => {
   const dispatch = useDispatch();
 
   const counterValue = useSelector(getCounterValue);
@@ -21,15 +19,9 @@ export const Counter: FC<CounterProps> = () => {
   };
   return (
       <div>
-          <h1 data-testid="value-title">
-              {counterValue}
-          </h1>
-          <Button data-testid="increment-btn" onClick={increment}>
-              +
-          </Button>
-          <Button data-testid="decrement-btn" onClick={decrement}>
-              -
-          </Button>
+          <h1>{counterValue}</h1>
+          <Button onClick={increment}>+</Button>
+          <Button onClick={decrement}>-</Button>
       </div>
   );
 };

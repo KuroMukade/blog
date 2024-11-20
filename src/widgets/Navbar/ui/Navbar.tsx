@@ -9,16 +9,14 @@ import { LoginModal } from 'features/AuthByUsername';
 import { getUserAuthData, userActions } from 'entities/User';
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
-import { classNames } from 'shared/lib/classNames';
 
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
-  className?: string;
   onBurgerClick?: () => void;
 }
 
-export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
+export const Navbar = ({ onBurgerClick }: NavbarProps) => {
   const { t } = useTranslation();
 
   const [isAuthOpen, setAuthOpen] = useState(false);
@@ -37,7 +35,7 @@ export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
 
   if (authData) {
     return (
-        <div className={classNames(styles.navbar, {}, [className])}>
+        <div className={styles.navbar}>
             <Button onClick={onBurgerClick}>
                 <img src={burgerIcon} alt="toggle sidebar" />
             </Button>
@@ -47,7 +45,7 @@ export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
   }
 
   return (
-      <div className={classNames(styles.navbar, {}, [className])}>
+      <div className={styles.navbar}>
           <Button onClick={onBurgerClick}>
               <img src={burgerIcon} alt="toggle sidebar" />
           </Button>

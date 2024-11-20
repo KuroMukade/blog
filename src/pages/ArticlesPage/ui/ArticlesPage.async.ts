@@ -1,5 +1,3 @@
-import { lazy } from 'react';
+import { lazyLoad } from 'shared/lib/lazyLoad';
 
-export const ArticlesPageAsync = lazy(
-  () => import('./ArticlesPage').then((module) => ({ default: module.ArticlesPage })),
-);
+export const ArticlesPageAsync = lazyLoad(() => import('./ArticlesPage'), 'ArticlesPage');

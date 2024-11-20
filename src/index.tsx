@@ -1,22 +1,31 @@
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Theme, ThemeProvider } from 'shared/contexts/theme';
+import { hydrateRoot } from 'react-dom/client';
 
-import 'shared/config/i18n';
+import { BrowserRouter } from 'react-router-dom';
+
+import 'shared/lib/i18n';
+import 'app/styles/index.scss';
 
 import App from 'app/App';
 
 import { StoreProvider } from 'app/providers/StoreProvider';
+import { ThemeProvider } from 'shared/contexts/theme';
+import { moveStyles } from 'used-styles/moveStyles';
+import { CookiesProvider } from 'shared/contexts/cookies';
+import { I18nextWrapper } from 'app/providers/i18';
 
-import 'app/styles/index.scss';
+moveStyles();
 
-render(
+hydrateRoot(
+  document.getElementById('root')!,
     <BrowserRouter>
         <StoreProvider>
-            <ThemeProvider initialTheme={Theme.SIMPLE}>
-                <App />
-            </ThemeProvider>
+            <CookiesProvider>
+                <I18nextWrapper>
+                    <ThemeProvider>
+                        <App />
+                    </ThemeProvider>
+                </I18nextWrapper>
+            </CookiesProvider>
         </StoreProvider>
     </BrowserRouter>,
-    document.getElementById('root'),
 );
