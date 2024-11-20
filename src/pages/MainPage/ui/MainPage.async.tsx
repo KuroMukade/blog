@@ -1,3 +1,6 @@
-import { lazy } from 'react';
+import { lazyLoad } from 'shared/lib/lazyLoad';
 
-export const MainPageAsync = lazy(() => import('./MainPage'));
+export const MainPageAsync = lazyLoad(
+  () => import(/* webpackChunkName: "MainPage" */ './MainPage'),
+  'MainPage',
+);

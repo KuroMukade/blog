@@ -5,8 +5,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { ImportedPlugin } from 'webpack-imported';
+import LoadablePlugin from '@loadable/webpack-plugin';
 import { dependencies } from '../../package.json';
-
 import { BuildOptions } from './types/config';
 import { buildMfConfig } from './mf/mfConfig';
 
@@ -45,5 +45,6 @@ export function buildPlugins({
         { from: 'public/locales', to: 'locales' },
       ],
     }),
+    new LoadablePlugin(),
   ].filter(Boolean) as WebpackPluginInstance[];
 }

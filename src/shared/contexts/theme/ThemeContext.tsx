@@ -36,6 +36,7 @@ const getInitialTheme = (initTheme: string) => {
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const [initTheme] = useCookies(THEME_COOKIE_STORAGE_KEY);
+  console.log({ initTheme });
 
   const [theme, setTheme] = useState<Theme>(() => getInitialTheme(initTheme));
 

@@ -4,9 +4,7 @@ import { initReactI18next } from 'react-i18next';
 import backend from 'i18next-fs-backend';
 import path, { join } from 'path';
 import { lstatSync, readdirSync } from 'fs';
-
-export const LANGUAGES_LIST = ['en', 'ru'] as const;
-export const DEFAULT_LANGUAGE = LANGUAGES_LIST[0];
+import { DEFAULT_LANGUAGE } from '@client/shared/lib/i18n/i18n';
 
 const localesFolder = path.resolve(__dirname, '..', '..', 'public', 'locales/');
 

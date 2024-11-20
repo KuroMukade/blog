@@ -9,7 +9,7 @@ import { useTheme } from 'shared/contexts/theme/useTheme';
 
 import { Sidebar } from 'widgets/Sidebar';
 
-import { ErrorBoundary } from './providers/ErrorBoundary';
+import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 
 const App = () => {
   const { theme } = useTheme();
@@ -17,7 +17,7 @@ const App = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-      <ErrorBoundary fallback="Error!">
+      <ErrorBoundaryWithSSR fallback="Error!">
           <div className={classNames('app', {}, [theme])}>
               <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
               <div className="content-page">
@@ -25,8 +25,7 @@ const App = () => {
                   <AppRouter />
               </div>
           </div>
-          <div />
-      </ErrorBoundary>
+      </ErrorBoundaryWithSSR>
   );
 };
 

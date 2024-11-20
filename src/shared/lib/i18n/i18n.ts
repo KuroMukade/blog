@@ -6,7 +6,7 @@ import Backend from 'i18next-http-backend';
 
 const loadPath = 'static/locales/{{lng}}/{{ns}}.json';
 
-export const LANGUAGES_LIST = ['en', 'ru'];
+export const LANGUAGES_LIST = ['en', 'ru'] as const;
 export const DEFAULT_LANGUAGE = LANGUAGES_LIST[0];
 
 i18n
@@ -15,7 +15,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: DEFAULT_LANGUAGE,
-    debug: Boolean(__IS_DEV__),
+    // debug: Boolean(__IS_DEV__),
 
     react: {
       useSuspense: true,

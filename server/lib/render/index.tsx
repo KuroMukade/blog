@@ -18,8 +18,9 @@ import {
 } from 'used-styles';
 
 import { ServerCookiesManager } from 'lib/cookies';
-import { Head } from 'lib/html/head/Head';
-import { Body } from 'lib/html/body/Body';
+
+import { Head } from 'lib/jsx/html/head/Head';
+import { Body } from 'lib/jsx/html/body/Body';
 
 type Options = {
     url: string;

@@ -13,11 +13,10 @@ import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
-  className?: string;
   onBurgerClick?: () => void;
 }
 
-export const Navbar = ({ className, onBurgerClick }: NavbarProps) => {
+export const Navbar = ({ onBurgerClick }: NavbarProps) => {
   const { t } = useTranslation();
 
   const [isAuthOpen, setAuthOpen] = useState(false);

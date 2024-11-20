@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Route, Routes } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { AppRoutesProps, routeConfig } from 'shared/config/routeConfig';
 import { PageLoader } from 'widgets/PageLoader';
 
 import { getUserInited, userActions } from 'entities/User';
+import { ErrorBoundaryWithSSR } from 'app/providers/ErrorBoundary';
 import { RequireAuth } from './PrivateRoute';
 
 const renderWithWrapper = (route: AppRoutesProps) => {
@@ -21,18 +22,17 @@ const renderWithWrapper = (route: AppRoutesProps) => {
               ? (
             // @ts-ignore
                   <RequireAuth>
-                      <Suspense fallback={<PageLoader />}>
+                      <ErrorBoundaryWithSSR fallback={null}>
                           {element}
-                      </Suspense>
+                      </ErrorBoundaryWithSSR>
                   </RequireAuth>
               )
               : (
-                  <Suspense fallback={<PageLoader />}>
+                  <ErrorBoundaryWithSSR fallback={<PageLoader />}>
                       {element}
-                  </Suspense>
+                  </ErrorBoundaryWithSSR>
               )
-}
-
+          }
       />
   );
 };
@@ -52,6 +52,5 @@ export const AppRouter = () => {
       <Routes>
           {Object.values(routeConfig).map(renderWithWrapper)}
       </Routes>
-
   );
 };

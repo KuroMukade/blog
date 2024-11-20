@@ -2,6 +2,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import LoadablePlugin from '@loadable/webpack-plugin';
 import { buildServerLoaders } from './loaders.js';
 
 const nodeJsPlugin = new webpack.DefinePlugin({
@@ -11,8 +12,6 @@ const nodeJsPlugin = new webpack.DefinePlugin({
   __API__: JSON.stringify('http://localhost:8000'),
   __PROFILE_MF_URL__: JSON.stringify(''),
 });
-
-const options = {};
 
 export default {
   target: 'async-node',
@@ -36,6 +35,7 @@ export default {
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
     new WebpackManifestPlugin({}),
+    new LoadablePlugin(),
   ],
   resolve: {
     preferAbsolute: true,

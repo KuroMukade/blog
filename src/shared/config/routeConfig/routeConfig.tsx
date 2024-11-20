@@ -45,11 +45,13 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.ARTICLES]: {
     path: RoutePath.articles_page,
     element: <ArticlesPage />,
-    authOnly: true,
+    // TODO: remove false
+    authOnly: false,
   },
   [AppRoutes.ARTICLE_DETAILS]: {
     path: `${RoutePath.article_details_page}:id`,
     element: <ArticleDetailsPage />,
+    // TODO: remove false
     authOnly: true,
   },
   [AppRoutes.NOT_FOUND]: {
