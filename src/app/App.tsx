@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { AppRouter } from 'app/providers/router';
 
@@ -11,20 +11,27 @@ import { Sidebar } from 'widgets/Sidebar';
 
 import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 
-const App = () => {
+const Layout = ({ children }: {children: ReactNode}) => {
+  const [collapsed, setCollapsed] = useState(false);
   const { theme } = useTheme();
 
-  const [collapsed, setCollapsed] = useState(false);
+  return (
+      <div className={classNames('app', {}, [theme])}>
+          <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
+          <div className="content-page">
+              <Sidebar collapsed={collapsed} />
+              {children}
+          </div>
+      </div>
+  );
+};
 
+const App = () => {
   return (
       <ErrorBoundaryWithSSR fallback="Error!">
-          <div className={classNames('app', {}, [theme])}>
-              <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
-              <div className="content-page">
-                  <Sidebar collapsed={collapsed} />
-                  <AppRouter />
-              </div>
-          </div>
+          <Layout>
+              <AppRouter />
+          </Layout>
       </ErrorBoundaryWithSSR>
   );
 };
