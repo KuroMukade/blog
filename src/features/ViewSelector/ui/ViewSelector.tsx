@@ -29,8 +29,7 @@ const viewItems: readonly View[] = [
   },
 ] as const;
 
-export const ViewSelector = memo((props: ViewSelectorProps) => {
-  const { className, view, onViewClick } = props;
+export const ViewSelector = memo(({ className, onViewClick, view }: ViewSelectorProps) => {
   const onClick = (newView: ViewType) => {
     onViewClick?.(newView);
   };
@@ -49,6 +48,7 @@ export const ViewSelector = memo((props: ViewSelectorProps) => {
                       )}
                       theme={ThemeButton.CLEAR}
                       type="button"
+                      key={item.view}
                       onClick={() => onClick(item.view)}
                   >
                       <img alt={item.view} src={item.icon} />
