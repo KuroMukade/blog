@@ -31,5 +31,6 @@ export const getStore = (pageType: string, url: string, cookies: Record<string, 
   const store = createSSRStore();
   const initUser = getStoreUserInitializer(cookies);
   store.dispatch(initUser);
+
   return store;
 };

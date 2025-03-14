@@ -3,6 +3,7 @@ import path from 'path';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
+import NodemonPlugin from 'nodemon-webpack-plugin';
 import { buildServerLoaders } from './loaders.js';
 
 const nodeJsPlugin = new webpack.DefinePlugin({
@@ -23,7 +24,7 @@ export default {
     rules: buildServerLoaders({ isDev: true }),
   },
   output: {
-    path: path.resolve(__dirname, '..', '..', 'dist/server'),
+    path: path.resolve(__dirname, '..', '..', 'dist', 'server'),
     publicPath: '/static',
     filename: 'server.js',
     clean: true,
@@ -35,6 +36,10 @@ export default {
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
     new WebpackManifestPlugin({}),
+    new NodemonPlugin({
+      script: path.resolve(__dirname, '..', '..', 'dist', 'server', 'server.js'),
+      watch: [path.resolve(__dirname, '..', '..', 'dist')],
+    }),
     new LoadablePlugin(),
   ],
   resolve: {

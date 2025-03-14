@@ -46,11 +46,9 @@ export const render = async (res: Response, options: Options) => {
   } = options;
 
   const manifest = JSON.parse(fs.readFileSync(
-    path.join(__dirname, '../client/manifest.json'),
+    path.resolve(__dirname, '..', 'client', 'manifest.json'),
     'utf-8',
   ));
-
-  console.log({state: store.getState()});
 
   const { abort, pipe } = renderToPipeableStream((
       <StaticRouter location={url}>

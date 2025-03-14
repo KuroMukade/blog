@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames';
 
 import { Article, ArticleView } from '../../model/types/article';
@@ -14,14 +14,18 @@ interface ArticleListProps {
    view?: ArticleView;
 }
 
+const renderArticle = (article: Article, view?: ArticleView) => (
+    <ArticleListViewController key={article.id} article={article} view={view} />
+);
+
 export const ArticleList = memo((props: ArticleListProps) => {
   const {
     className, articles, view, isLoading, error,
   } = props;
 
-  const renderArticle = (article: Article, view: ArticleView) => (
-      <ArticleListViewController key={article.id} article={article} view={view} />
-  );
+  const handleRenderArticle = useCallback((article: Article) => {
+    return renderArticle(article, view);
+  }, [view]);
 
   if (!view) {
     return (
@@ -39,7 +43,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
   return (
       <div className={classNames(styles.wrapper, {}, [className, styles[view!]])}>
           {articles.length > 0
-            ? articles.map((article) => renderArticle(article, view))
+            ? articles.map(handleRenderArticle)
             : <div className={classNames(styles.wrapper, {}, [className])} />}
       </div>
   );
