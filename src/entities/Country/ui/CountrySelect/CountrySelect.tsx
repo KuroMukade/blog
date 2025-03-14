@@ -43,3 +43,5 @@ export const CountrySelect = memo(({
       </div>
   );
 });
+
+CountrySelect.displayName = 'CountrySelect';

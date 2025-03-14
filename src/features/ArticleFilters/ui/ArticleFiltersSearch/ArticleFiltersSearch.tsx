@@ -28,3 +28,5 @@ export const ArticleFiltersSearch = memo(() => {
       </div>
   );
 });
+
+ArticleFiltersSearch.displayName = 'ArticleFiltersSearch';

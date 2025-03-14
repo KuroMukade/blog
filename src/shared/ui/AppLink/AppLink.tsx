@@ -29,3 +29,5 @@ export const AppLink = memo((props: AppLinkProps) => {
       </Link>
   );
 });
+
+AppLink.displayName = 'AppLink';

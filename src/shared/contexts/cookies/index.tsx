@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import decode from 'decode-uri-component';
 import { createContext, FC, useContext } from 'react';
 import { CookiesManagerType } from './types';
@@ -15,7 +16,7 @@ class CookiesManager implements CookiesManagerType {
     const pairs = document.cookie.split(';');
     const cookies: {[key: string]: string} = {};
 
-    for (let i = 0; i < pairs.length; i++) {
+    for (let i = 0; i < pairs.length; i += 1) {
       const pair = pairs[i].split('=');
 
       if (pair[0] && pair[1]) {

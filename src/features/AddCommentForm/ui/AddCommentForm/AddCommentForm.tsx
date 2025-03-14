@@ -64,3 +64,5 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
       </div>
   );
 });
+
+AddCommentForm.displayName = 'AddCommentForm';

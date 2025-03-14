@@ -54,3 +54,5 @@ export const CommentCard = memo((props: CommentCardProps) => {
       </div>
   );
 });
+
+CommentCard.displayName = 'CommentCard';

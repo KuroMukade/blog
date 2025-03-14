@@ -22,4 +22,3 @@ export const lazyLoad = (
 
   return DynamicComponent;
 };
-

@@ -91,4 +91,6 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   );
 });
 
+LoginForm.displayName = 'LoginForm';
+
 export default LoginForm;

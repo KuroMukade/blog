@@ -36,3 +36,5 @@ export const CommentList = memo((props: CommentListProps) => {
       </div>
   );
 });
+
+CommentList.displayName = 'CommentList';

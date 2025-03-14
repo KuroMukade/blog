@@ -74,6 +74,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'arrow-body-style': 'off',
     'class-methods-use-this': 0,
+    'react/display-name': ['error'],
   },
   globals: {
     __IS_DEV__: true,

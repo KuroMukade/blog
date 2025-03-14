@@ -35,3 +35,5 @@ export const ArticleFiltersOrder = memo<PropsType>((props: PropsType) => {
       <Select onChange={onSetOrder} className={className} options={selectOptions} value={currentOrder} />
   );
 });
+
+ArticleFiltersOrder.displayName = 'ArticleFiltersOrder';

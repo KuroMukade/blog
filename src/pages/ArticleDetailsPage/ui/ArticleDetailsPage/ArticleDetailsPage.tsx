@@ -72,3 +72,5 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
       </Page>
   );
 });
+
+ArticleDetailsPage.displayName = 'ArticleDetailsPage';

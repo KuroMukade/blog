@@ -20,3 +20,5 @@ export const ArticleImageBlockComponent = memo(({ className, block }: ArticleIma
       </div>
   );
 });
+
+ArticleImageBlockComponent.displayName = 'ArticleImageBlockComponent';

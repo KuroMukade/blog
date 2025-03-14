@@ -79,3 +79,5 @@ export const ArticleListGridItem = memo((props: ArticleListItemProps) => {
       </div>
   );
 });
+
+ArticleListGridItem.displayName = 'ArticleListGridItem';
