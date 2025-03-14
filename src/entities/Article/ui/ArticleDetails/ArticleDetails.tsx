@@ -133,3 +133,5 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
       </div>
   );
 });
+
+ArticleDetails.displayName = 'ArticleDetails';

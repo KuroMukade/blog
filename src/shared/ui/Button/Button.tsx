@@ -55,3 +55,5 @@ export const Button = memo(({
       </button>
   );
 });
+
+Button.displayName = 'Button';

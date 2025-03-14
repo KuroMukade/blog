@@ -29,3 +29,5 @@ export const CommentCardSkeleton = memo((props: CommentCardSkeletonProps) => {
       </ContentLoader>
   );
 });
+
+CommentCardSkeleton.displayName = 'CommentCardSkeleton';

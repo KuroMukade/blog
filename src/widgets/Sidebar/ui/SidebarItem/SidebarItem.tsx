@@ -24,3 +24,5 @@ export const SidebarItem = memo(({
       </AppLink>
   );
 });
+
+SidebarItem.displayName = 'SidebarItem';

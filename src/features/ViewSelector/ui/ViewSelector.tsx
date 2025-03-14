@@ -58,3 +58,5 @@ export const ViewSelector = memo((props: ViewSelectorProps) => {
       </div>
   );
 });
+
+ViewSelector.displayName = 'ViewSelector';

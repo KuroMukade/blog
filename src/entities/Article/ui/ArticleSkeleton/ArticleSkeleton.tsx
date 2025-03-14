@@ -24,3 +24,5 @@ export const ArticleSkeleton = memo(({ className }: ArticleSkeletonProps) => (
         <rect x="0" ry="5" y="294" width="900" height="460" />
     </ContentLoader>
 ));
+
+ArticleSkeleton.displayName = 'ArticleSkeleton';

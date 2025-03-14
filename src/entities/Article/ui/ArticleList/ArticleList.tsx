@@ -44,3 +44,5 @@ export const ArticleList = memo((props: ArticleListProps) => {
       </div>
   );
 });
+
+ArticleList.displayName = 'ArticleList';

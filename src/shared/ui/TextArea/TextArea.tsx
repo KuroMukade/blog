@@ -32,3 +32,5 @@ export const TextArea = memo((props: TextAreaProps) => {
       </>
   );
 });
+
+TextArea.displayName = 'TextArea';

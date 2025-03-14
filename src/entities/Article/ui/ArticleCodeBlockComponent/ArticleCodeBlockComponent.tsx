@@ -19,3 +19,5 @@ export const ArticleCodeBlockComponent = memo(({ className, block }: ArticleCode
       </div>
   );
 });
+
+ArticleCodeBlockComponent.displayName = 'ArticleCodeBlockComponent';
