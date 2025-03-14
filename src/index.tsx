@@ -18,7 +18,7 @@ moveStyles();
 hydrateRoot(
   document.getElementById('root')!,
     <BrowserRouter>
-        <StoreProvider>
+        <StoreProvider initialState={window.__PRELOADED_STATE__}>
             <CookiesProvider>
                 <I18nextWrapper>
                     <ThemeProvider>

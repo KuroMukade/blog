@@ -55,7 +55,7 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
 
   useEffect(() => {
     dispatch(initArticlesPage());
-  });
+  }, [dispatch]);
 
   return (
       <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>

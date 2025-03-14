@@ -41,7 +41,6 @@ export const AppRouter = () => {
   const dispatch = useDispatch();
 
   const inited = useSelector(getUserInited);
-  console.log('render');
 
   useEffect(() => {
     if (!inited) {

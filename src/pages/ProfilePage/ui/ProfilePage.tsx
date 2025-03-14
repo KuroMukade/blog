@@ -22,8 +22,6 @@ import {
 import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
 
-import { importRemote } from 'shared/lib/mf-loader';
-
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
 const reducers: ReducersList = {
@@ -31,14 +29,15 @@ const reducers: ReducersList = {
 };
 
 interface ProfilePageProps {
-    className?: string;
+  className?: string;
 }
 
-const ProfileRemote = lazy(() => importRemote({
-  module: './quiz',
-  scope: 'Quiz',
-  url: __PROFILE_MF_URL__,
-}));
+// import { importRemote } from 'shared/lib/mf-loader';
+// const ProfileRemote = lazy(() => importRemote({
+//   module: './quiz',
+//   scope: 'Quiz',
+//   url: __PROFILE_MF_URL__,
+// }));
 
 const ProfilePage = ({ className }: ProfilePageProps) => {
   useDynamicModuleLoader('profile', reducers);
@@ -54,7 +53,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
 
   useEffect(() => {
     dispatch(fetchProfileData(id));
-  });
+  }, [dispatch, id]);
 
   const onChangeFirstname = useCallback((value?: string) => {
     dispatch(profileActions.updateProfile({ first: value || '' }));
