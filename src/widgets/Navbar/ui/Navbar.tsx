@@ -24,7 +24,6 @@ export const Navbar = ({ onBurgerClick }: NavbarProps) => {
   const dispatch = useDispatch();
 
   const authData = useSelector(getUserAuthData);
-  console.log({ authData });
 
   const onToggleModal = useCallback(() => {
     setAuthOpen((prev) => !prev);
