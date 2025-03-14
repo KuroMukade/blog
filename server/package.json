@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "build:dev": "webpack --env mode=development --config ./config/webpack.config.dev.ts",
-    "start": "npm run build:dev && node ../dist/server/server.js"
+    "start": "webpack --watch --progress --config ./config/webpack.config.dev.ts"
   },
   "author": "kuromukade.dev",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "css-class-generator": "^2.0.0",
     "loader-utils": "^3.2.1",
     "nodemon": "^3.1.0",
+    "nodemon-webpack-plugin": "^4.8.2",
     "ts-node": "^10.9.2"
   },
   "dependencies": {

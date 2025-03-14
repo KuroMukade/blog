@@ -25,7 +25,7 @@ export interface BuildOptions {
 }
 
 export const MFRemotes = {
-    profile: 'Profile'
+  profile: 'Profile',
 } as const;
 
 export interface BuildMFOptions {
