@@ -17,6 +17,8 @@ import {
   createLink, createStyleStream, discoverProjectStyles,
 } from 'used-styles';
 
+import { ChunkExtractor } from '@loadable/server';
+
 import { ServerCookiesManager } from 'lib/cookies';
 
 import { Head } from 'lib/jsx/html/head/Head';
@@ -50,7 +52,14 @@ export const render = async (res: Response, options: Options) => {
     'utf-8',
   ));
 
-  const { abort, pipe } = renderToPipeableStream((
+  const extractor = new ChunkExtractor({
+    statsFile: path.resolve(__dirname, '..', 'client', 'loadable-stats.json'),
+    entrypoints: 'initChunk',
+  });
+
+  const scriptTags = extractor.getScriptTags();
+
+  const jsx = extractor.collectChunks(
       <StaticRouter location={url}>
           <Provider store={store}>
               <I18nextProvider i18n={i18n}>
@@ -68,7 +77,10 @@ export const render = async (res: Response, options: Options) => {
                   </Body>
               </I18nextProvider>
           </Provider>
-      </StaticRouter>), {
+      </StaticRouter>,
+  );
+
+  const { abort, pipe } = renderToPipeableStream(jsx, {
     onShellError() {
       console.log('SHELL ERR');
       res.sendStatus(500);
@@ -89,6 +101,7 @@ export const render = async (res: Response, options: Options) => {
         res.end('</html>');
       });
     },
+
     onError(error) {
       didError = true;
       console.error(error);

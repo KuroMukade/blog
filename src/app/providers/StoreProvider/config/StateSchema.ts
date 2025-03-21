@@ -17,11 +17,13 @@ import type { SaveScrollSchema } from 'features/SaveScroll';
 import type { ArticleDetailsCommentsSchema } from 'pages/ArticleDetailsPage';
 import type { ArticlesPageSchema } from 'pages/ArticlesPage';
 import type { ArticleFiltersSchema } from 'features/ArticleFilters';
+import type { RouterSchema } from 'app/providers/router/model/types/routerSchema';
 
 export interface StateSchema {
     counter: CounterSchema;
     user: UserSchema;
     saveScroll: SaveScrollSchema;
+    routerInfo: RouterSchema;
     // Async reducers
     loginForm?: LoginSchema;
     profile?: ProfileSchema;

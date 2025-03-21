@@ -1,10 +1,11 @@
 import { createEntityAdapter, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/StoreProvider';
 import { Article, ArticleView } from 'entities/Article';
-import { ARTICLE_STORAGE_KEY } from 'shared/constants/localstorage';
-import { localStore } from 'shared/lib/store';
+import { cookieStore } from 'shared/lib/store';
 import { ArticlesPageSchema } from '../types/articlesPageSchema';
 import { fetchArticlesList } from '../services/fetchArticlesList/fetchArticlesList';
+
+export const ARTICLE_STORAGE_KEY = 'articles_view';
 
 const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article) => article.id,
@@ -30,13 +31,13 @@ export const articlesPageSlice = createSlice({
   reducers: {
     setView: (state, action: PayloadAction<ArticleView>) => {
       state.view = action.payload;
-      localStore.set(ARTICLE_STORAGE_KEY, action.payload);
+      cookieStore.set(ARTICLE_STORAGE_KEY, action.payload);
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
     initState: (state) => {
-      const view = localStore.get(ARTICLE_STORAGE_KEY) as ArticleView;
+      const view = cookieStore.get(ARTICLE_STORAGE_KEY) as ArticleView;
       if (view) {
         state.view = view;
       } else {

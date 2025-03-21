@@ -8,6 +8,7 @@ import { saveScrollReducer } from 'features/SaveScroll';
 
 import { $api } from 'shared/api/api';
 
+import { routerReducer } from 'app/providers/router';
 import type { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
@@ -19,6 +20,7 @@ export const staticReducers = {
   counter: counterReducer,
   user: userReducer,
   saveScroll: saveScrollReducer,
+  routerInfo: routerReducer,
 };
 
 export function createReduxStore(

@@ -7,7 +7,8 @@ import { getIsMatchRoute } from 'lib/router/routeMatcher';
 import { render } from '../render';
 
 export const handleRequest = async (url: string, res: Response, req: Request) => {
-  const matchedRoute = getIsMatchRoute(url);
+  const parsed = url.split('?');
+  const matchedRoute = getIsMatchRoute(parsed[0]);
 
   if (!matchedRoute) {
     res.statusCode = 404;
@@ -18,7 +19,7 @@ export const handleRequest = async (url: string, res: Response, req: Request) =>
 
   const { cookies } = req;
 
-  const store = getStore(matchedRoute, url, cookies);
+  const store = await getStore(matchedRoute, url, cookies);
 
   await render(res, {
     url,

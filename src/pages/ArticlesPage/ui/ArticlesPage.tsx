@@ -36,6 +36,7 @@ const initialFiltersReducers: ReducersList = {
 };
 
 export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
+  console.log('loading ');
   useDynamicModuleLoader('articlesPage', initialPageReducers, false);
   useDynamicModuleLoader('articlesFilters', initialFiltersReducers, false);
 
@@ -70,3 +71,5 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
       </Page>
   );
 };
+
+export default ArticlesPage;

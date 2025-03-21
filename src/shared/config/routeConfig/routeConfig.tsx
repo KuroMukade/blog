@@ -19,14 +19,14 @@ export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
 }
 
-export const RoutePath: Record<AppRoutes, string> = {
+export const RoutePath = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.PROFILE]: '/profile/',
   [AppRoutes.ARTICLES]: '/articles',
   [AppRoutes.ARTICLE_DETAILS]: '/articles/', // + id
   [AppRoutes.NOT_FOUND]: '*',
-};
+} as const;
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -45,14 +45,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.ARTICLES]: {
     path: RoutePath.articles_page,
     element: <ArticlesPage />,
-    // TODO: remove false
-    authOnly: false,
   },
   [AppRoutes.ARTICLE_DETAILS]: {
     path: `${RoutePath.article_details_page}:id`,
     element: <ArticleDetailsPage />,
-    // TODO: remove false
-    authOnly: true,
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePath.not_found,

@@ -1,7 +1,5 @@
-import type { Article, ArticleView } from 'entities/Article';
-import { ARTICLE_STORAGE_KEY } from 'shared/constants/localstorage';
+import type { Article } from 'entities/Article';
 
 export type LocalStoreType = {
     article: Article;
-    [ARTICLE_STORAGE_KEY]: ArticleView;
 };
