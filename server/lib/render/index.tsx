@@ -14,6 +14,7 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import {
+  createCriticalStyleStream,
   createLink, createStyleStream, discoverProjectStyles,
 } from 'used-styles';
 
@@ -36,11 +37,7 @@ const stylesLookup = discoverProjectStyles(path.resolve('..', 'dist', 'client'))
 
 export const render = async (res: Response, options: Options) => {
   await stylesLookup;
-
-  const styledStream = createStyleStream(stylesLookup, (style) => {
-    return createLink(`/static/${style}`);
-  });
-
+  const styledStream = createCriticalStyleStream(stylesLookup);
   let didError = false;
 
   const {
@@ -52,40 +49,44 @@ export const render = async (res: Response, options: Options) => {
     'utf-8',
   ));
 
-  const extractor = new ChunkExtractor({
-    statsFile: path.resolve(__dirname, '..', 'client', 'loadable-stats.json'),
-    entrypoints: 'initChunk',
-  });
-
-  const scriptTags = extractor.getScriptTags();
-
-  const jsx = extractor.collectChunks(
-      <StaticRouter location={url}>
-          <Provider store={store}>
-              <I18nextProvider i18n={i18n}>
-                  <Body
-                      assets={{
-                        react: '',
-                        preloadedState: store.getState(),
-                      }}
-                  >
-                      <CookiesProvider manager={new ServerCookiesManager(cookies)}>
-                          <ThemeProvider>
-                              <App />
-                          </ThemeProvider>
-                      </CookiesProvider>
-                  </Body>
-              </I18nextProvider>
-          </Provider>
-      </StaticRouter>,
-  );
-
-  const { abort, pipe } = renderToPipeableStream(jsx, {
+  const { abort, pipe } = renderToPipeableStream((<StaticRouter location={url}>
+      <Provider store={store}>
+          <I18nextProvider i18n={i18n}>
+              <Body
+                  assets={{
+                    react: '',
+                    preloadedState: store.getState(),
+                  }}
+              >
+                  <CookiesProvider manager={new ServerCookiesManager(cookies)}>
+                      <ThemeProvider>
+                          <App />
+                      </ThemeProvider>
+                  </CookiesProvider>
+              </Body>
+          </I18nextProvider>
+      </Provider>
+  </StaticRouter>), {
     onShellError() {
       console.log('SHELL ERR');
       res.sendStatus(500);
     },
     bootstrapScripts: [manifest['initChunk.js']],
+    // onAllReady() {
+    //   res.status(didError ? 500 : 200);
+    //   res.set({ 'Content-Type': 'text/html' });
+    //   const head = renderToString(
+    //       <Head language={i18n.language} title={title} />,
+    //   );
+    //   res.write(`<!DOCTYPE html><html>${head}`);
+
+    //   pipe(styledStream);
+
+    //   styledStream.pipe(res, { end: false });
+    //   styledStream.on('end', () => {
+    //     res.end('</html>');
+    //   });
+    // },
     onAllReady() {
       res.status(didError ? 500 : 200);
       res.set({ 'Content-Type': 'text/html' });
@@ -93,10 +94,8 @@ export const render = async (res: Response, options: Options) => {
           <Head language={i18n.language} title={title} />,
       );
       res.write(`<!DOCTYPE html><html>${head}`);
-
-      pipe(styledStream);
-
       styledStream.pipe(res, { end: false });
+      pipe(styledStream);
       styledStream.on('end', () => {
         res.end('</html>');
       });

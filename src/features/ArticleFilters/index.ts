@@ -2,5 +2,5 @@ export { articleFiltersReducer, articlesFiltersActions } from './model/slice/art
 
 export type { ArticleFiltersSchema } from './model/types/ArticleFilters';
 
-export { ArticleFiltersSearch as ArticleSearchFilter } from './ui/ArticleFiltersSearch/ArticleFiltersSearch';
-export { ArticleFiltersOrder as ArticleOrderFilter } from './ui/ArticleFiltersOrder/ArticleFiltersOrder';
+export { ArticleFiltersSearch } from './ui/ArticleFiltersSearch/ArticleFiltersSearch';
+export { ArticleFiltersOrder } from './ui/ArticleFiltersOrder/ArticleFiltersOrder';

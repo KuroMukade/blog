@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "initChunk.ts",
   "scripts": {
     "build:dev": "webpack --env mode=development --config ./config/webpack.config.dev.ts",
     "start": "webpack --watch --progress --config ./config/webpack.config.dev.ts"
@@ -28,6 +28,7 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "@loadable/babel-plugin": "^5.16.1",
     "@loadable/server": "^5.16.5",
     "@types/accept-language-parser": "^1.5.6",
     "@types/i18next-node-fs-backend": "^2.1.5",

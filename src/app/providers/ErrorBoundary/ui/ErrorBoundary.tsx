@@ -46,7 +46,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 export const ErrorBoundaryWithSSR: FC<ErrorBoundaryProps> = ({ fallback, children, errorHandler }) => {
   return (
       <ErrorBoundary errorHandler={errorHandler} fallback={fallback}>
-          {children}
+          <Suspense fallback={fallback}>
+              {children}
+          </Suspense>
           {/* <Suspense fallback={fallback}>{children}</Suspense> */}
       </ErrorBoundary>
   );

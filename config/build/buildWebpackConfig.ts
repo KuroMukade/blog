@@ -15,6 +15,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
     },
     output: {
       filename: '[name].[contenthash].js',
+      chunkFilename: '[name].chunk.js',
       path: paths.build,
       clean: true,
       assetModuleFilename: '[hash][ext][query]',

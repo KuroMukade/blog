@@ -13,3 +13,5 @@ export const MainPage = () => {
       </Page>
   );
 };
+
+export default MainPage;

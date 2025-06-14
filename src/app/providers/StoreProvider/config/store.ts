@@ -9,6 +9,7 @@ import { saveScrollReducer } from 'features/SaveScroll';
 import { $api } from 'shared/api/api';
 
 import { routerReducer } from 'app/providers/router';
+import { articlesPageReducer } from 'pages/ArticlesPage';
 import type { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
@@ -29,11 +30,11 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...staticReducers,
-    ...asyncReducers,
+    ...{ ...asyncReducers, articlesPage: articlesPageReducer },
   };
 
   const reducerManager = createReducerManager(rootReducers);
-
+  console.log(reducerManager.getReducerMap());
   const store = configureStore({
     reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
     devTools: __IS_DEV__,

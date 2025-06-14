@@ -15,10 +15,7 @@ export function createSSRStore(
   asyncReducers?: ReducersMapObject<StateSchema>,
   page?: '',
 ) {
-  const reducerManager = createReducerManager({
-    ...staticReducers,
-    ...asyncReducers,
-  });
+  const reducerManager = createReducerManager({ ...staticReducers, ...asyncReducers });
 
   const store = configureStore({
     reducer: reducerManager.reduce as Reducer<CombinedState<StateSchema>>,
@@ -29,11 +26,15 @@ export function createSSRStore(
     }),
   });
 
-  return { store, reducerManager };
+  // @ts-expect-error wrong types
+  store.reducerManager = reducerManager;
+
+  return store;
 }
 
 export const getStore = async (pageType: AppRoute, url: string, cookies: Record<string, any>) => {
-  const { store, reducerManager } = createSSRStore({ articlesPage: articlesPageReducer });
+  const store = createSSRStore({ articlesPage: articlesPageReducer });
+
   const urlParams = getUrlParams(url);
 
   store.dispatch(routerActions.setSearchParams(urlParams));
@@ -41,7 +42,8 @@ export const getStore = async (pageType: AppRoute, url: string, cookies: Record<
   await initializeUserData(store, cookies);
 
   if (pageType === '/articles') {
-    reducerManager.add('articlesPage', articlesPageReducer);
+    store.reducerManager.add('articlesPage', articlesPageReducer);
+    console.log(store.reducerManager.getReducerMap())
     await initializeArticlesData(store);
   }
 

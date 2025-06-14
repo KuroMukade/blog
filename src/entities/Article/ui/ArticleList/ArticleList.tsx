@@ -18,15 +18,13 @@ const renderArticle = (article: Article, view?: ArticleView) => (
     <ArticleListViewController key={article.id} article={article} view={view} />
 );
 
-export const ArticleList = memo((props: ArticleListProps) => {
-  const {
-    className, articles, view, isLoading, error,
-  } = props;
-
+export const ArticleList = memo(({
+  className, articles, view, isLoading, error,
+}: ArticleListProps) => {
   const handleRenderArticle = useCallback((article: Article) => {
     return renderArticle(article, view);
   }, [view]);
-
+  console.log({view});
   if (!view) {
     return (
         <div className={classNames(styles.wrapper, {}, [className])} />

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames';
 
 import { LangSwitcher } from 'widgets/LangSwitcher';
-import { ThemeSwithcer } from 'widgets/ThemeSwitcher';
+import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 
 import { getSidebarItems } from '../../model/selectors/getSidebarItems';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
@@ -40,7 +40,7 @@ export const Sidebar = memo(({ className, collapsed }: SidebarProps) => {
                 classNames(styles.switchers, { [styles.collapsedSwitchers]: collapsed }, [className])
             }
           >
-              <ThemeSwithcer collapsed={collapsed} />
+              <ThemeSwitcher collapsed={collapsed} />
               <LangSwitcher collapsed={collapsed} />
           </div>
       </div>

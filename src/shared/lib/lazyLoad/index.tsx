@@ -7,6 +7,7 @@ export const lazyLoad = (
   exportedName = 'default',
   suspenseProps: {fallback?: ReactNode} = {},
 ): React.FC<any> => {
+  console.log('running', exportedName);
   const Component = loadable(importModule, {
     fallback: suspenseProps.fallback,
     resolveComponent: (components) => {

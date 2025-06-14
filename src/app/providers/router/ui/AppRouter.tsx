@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { AppRoutesProps, routeConfig } from 'shared/config/routeConfig';
 import { PageLoader } from 'widgets/PageLoader';
@@ -21,7 +21,7 @@ const renderWithWrapper = (route: AppRoutesProps) => {
             route.authOnly
               ? (
                   <ErrorBoundaryWithSSR fallback={null}>
-                      // @ts-ignore
+                      {/* @ts-ignore */}
                       <RequireAuth>
                           {element}
                       </RequireAuth>
