@@ -1,2 +1,5 @@
 dist/
 node_modules
+server
+extractedTranslations
+json-server

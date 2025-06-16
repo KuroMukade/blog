@@ -14,6 +14,7 @@ import { CookiesProvider } from 'shared/contexts/cookies';
 import { I18nextWrapper } from 'app/providers/i18';
 
 moveStyles();
+
 hydrateRoot(
   document.getElementById('root')!,
     <BrowserRouter>

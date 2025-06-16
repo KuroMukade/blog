@@ -5,7 +5,8 @@
   "main": "initChunk.ts",
   "scripts": {
     "build:dev": "webpack --env mode=development --config ./config/webpack.config.dev.ts",
-    "start": "webpack --watch --progress --config ./config/webpack.config.dev.ts"
+    "start": "webpack --watch --progress --config ./config/webpack.config.dev.ts",
+    "lint": "eslint \"**/*.{ts,tsx}\""
   },
   "author": "kuromukade.dev",
   "license": "ISC",

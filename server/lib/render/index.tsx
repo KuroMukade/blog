@@ -15,15 +15,12 @@ import { Provider } from 'react-redux';
 
 import {
   createCriticalStyleStream,
-  createLink, createStyleStream, discoverProjectStyles,
+  discoverProjectStyles,
 } from 'used-styles';
-
-import { ChunkExtractor } from '@loadable/server';
 
 import { ServerCookiesManager } from 'lib/cookies';
 
-import { Head } from 'lib/jsx/html/head/Head';
-import { Body } from 'lib/jsx/html/body/Body';
+import { Head } from 'lib/jsx/head/Head';
 
 type Options = {
     url: string;
@@ -52,18 +49,11 @@ export const render = async (res: Response, options: Options) => {
   const { abort, pipe } = renderToPipeableStream((<StaticRouter location={url}>
       <Provider store={store}>
           <I18nextProvider i18n={i18n}>
-              <Body
-                  assets={{
-                    react: '',
-                    preloadedState: store.getState(),
-                  }}
-              >
-                  <CookiesProvider manager={new ServerCookiesManager(cookies)}>
-                      <ThemeProvider>
-                          <App />
-                      </ThemeProvider>
-                  </CookiesProvider>
-              </Body>
+              <CookiesProvider manager={new ServerCookiesManager(cookies)}>
+                  <ThemeProvider>
+                      <App />
+                  </ThemeProvider>
+              </CookiesProvider>
           </I18nextProvider>
       </Provider>
   </StaticRouter>), {
@@ -72,32 +62,18 @@ export const render = async (res: Response, options: Options) => {
       res.sendStatus(500);
     },
     bootstrapScripts: [manifest['initChunk.js']],
-    // onAllReady() {
-    //   res.status(didError ? 500 : 200);
-    //   res.set({ 'Content-Type': 'text/html' });
-    //   const head = renderToString(
-    //       <Head language={i18n.language} title={title} />,
-    //   );
-    //   res.write(`<!DOCTYPE html><html>${head}`);
-
-    //   pipe(styledStream);
-
-    //   styledStream.pipe(res, { end: false });
-    //   styledStream.on('end', () => {
-    //     res.end('</html>');
-    //   });
-    // },
     onAllReady() {
       res.status(didError ? 500 : 200);
       res.set({ 'Content-Type': 'text/html' });
       const head = renderToString(
-          <Head language={i18n.language} title={title} />,
+          <Head reduxState={store.getState()} language={i18n.language} title={title} />,
       );
-      res.write(`<!DOCTYPE html><html>${head}`);
+
+      res.write(`<!DOCTYPE html><html>${head}<body><div id="root">`);
       styledStream.pipe(res, { end: false });
       pipe(styledStream);
       styledStream.on('end', () => {
-        res.end('</html>');
+        res.end('</body></html>');
       });
     },
 
