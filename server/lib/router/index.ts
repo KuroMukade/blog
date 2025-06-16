@@ -1,4 +1,4 @@
-type AppRoute = '/' | '/about' | '/profile/' | '/articles' | '/articles/';
+export type AppRoute = '/' | '/about' | '/profile/' | '/articles' | '/articles/';
 
 export const APP_ROUTES: Readonly<AppRoute[]> = [
   '/', '/about', '/profile/', '/articles', '/articles/',

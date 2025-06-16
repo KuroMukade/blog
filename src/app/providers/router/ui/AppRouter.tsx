@@ -20,12 +20,12 @@ const renderWithWrapper = (route: AppRoutesProps) => {
           element={
             route.authOnly
               ? (
-            // @ts-ignore
-                  <RequireAuth>
-                      <ErrorBoundaryWithSSR fallback={null}>
+                  <ErrorBoundaryWithSSR fallback={null}>
+                      {/* @ts-ignore */}
+                      <RequireAuth>
                           {element}
-                      </ErrorBoundaryWithSSR>
-                  </RequireAuth>
+                      </RequireAuth>
+                  </ErrorBoundaryWithSSR>
               )
               : (
                   <ErrorBoundaryWithSSR fallback={<PageLoader />}>

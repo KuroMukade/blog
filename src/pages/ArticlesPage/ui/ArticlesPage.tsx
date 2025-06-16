@@ -1,4 +1,6 @@
-import { FC, useCallback, useEffect } from 'react';
+import {
+  FC, Suspense, useCallback, useEffect,
+} from 'react';
 import { useSelector } from 'react-redux';
 
 import { classNames } from 'shared/lib/classNames';
@@ -8,7 +10,7 @@ import { ReducersList, useDynamicModuleLoader } from 'shared/lib/hooks/useDynami
 import { ArticleList, ArticleView } from 'entities/Article';
 
 import { ViewSelector } from 'features/ViewSelector';
-import { articleFiltersReducer, ArticleOrderFilter, ArticleSearchFilter } from 'features/ArticleFilters';
+import { articleFiltersReducer, ArticleFiltersOrder, ArticleFiltersSearch } from 'features/ArticleFilters';
 
 import { Page } from 'widgets/Page/Page';
 
@@ -24,7 +26,7 @@ import {
 import s from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
-   className?: string
+  className?: string
 }
 
 const initialPageReducers: ReducersList = {
@@ -61,8 +63,8 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
       <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>
           <div className={s.content}>
               <div className={s.filters}>
-                  <ArticleSearchFilter />
-                  <ArticleOrderFilter />
+                  <ArticleFiltersSearch />
+                  <ArticleFiltersOrder />
               </div>
               <ViewSelector view={view} onViewClick={onViewChange} />
               <ArticleList isLoading={isLoading} error={error} articles={articles} view={view} />
@@ -70,3 +72,5 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
       </Page>
   );
 };
+
+export default ArticlesPage;

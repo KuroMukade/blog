@@ -1,21 +1,25 @@
 import loadable from '@loadable/component';
-import { ErrorBoundary } from 'app/providers/ErrorBoundary';
-import { memo } from 'react';
+import { ErrorBoundaryWithSSR } from 'app/providers/ErrorBoundary';
+import { memo, ReactNode } from 'react';
 
 export const lazyLoad = (
   importModule: () => Promise<any>,
   exportedName = 'default',
-  suspenseProps: {fallback?: JSX.Element} = {},
+  suspenseProps: {fallback?: ReactNode} = {},
 ): React.FC<any> => {
+  console.log('running', exportedName);
   const Component = loadable(importModule, {
     fallback: suspenseProps.fallback,
-    resolveComponent: (components) => components[exportedName],
+    resolveComponent: (components) => {
+      return components[exportedName];
+    },
+    ssr: true,
   });
 
   const DynamicComponent = memo((props) => (
-      <ErrorBoundary fallback={suspenseProps.fallback}>
+      <ErrorBoundaryWithSSR errorHandler={console.error} fallback={suspenseProps.fallback}>
           <Component {...props} />
-      </ErrorBoundary>
+      </ErrorBoundaryWithSSR>
   ));
 
   DynamicComponent.displayName = 'DynamicComponent';

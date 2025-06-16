@@ -31,12 +31,13 @@ export function buildPlugins({
       __NODEJS__: JSON.stringify(project === 'server'),
       __PROFILE_MF_URL__: JSON.stringify(process.env.PROFILE_MF_URI) || 'no-route',
     }),
-    buildMfConfig({
-      remotes: {
-        profile: 'Profile',
-      },
-      packageVersions: dependencies,
-    }),
+    // buildMfConfig({
+    //   remotes: {
+    //     profile: 'Profile',
+    //   },
+    //   packageVersions: dependencies,
+    // }),
+    new LoadablePlugin(),
     new ImportedPlugin('imported.json'),
     isWithAnalyzer && new BundleAnalyzerPlugin({ openAnalyzer: true }),
     new WebpackManifestPlugin({}),
@@ -45,6 +46,5 @@ export function buildPlugins({
         { from: 'public/locales', to: 'locales' },
       ],
     }),
-    new LoadablePlugin(),
   ].filter(Boolean) as WebpackPluginInstance[];
 }

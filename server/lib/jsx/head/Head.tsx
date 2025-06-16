@@ -1,11 +1,15 @@
 import React from 'react';
+import serializeJavascript from 'serialize-javascript';
 
 type HeadTemplateType = {
     title: string;
     language: string;
+    reduxState: Object;
 };
 
-export const Head = ({ title, language }: HeadTemplateType) => {
+export const Head = ({ title, language, reduxState }: HeadTemplateType) => {
+  const reduxStateScript = `window.__PRELOADED_STATE__ = ${serializeJavascript(reduxState)};`;
+
   return (
       <head lang={language}>
           <meta charSet="utf-8" />
@@ -17,6 +21,10 @@ export const Head = ({ title, language }: HeadTemplateType) => {
           <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <meta name="description" content="ausbdasubhc" />
           <title>{title}</title>
+          <noscript
+              dangerouslySetInnerHTML={{ __html: '<b>Enable JavaScript to run this app.</b>' }}
+          />
+          <script dangerouslySetInnerHTML={{ __html: reduxStateScript }} />
       </head>
   );
 };

@@ -1,21 +1,21 @@
 .ArticleFiltersSearch {
   position: relative;
-
-  .input {
-    min-width: 509px;
-    color: #9C9C9C;
-    box-shadow: none;
-    padding: 13px 25px 13px 61px;
-    font: var(--font-m);
-    border-radius: 30px;
-    border: 1px solid #DADADA;
-  }
-
-  .searchIcon {
-    position: absolute;
-    top: 13px;
-    left: 25px;
-    width: 24px;
-    height: 24px;
-  }
 }
+.input {
+  min-width: 509px;
+  color: #9C9C9C;
+  box-shadow: none;
+  padding: 13px 25px 13px 61px;
+  font: var(--font-m);
+  border-radius: 30px;
+  border: 1px solid #DADADA;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 13px;
+  left: 25px;
+  width: 24px;
+  height: 24px;
+}
+

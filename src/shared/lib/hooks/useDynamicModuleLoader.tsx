@@ -17,7 +17,7 @@ export function useDynamicModuleLoader(
 ) {
   const store = useStore() as ReduxStoreWithManager;
   const dispatch = useDispatch();
-  const mountedReducers = store.reducerManager.getReducerMap();
+  const mountedReducers = store?.reducerManager?.getReducerMap();
 
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {

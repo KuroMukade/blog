@@ -18,5 +18,5 @@
       "allowSyntheticDefaultImports": true,
       "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "include": ["server.ts", "./config", "./lib", "lib/router", "./types"],
+    "include": ["server.ts", "./config", "./lib", "lib/router", "./types", "../src/shared/lib/url"],
 }

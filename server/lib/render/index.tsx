@@ -14,13 +14,13 @@ import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import {
-  createLink, createStyleStream, discoverProjectStyles,
+  createCriticalStyleStream,
+  discoverProjectStyles,
 } from 'used-styles';
 
 import { ServerCookiesManager } from 'lib/cookies';
 
-import { Head } from 'lib/jsx/html/head/Head';
-import { Body } from 'lib/jsx/html/body/Body';
+import { Head } from 'lib/jsx/head/Head';
 
 type Options = {
     url: string;
@@ -34,11 +34,7 @@ const stylesLookup = discoverProjectStyles(path.resolve('..', 'dist', 'client'))
 
 export const render = async (res: Response, options: Options) => {
   await stylesLookup;
-
-  const styledStream = createStyleStream(stylesLookup, (style) => {
-    return createLink(`/static/${style}`);
-  });
-
+  const styledStream = createCriticalStyleStream(stylesLookup);
   let didError = false;
 
   const {
@@ -50,25 +46,17 @@ export const render = async (res: Response, options: Options) => {
     'utf-8',
   ));
 
-  const { abort, pipe } = renderToPipeableStream((
-      <StaticRouter location={url}>
-          <Provider store={store}>
-              <I18nextProvider i18n={i18n}>
-                  <Body
-                      assets={{
-                        react: '',
-                        preloadedState: store.getState(),
-                      }}
-                  >
-                      <CookiesProvider manager={new ServerCookiesManager(cookies)}>
-                          <ThemeProvider>
-                              <App />
-                          </ThemeProvider>
-                      </CookiesProvider>
-                  </Body>
-              </I18nextProvider>
-          </Provider>
-      </StaticRouter>), {
+  const { abort, pipe } = renderToPipeableStream((<StaticRouter location={url}>
+      <Provider store={store}>
+          <I18nextProvider i18n={i18n}>
+              <CookiesProvider manager={new ServerCookiesManager(cookies)}>
+                  <ThemeProvider>
+                      <App />
+                  </ThemeProvider>
+              </CookiesProvider>
+          </I18nextProvider>
+      </Provider>
+  </StaticRouter>), {
     onShellError() {
       console.log('SHELL ERR');
       res.sendStatus(500);
@@ -78,17 +66,17 @@ export const render = async (res: Response, options: Options) => {
       res.status(didError ? 500 : 200);
       res.set({ 'Content-Type': 'text/html' });
       const head = renderToString(
-          <Head language={i18n.language} title={title} />,
+          <Head reduxState={store.getState()} language={i18n.language} title={title} />,
       );
-      res.write(`<!DOCTYPE html><html>${head}`);
 
-      pipe(styledStream);
-
+      res.write(`<!DOCTYPE html><html>${head}<body><div id="root">`);
       styledStream.pipe(res, { end: false });
+      pipe(styledStream);
       styledStream.on('end', () => {
-        res.end('</html>');
+        res.end('</body></html>');
       });
     },
+
     onError(error) {
       didError = true;
       console.error(error);

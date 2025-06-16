@@ -35,12 +35,12 @@ export default {
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
+    new LoadablePlugin(),
     new WebpackManifestPlugin({}),
     new NodemonPlugin({
       script: path.resolve(__dirname, '..', '..', 'dist', 'server', 'server.js'),
       watch: [path.resolve(__dirname, '..', '..', 'dist')],
     }),
-    new LoadablePlugin(),
   ],
   resolve: {
     preferAbsolute: true,

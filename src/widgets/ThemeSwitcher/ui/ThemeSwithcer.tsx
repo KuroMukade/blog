@@ -39,31 +39,31 @@ const getThemeParams = (theme: Theme, t: TFunction) => {
   };
 };
 
-export const ThemeSwithcer = ({ className, collapsed }: ThemeSwithcerProps) => {
+export const ThemeSwitcher = ({ className, collapsed }: ThemeSwithcerProps) => {
   const { theme, toggleTheme } = useTheme();
-
   const { t } = useTranslation();
-
   const { themeToShow, style, icon } = getThemeParams(theme, t);
 
   return (
       <div
           role="button"
           className={
-            classNames(
-              styles.wrapper,
-              {},
-              [className, theme === Theme.DARK ? styles.light : styles.dark],
-            )
-          }
+        classNames(
+          styles.wrapper,
+          {},
+          [className, theme === Theme.DARK ? styles.light : styles.dark],
+        )
+      }
           tabIndex={0}
           onKeyDown={toggleTheme}
           onClick={toggleTheme}
       >
-          <img className={styles.img} src={icon} alt={theme} />
+          <img src={icon} alt={theme} />
+          {!collapsed && (
           <span className={classNames(styles.themeName, {}, [style])}>
-              {!collapsed && themeToShow}
+              {themeToShow}
           </span>
+          )}
       </div>
   );
 };
