@@ -1,6 +1,7 @@
 import { memo, useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames';
 
+import { Loader } from 'shared/ui/Loader/Loader';
 import { Article, ArticleView } from '../../model/types/article';
 
 import styles from './ArticleList.module.scss';
@@ -19,12 +20,16 @@ const renderArticle = (article: Article, view?: ArticleView) => (
 );
 
 export const ArticleList = memo(({
-  className, articles, view, isLoading, error,
+  className, articles, view, error, isLoading,
 }: ArticleListProps) => {
   const handleRenderArticle = useCallback((article: Article) => {
     return renderArticle(article, view);
   }, [view]);
-  console.log({view});
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   if (!view) {
     return (
         <div className={classNames(styles.wrapper, {}, [className])} />

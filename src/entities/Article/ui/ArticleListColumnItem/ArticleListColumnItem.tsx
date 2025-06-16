@@ -23,7 +23,7 @@ interface ArticleListListItemProps {
 export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
   const { className, article } = props;
 
-  const [isHover, bindHover] = useHover();
+  const [_, bindHover] = useHover();
 
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
 
   return (
       <div className={classNames(styles.wrapperColumns, {}, [className])}>
-          <Card onClick={onOpenArticle} {...bindHover}>
+          <Card {...bindHover} onClick={onOpenArticle}>
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
                       <AppLink className={styles.cardHeaderLink} to={`profile/${article.user?.id}`}>
@@ -77,7 +77,7 @@ export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
                           <p className={styles.cardReadTime}>Время чтения: 10 мин</p>
                           <div className={styles.cardViews}>
                               <img src={eyeIcon} alt="views" />
-                              <p className={styles.cardViewCount}>281</p>
+                              <p className={styles.cardViewCount}>{article.views}</p>
                           </div>
                       </div>
                   </div>
