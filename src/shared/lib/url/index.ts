@@ -12,6 +12,37 @@ export const hasEncodedCharacters = (str: string): boolean => {
   return encodedRegex.test(str);
 };
 
+type QueryValue = string | boolean;
+export type QueryParams = Record<string, QueryValue | QueryValue[]>;
+export function parseQueryParams(url: string): QueryParams {
+  const queryParams: QueryParams = {};
+
+  const queryString = url.split('?')[1];
+  if (!queryString) return queryParams;
+
+  const pairs = queryString.split('&');
+
+  for (const pair of pairs) {
+    if (!pair) continue;
+
+    const [rawKey, rawValue] = pair.split('=');
+    const key = decodeURIComponent(rawKey);
+    const value = rawValue !== undefined
+      ? decodeURIComponent(rawValue.replace(/\+/g, ' '))
+      : true; // поддержка ?flag без =
+
+    if (queryParams[key] === undefined) {
+      queryParams[key] = value;
+    } else if (Array.isArray(queryParams[key])) {
+      (queryParams[key] as QueryValue[]).push(value);
+    } else {
+      queryParams[key] = [queryParams[key] as QueryValue, value];
+    }
+  }
+
+  return queryParams;
+}
+
 /**
  * Parse url params and return object
  * @param {string} searchParams - router search param

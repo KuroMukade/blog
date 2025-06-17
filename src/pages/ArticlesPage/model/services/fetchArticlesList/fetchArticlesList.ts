@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Article } from 'entities/Article';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { getArticlesLimit } from 'pages/ArticlesPage/model/selectors/articlesSelectors';
+import { getArticleFiltersOrder } from 'features/ArticleFilters/model/selectors/articleFiltersSelector';
 
 interface FetchArticlesListProps {
   page?: number;
@@ -14,12 +15,16 @@ export const fetchArticlesList = createAsyncThunk<
 >('articlesPage/fetchArticlesList', async ({ page = 1 }, thunkApi) => {
   const { extra, rejectWithValue, getState } = thunkApi;
   const limit = getArticlesLimit(getState());
+  const order = getArticleFiltersOrder(getState());
+
   try {
     const response = await extra.api.get<Article[]>('/articles', {
       params: {
         _expand: 'user',
         _limit: limit,
         _page: page,
+        _sort: 'views',
+        _order: order,
       },
     });
     if (!response.data) {

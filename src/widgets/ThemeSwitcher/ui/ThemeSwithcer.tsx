@@ -48,12 +48,12 @@ export const ThemeSwitcher = ({ className, collapsed }: ThemeSwithcerProps) => {
       <div
           role="button"
           className={
-        classNames(
-          styles.wrapper,
-          {},
-          [className, theme === Theme.DARK ? styles.light : styles.dark],
-        )
-      }
+                classNames(
+                  styles.wrapper,
+                  {},
+                  [className, theme === Theme.DARK ? styles.light : styles.dark],
+                )
+            }
           tabIndex={0}
           onKeyDown={toggleTheme}
           onClick={toggleTheme}

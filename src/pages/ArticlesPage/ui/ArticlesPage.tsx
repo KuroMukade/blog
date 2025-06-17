@@ -14,6 +14,7 @@ import { articleFiltersReducer, ArticleFiltersOrder, ArticleFiltersSearch } from
 
 import { Page } from 'widgets/Page/Page';
 
+import { getArticleFiltersOrder } from 'features/ArticleFilters/model/selectors/articleFiltersSelector';
 import { fetchArticlesNextPage } from '../model/services/fetchArticlesNextPage/fetchArticlesNextPage';
 import { initArticlesPage } from '../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/articlesPageSlice';
@@ -24,6 +25,7 @@ import {
 } from '../model/selectors/articlesSelectors';
 
 import s from './ArticlesPage.module.scss';
+import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
 
 interface ArticlesPageProps {
   className?: string
@@ -46,7 +48,8 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   const view = useSelector(getArticlesView);
   const error = useSelector(getArticlesError);
   const dispatch = useAppDispatch();
-
+  const order = useSelector(getArticleFiltersOrder);
+  console.log({ order });
   const onViewChange = useCallback((view: ArticleView) => {
     dispatch(articlesPageActions.setView(view));
   }, [dispatch]);
@@ -58,6 +61,10 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   useEffect(() => {
     dispatch(initArticlesPage());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchArticlesList({ page: 1 }));
+  }, [order, dispatch]);
 
   return (
       <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>

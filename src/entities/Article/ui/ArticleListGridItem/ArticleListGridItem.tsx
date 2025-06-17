@@ -1,4 +1,4 @@
-import { memo, useCallback, useRef } from 'react';
+import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import archiveIcon from 'shared/assets/icons/bookmark-mini.svg';
@@ -22,13 +22,9 @@ interface ArticleListItemProps {
     article: Article;
 }
 
-export const ArticleListGridItem = memo((props: ArticleListItemProps) => {
-  const { className, article } = props;
+export const ArticleListGridItem = memo(({ article, className }: ArticleListItemProps) => {
   const [isHover, bindHover] = useHover();
-
   const navigate = useNavigate();
-
-  const imgRef = useRef(null);
 
   const onOpenArticle = useCallback(() => {
     navigate(`${RoutePath.article_details_page}${article.id}`);
@@ -36,7 +32,7 @@ export const ArticleListGridItem = memo((props: ArticleListItemProps) => {
 
   return (
       <div className={classNames(styles.wrapperGrid, {}, [className])}>
-          <Card onClick={onOpenArticle} {...bindHover}>
+          <Card {...bindHover} onClick={onOpenArticle}>
               <img className={styles.cardImage} src={article.img} alt={article.title} />
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
@@ -70,7 +66,7 @@ export const ArticleListGridItem = memo((props: ArticleListItemProps) => {
                           <p className={styles.cardReadTime}>Время чтения: 10 мин</p>
                           <div className={styles.cardViews}>
                               <img src={eyeIcon} alt="views" />
-                              <p className={styles.cardViewCount}>281</p>
+                              <p className={styles.cardViewCount}>{article.views}</p>
                           </div>
                       </div>
                   </div>

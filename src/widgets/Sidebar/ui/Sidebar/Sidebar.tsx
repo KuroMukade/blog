@@ -37,8 +37,8 @@ export const Sidebar = memo(({ className, collapsed }: SidebarProps) => {
           </nav>
           <div
               className={
-                classNames(styles.switchers, { [styles.collapsedSwitchers]: collapsed }, [className])
-            }
+                    classNames(styles.switchers, { [styles.collapsedSwitchers]: collapsed }, [className])
+                }
           >
               <ThemeSwitcher collapsed={collapsed} />
               <LangSwitcher collapsed={collapsed} />

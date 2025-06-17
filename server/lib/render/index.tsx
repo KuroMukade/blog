@@ -46,7 +46,8 @@ export const render = async (res: Response, options: Options) => {
     'utf-8',
   ));
 
-  const { abort, pipe } = renderToPipeableStream((<StaticRouter location={url}>
+  const { abort, pipe } = renderToPipeableStream((
+  <StaticRouter location={url}>
       <Provider store={store}>
           <I18nextProvider i18n={i18n}>
               <CookiesProvider manager={new ServerCookiesManager(cookies)}>

@@ -1,7 +1,8 @@
 import { createEntityAdapter, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { StateSchema } from 'app/providers/StoreProvider';
+import { ReduxStoreWithManager, StateSchema } from 'app/providers/StoreProvider';
 import { Article, ArticleView } from 'entities/Article';
 import { cookieStore } from 'shared/lib/store';
+import { articleFiltersReducer } from 'features/ArticleFilters';
 import { ArticlesPageSchema } from '../types/articlesPageSchema';
 import { fetchArticlesList } from '../services/fetchArticlesList/fetchArticlesList';
 
@@ -70,3 +71,13 @@ export const {
   reducer: articlesPageReducer,
   actions: articlesPageActions,
 } = articlesPageSlice;
+
+export const initialSSRReducers = {
+  articlesPage: articlesPageReducer,
+  articlesFilters: articleFiltersReducer,
+};
+
+export const injectSSRReducer = (store: ReduxStoreWithManager) => {
+  store.reducerManager.add('articlesPage', articlesPageReducer);
+  store.reducerManager.add('articlesFilters', articleFiltersReducer);
+};

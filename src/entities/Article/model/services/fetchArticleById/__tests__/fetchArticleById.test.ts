@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { TestAsyncThunk } from 'shared/lib/tests/testAsyncThunk/testAsyncThunk';
 import { fetchArticleById } from '../fetchArticleById';
 

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { getUserAuthData } from 'entities/User';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,5 +14,5 @@ export const RequireAuth = ({ children }: { children: ReactNode }): ReactNode =>
     navigate(RoutePath.main, { state: { from: location }, replace: true });
   }
 
-  return <>{children}</>;
+  return children;
 };
