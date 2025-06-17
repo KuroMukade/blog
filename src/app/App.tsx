@@ -26,7 +26,7 @@ const Layout = ({ children }: {children: ReactNode}) => {
   );
 };
 
-const App = () => {
+const App: React.FC = () => {
   return (
       <ErrorBoundaryWithSSR fallback="Error!">
           <Layout>
