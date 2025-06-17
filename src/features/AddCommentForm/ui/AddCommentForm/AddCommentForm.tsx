@@ -59,7 +59,7 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
                       {t('Отправить')}
 
                   </Button>
-              )}
+                )}
           />
       </div>
   );

@@ -21,8 +21,8 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ className, collapsed }) =>
   return (
       <Button
           className={
-            classNames(styles.switcher, {}, [className])
-          }
+                classNames(styles.switcher, {}, [className])
+            }
           theme={ThemeButton.CLEAR}
           onClick={toggle}
       >

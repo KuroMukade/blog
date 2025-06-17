@@ -11,7 +11,7 @@ export const DEFAULT_LANGUAGE = LANGUAGES_LIST[0];
 
 i18n
   .use(Backend)
-  // .use(LanguageDetector)
+// .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     fallbackLng: DEFAULT_LANGUAGE,

@@ -49,7 +49,7 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   const error = useSelector(getArticlesError);
   const dispatch = useAppDispatch();
   const order = useSelector(getArticleFiltersOrder);
-  console.log({order});
+  console.log({ order });
   const onViewChange = useCallback((view: ArticleView) => {
     dispatch(articlesPageActions.setView(view));
   }, [dispatch]);
@@ -63,7 +63,7 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchArticlesList({page: 1}));
+    dispatch(fetchArticlesList({ page: 1 }));
   }, [order, dispatch]);
 
   return (

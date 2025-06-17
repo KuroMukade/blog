@@ -12,49 +12,44 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { RequireAuth } from './PrivateRoute';
 
 const renderWithWrapper = (route: AppRoutesProps) => {
-    const { element } = route;
+  const { element } = route;
 
-    return (
-        <Route
-            key={route.path}
-            path={route.path}
-            element={
+  return (
+      <Route
+          key={route.path}
+          path={route.path}
+          element={
                 route.authOnly
-                    ? (
-                        <ErrorBoundaryWithSSR fallback={null}>
-                            <RequireAuth>
-                                {element}
-                            </RequireAuth>
-                        </ErrorBoundaryWithSSR>
-                    )
-                    : (
-                        <ErrorBoundaryWithSSR fallback={<PageLoader />}>
-                            {element}
-                        </ErrorBoundaryWithSSR>
-                    )
+                  ? (
+                      <ErrorBoundaryWithSSR fallback={null}>
+                          <RequireAuth>
+                              {element}
+                          </RequireAuth>
+                      </ErrorBoundaryWithSSR>
+                  )
+                  : (
+                      <ErrorBoundaryWithSSR fallback={<PageLoader />}>
+                          {element}
+                      </ErrorBoundaryWithSSR>
+                  )
             }
-        />
-    );
+      />
+  );
 };
 
 export const AppRouter = () => {
+  const dispatch = useAppDispatch();
+  const inited = useSelector(getUserInited);
+
+  useEffect(() => {
+    if (!inited) {
+      dispatch(userActions.initAuthData(null));
+    }
+  }, [inited, dispatch]);
+
   return (
       <Routes>
           {Object.values(routeConfig).map(renderWithWrapper)}
       </Routes>
   );
-    const dispatch = useAppDispatch();
-    const inited = useSelector(getUserInited);
-
-    useEffect(() => {
-        if (!inited) {
-            dispatch(userActions.initAuthData(null));
-        }
-    }, [inited, dispatch]);
-
-    return (
-        <Routes>
-            {Object.values(routeConfig).map(renderWithWrapper)}
-        </Routes>
-    );
 };

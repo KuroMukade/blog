@@ -7,7 +7,7 @@
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-        "editor.tabSize": 4,
+        "editor.tabSize": 2,
         "editor.insertSpaces": true
     },
     "typescript.tsdk": "node_modules/typescript/lib"
