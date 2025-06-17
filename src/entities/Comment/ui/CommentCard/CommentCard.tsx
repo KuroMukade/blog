@@ -22,37 +22,37 @@ interface CommentCardProps {
 }
 
 export const CommentCard = memo((props: CommentCardProps) => {
-  const { className, comment, isLoading } = props;
+    const { className, comment, isLoading } = props;
 
-  const { t } = useTranslation('commentCard');
+    const { t } = useTranslation('commentCard');
 
-  if (isLoading) {
+    if (isLoading) {
+        return (
+            <div className={styles.header}>
+                <CommentCardSkeleton />
+            </div>
+        );
+    }
+
     return (
-        <div className={styles.header}>
-            <CommentCardSkeleton />
+        <div className={classNames(styles.wrapper, {}, [className])}>
+            <div className={styles.header}>
+                <AppLink className={styles.link} to={`${RoutePath.profile}${comment.user.id}`}>
+                    {comment.user?.avatar && <Avatar size={40} src={comment.user.avatar} alt="user-logo" />}
+                </AppLink>
+                <div className={styles.commentInfo}>
+                    <p className={styles.username}>{comment.user?.username}</p>
+                    <p className={styles.date}>{comment?.createdAt}</p>
+                </div>
+            </div>
+            <Text className={styles.text} text={comment.text} />
+            <div className={styles.additional}>
+                <img src={heartIcon} alt="" />
+                <p>{t('Ответить')}</p>
+                <img src={dotsIcon} alt="" />
+            </div>
         </div>
     );
-  }
-
-  return (
-      <div className={classNames(styles.wrapper, {}, [className])}>
-          <div className={styles.header}>
-              <AppLink className={styles.link} to={`${RoutePath.profile}${comment.user.id}`}>
-                  {comment.user?.avatar && <Avatar size={40} src={comment.user.avatar} alt="user-logo" />}
-              </AppLink>
-              <div className={styles.commentInfo}>
-                  <p className={styles.username}>{comment.user?.username}</p>
-                  <p className={styles.date}>{comment?.createdAt}</p>
-              </div>
-          </div>
-          <Text className={styles.text} text={comment.text} />
-          <div className={styles.additional}>
-              <img src={heartIcon} alt="" />
-              <p>{t('Ответить')}</p>
-              <img src={dotsIcon} alt="" />
-          </div>
-      </div>
-  );
 });
 
 CommentCard.displayName = 'CommentCard';

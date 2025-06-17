@@ -12,18 +12,18 @@ import { Sidebar } from 'widgets/Sidebar';
 import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 
 const Layout = ({ children }: {children: ReactNode}) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const { theme } = useTheme();
+    const [collapsed, setCollapsed] = useState(false);
+    const { theme } = useTheme();
 
-  return (
-      <div className={classNames('app', {}, [theme])}>
-          <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
-          <div className="content-page">
-              <Sidebar collapsed={collapsed} />
-              {children}
-          </div>
-      </div>
-  );
+    return (
+        <div className={classNames('app', {}, [theme])}>
+            <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
+            <div className="content-page">
+                <Sidebar collapsed={collapsed} />
+                {children}
+            </div>
+        </div>
+    );
 };
 
 const App: React.FC = () => {
@@ -34,6 +34,6 @@ const App: React.FC = () => {
           </Layout>
       </ErrorBoundaryWithSSR>
   );
-};
+}
 
 export default App;
