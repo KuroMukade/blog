@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import { PageLoader } from 'widgets/PageLoader';
 
 import { getUserInited, userActions } from 'entities/User';
 import { ErrorBoundaryWithSSR } from 'app/providers/ErrorBoundary';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { RequireAuth } from './PrivateRoute';
 
 const renderWithWrapper = (route: AppRoutesProps) => {
@@ -38,8 +39,7 @@ const renderWithWrapper = (route: AppRoutesProps) => {
 };
 
 export const AppRouter = () => {
-  const dispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
   const inited = useSelector(getUserInited);
 
   useEffect(() => {

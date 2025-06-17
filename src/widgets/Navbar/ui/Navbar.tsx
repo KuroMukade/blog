@@ -1,7 +1,7 @@
 import burgerIcon from 'shared/assets/icons/burger.svg';
 
 import { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { LoginModal } from 'features/AuthByUsername';
@@ -10,6 +10,7 @@ import { getUserAuthData, userActions } from 'entities/User';
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
@@ -21,7 +22,7 @@ export const Navbar = ({ onBurgerClick }: NavbarProps) => {
 
   const [isAuthOpen, setAuthOpen] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const authData = useSelector(getUserAuthData);
 
