@@ -1,12 +1,26 @@
-import { FC, ReactNode } from 'react';
+import {
+  FC, ReactNode, useEffect, useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 
 interface PortalProps {
     children: ReactNode;
-    element?: HTMLElement;
+    elementId: string;
 }
 
 export const Portal: FC<PortalProps> = ({
   children,
-  element = document.body,
-}) => createPortal(children, element);
+  elementId,
+}) => {
+  const [container, setContainer] = useState<Element | null>(null);
+
+  useEffect(() => {
+    const el = document.querySelector(`#${elementId}`);
+    if (el) {
+      setContainer(el);
+    }
+  }, [elementId]);
+
+  if (!container) return null;
+  return createPortal(children, container);
+};

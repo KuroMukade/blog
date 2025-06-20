@@ -1,5 +1,5 @@
 import {
-  FC, Suspense, useCallback, useEffect,
+  FC, useCallback, useEffect,
 } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -14,12 +14,13 @@ import { articleFiltersReducer, ArticleFiltersOrder, ArticleFiltersSearch } from
 
 import { Page } from 'widgets/Page/Page';
 
-import { getArticleFiltersOrder } from 'features/ArticleFilters/model/selectors/articleFiltersSelector';
+import { ArticleItemsLoader } from 'entities/Article/ui/ArticleList/ArticleItemsLoader';
 import { fetchArticlesNextPage } from '../model/services/fetchArticlesNextPage/fetchArticlesNextPage';
 import { initArticlesPage } from '../model/services/initArticlesPage/initArticlesPage';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../model/slices/articlesPageSlice';
 import {
   getArticlesError,
+  getArticlesHasMore,
   getArticlesIsLoading,
   getArticlesView,
 } from '../model/selectors/articlesSelectors';
@@ -42,14 +43,13 @@ const initialFiltersReducers: ReducersList = {
 export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   useDynamicModuleLoader('articlesPage', initialPageReducers, false);
   useDynamicModuleLoader('articlesFilters', initialFiltersReducers, false);
-
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesIsLoading);
+  const hasMore = useSelector(getArticlesHasMore);
   const view = useSelector(getArticlesView);
   const error = useSelector(getArticlesError);
   const dispatch = useAppDispatch();
-  const order = useSelector(getArticleFiltersOrder);
-  console.log({ order });
+
   const onViewChange = useCallback((view: ArticleView) => {
     dispatch(articlesPageActions.setView(view));
   }, [dispatch]);
@@ -64,17 +64,32 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
 
   useEffect(() => {
     dispatch(fetchArticlesList({ page: 1 }));
-  }, [order, dispatch]);
+  }, [dispatch]);
 
   return (
-      <Page isSaveScroll onScrollEnd={onLoadNextPart} className={classNames(s.wrapper, {}, [className])}>
+      <Page
+          loader={(
+              <div className={s.content}>
+                  <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />
+              </div>
+          )}
+          isSaveScroll
+          onScrollEnd={onLoadNextPart}
+          className={classNames(s.wrapper, {}, [className])}
+      >
           <div className={s.content}>
               <div className={s.filters}>
                   <ArticleFiltersSearch />
                   <ArticleFiltersOrder />
               </div>
               <ViewSelector view={view} onViewClick={onViewChange} />
-              <ArticleList isLoading={isLoading} error={error} articles={articles} view={view} />
+              <ArticleList
+                  hasMore={hasMore}
+                  isLoading={isLoading}
+                  error={error}
+                  articles={articles}
+                  view={view}
+              />
           </div>
       </Page>
   );

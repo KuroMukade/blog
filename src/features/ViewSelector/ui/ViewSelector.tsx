@@ -4,13 +4,15 @@ import { classNames } from 'shared/lib/classNames';
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { memo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './ViewSelector.module.scss';
 
-type ViewType = 'GRID' | 'LIST';
+type ViewType = 'grid' | 'list';
+
 interface ViewSelectorProps {
-   className?: string;
-   view?: ViewType;
-   onViewClick?: (view: ViewType) => void;
+  className?: string;
+  view?: ViewType;
+  onViewClick?: (view: ViewType) => void;
 }
 
 type View = {
@@ -20,18 +22,24 @@ type View = {
 
 const viewItems: readonly View[] = [
   {
-    view: 'LIST',
+    view: 'list',
     icon: ListViewIcon,
   },
   {
-    view: 'GRID',
+    view: 'grid',
     icon: GridViewIcon,
   },
 ] as const;
 
 export const ViewSelector = memo(({ className, onViewClick, view }: ViewSelectorProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const onClick = (newView: ViewType) => {
+    if (typeof newView !== 'string') {
+      throw new Error('View mode must be string');
+    }
     onViewClick?.(newView);
+    searchParams.set('view', newView);
+    setSearchParams(searchParams);
   };
 
   return (

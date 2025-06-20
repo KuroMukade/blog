@@ -41,6 +41,19 @@ const reducers: ReducersList = {
   articleDetails: articleDetailsReducer,
 };
 
+const renderBlock = (block: ArticleBlock) => {
+  switch (block.type) {
+    case 'CODE':
+      return <ArticleCodeBlockComponent block={block} key={block.id} />;
+    case 'IMAGE':
+      return <ArticleImageBlockComponent block={block} key={block.id} />;
+    case 'TEXT':
+      return <ArticleTextBlockComponent block={block} key={block.id} />;
+    default:
+      return null;
+  }
+};
+
 export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
   const { t } = useTranslation();
 
@@ -49,19 +62,6 @@ export const ArticleDetails = memo(({ className, id }: ArticleDetailsProps) => {
   const isLoading = useSelector(getArticleDetailsIsLoading);
   const error = useSelector(getArticleDetailsError);
   const article = useSelector(getArticleDetailsData);
-
-  const renderBlock = (block: ArticleBlock) => {
-    switch (block.type) {
-      case 'CODE':
-        return <ArticleCodeBlockComponent block={block} key={block.id} />;
-      case 'IMAGE':
-        return <ArticleImageBlockComponent block={block} key={block.id} />;
-      case 'TEXT':
-        return <ArticleTextBlockComponent block={block} key={block.id} />;
-      default:
-        return null;
-    }
-  };
 
   useEffect(() => {
     dispatch(fetchArticleById(id));

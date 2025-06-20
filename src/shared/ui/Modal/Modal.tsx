@@ -23,6 +23,7 @@ export const Modal: FC<ModalProps> = ({
   const mods: Mods = {
     [styles.opened]: isOpen,
   };
+  console.log({ styles });
 
   const [isMounted, setMounted] = useState(false);
 
@@ -58,12 +59,12 @@ export const Modal: FC<ModalProps> = ({
     }
   }, [isOpen]);
 
-  if (lazy && !isMounted) {
+  if ((lazy && !isMounted) && !__NODEJS__) {
     return null;
   }
 
   return (
-      <Portal>
+      <Portal elementId="modal-root">
           <div tabIndex={tabIndex} className={classNames(styles.modal, mods, [className, theme])}>
               <div className={styles.overlay} onClick={closeHandler}>
                   <div
@@ -77,6 +78,5 @@ export const Modal: FC<ModalProps> = ({
               </div>
           </div>
       </Portal>
-
   );
 };

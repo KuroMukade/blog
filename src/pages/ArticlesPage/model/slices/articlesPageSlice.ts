@@ -26,7 +26,7 @@ export const articlesPageSlice = createSlice({
     page: 1,
     ids: [],
     entities: {},
-    view: 'GRID',
+    view: 'grid',
     _inited: false,
   }),
   reducers: {
@@ -42,9 +42,9 @@ export const articlesPageSlice = createSlice({
       if (view) {
         state.view = view;
       } else {
-        state.view = 'GRID';
+        state.view = 'grid';
       }
-      state.limit = view === 'LIST' ? 4 : 9;
+      state.limit = view === 'list' ? 4 : 9;
       state._inited = true;
     },
   },

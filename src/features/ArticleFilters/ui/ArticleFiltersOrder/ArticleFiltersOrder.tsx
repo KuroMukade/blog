@@ -5,7 +5,8 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { Select, SelectOption } from 'shared/ui/Select/Select';
 import { SortOrderType } from 'shared/types';
 import { useTranslation } from 'react-i18next';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { saveScrollActions } from 'features/SaveScroll';
 import { getArticleFiltersOrder } from '../../model/selectors/articleFiltersSelector';
 import { articlesFiltersActions } from '../../model/slice/articleFiltersSlice';
 
@@ -17,14 +18,16 @@ export const ArticleFiltersOrder = memo<PropsType>(({ className }: PropsType) =>
   const dispatch = useAppDispatch();
   const currentOrder = useSelector(getArticleFiltersOrder);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const { pathname } = useLocation();
   const { t } = useTranslation('articleFiltersOrder');
 
   const onSetOrder = useCallback((value: string) => {
     dispatch(articlesFiltersActions.setOrder(value as SortOrderType));
     searchParams.set('sort', value);
     setSearchParams(searchParams);
-  }, [dispatch, searchParams, setSearchParams]);
+
+    saveScrollActions.setScrollPosition({ path: pathname, position: 0 });
+  }, [dispatch, pathname, searchParams, setSearchParams]);
 
   const selectOptions : SelectOption<SortOrderType>[] = useMemo(() => [{
     value: 'asc',

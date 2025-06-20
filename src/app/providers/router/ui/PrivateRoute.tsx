@@ -7,7 +7,6 @@ import { RoutePath } from 'shared/config/routeConfig';
 export const RequireAuth = ({ children }: { children: ReactNode }): ReactNode => {
   const auth = useSelector(getUserAuthData);
   const location = useLocation();
-
   const navigate = useNavigate();
 
   if (!auth) {

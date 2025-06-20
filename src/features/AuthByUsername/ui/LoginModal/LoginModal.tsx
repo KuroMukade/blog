@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from 'react';
+import { FC, Suspense } from 'react';
 
 import { Modal } from 'shared/ui/Modal/Modal';
 import { Loader } from 'shared/ui/Loader/Loader';
@@ -10,10 +10,12 @@ interface LoginModalProps {
    onClose?: () => void;
 }
 
-export const LoginModal: FC<LoginModalProps> = ({ className, onClose, isOpen }) => (
-    <Modal tabIndex={-1} onClose={onClose} isOpen={isOpen} className={className}>
-        <Suspense fallback={<Loader />}>
-            <LoginForm onSuccess={onClose} />
-        </Suspense>
-    </Modal>
-);
+export const LoginModal: FC<LoginModalProps> = ({ className, onClose, isOpen }) => {
+  return (
+      <Modal tabIndex={-1} onClose={onClose} isOpen={isOpen} className={className}>
+          <Suspense fallback={<Loader />}>
+              <LoginForm onSuccess={onClose} />
+          </Suspense>
+      </Modal>
+  );
+};

@@ -1,35 +1,25 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames';
 
-import { Loader } from 'shared/ui/Loader/Loader';
+import { ClientSideOnly } from 'shared/lib/clientSideOnly/ClientSideOnly';
 import { Article, ArticleView } from '../../model/types/article';
 
 import styles from './ArticleList.module.scss';
 import { ArticleListViewController } from '../ArticleListViewController/ArticleListViewController';
+import { ArticleItemsLoader } from './ArticleItemsLoader';
 
 interface ArticleListProps {
    className?: string;
    articles: Article[];
    isLoading?: boolean;
    error?: string;
+   hasMore?: boolean;
    view?: ArticleView;
 }
 
-const renderArticle = (article: Article, view?: ArticleView) => (
-    <ArticleListViewController key={article.id} article={article} view={view} />
-);
-
 export const ArticleList = memo(({
-  className, articles, view, error, isLoading,
+  className, articles, view, error, isLoading, hasMore = false,
 }: ArticleListProps) => {
-  const handleRenderArticle = useCallback((article: Article) => {
-    return renderArticle(article, view);
-  }, [view]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
   if (!view) {
     return (
         <div className={classNames(styles.wrapper, {}, [className])} />
@@ -39,15 +29,24 @@ export const ArticleList = memo(({
   if (error) {
     return (
         <div className={classNames(styles.wrapper, {}, [className])} />
-
     );
   }
 
+  if (isLoading && !articles.length) {
+    return (
+        <div className={classNames(styles.wrapper, {}, [className, styles[view]])}>
+            <ArticleItemsLoader hasMore={hasMore} />
+        </div>
+    );
+  }
+
+  const articlesItems = articles.map(
+    (article) => <ArticleListViewController key={article.id} article={article} view={view} />,
+  );
+
   return (
-      <div className={classNames(styles.wrapper, {}, [className, styles[view!]])}>
-          {articles.length > 0
-            ? articles.map(handleRenderArticle)
-            : <div className={classNames(styles.wrapper, {}, [className])} />}
+      <div className={classNames(styles.wrapper, {}, [className, styles[view]])}>
+          {articlesItems}
       </div>
   );
 });

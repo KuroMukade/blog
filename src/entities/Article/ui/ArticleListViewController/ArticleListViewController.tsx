@@ -11,10 +11,10 @@ export const ArticleListViewController = (props: ArticleListViewControllerProps)
   const { article, view } = props;
 
   switch (view) {
-    case 'LIST': return (
+    case 'grid': return (
         <ArticleListGridItem article={article} />
     );
-    case 'GRID': return (
+    case 'list': return (
         <ArticleListColumnItem article={article} />
     );
     default: return (

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { QueryParams, UrlParamsType } from 'shared/lib/url';
+import { QueryParams } from 'shared/lib/url';
 import { ArticleFiltersSchema } from '../types/ArticleFilters';
 
 const initialState: ArticleFiltersSchema = {
@@ -13,8 +13,18 @@ const articlesFiltersSlice = createSlice({
   initialState,
   reducers: {
     initFilterParams: (state, action: PayloadAction<QueryParams>) => {
-      if (action.payload?.sort && (action.payload.sort === 'asc' || action.payload.sort === 'desc')) {
-        state.order = action.payload.sort;
+      const { sort, order, search } = action.payload;
+
+      if (order === 'asc' || order === 'desc') {
+        state.order = order;
+      }
+
+      if (typeof sort === 'string') {
+        state.sort = sort as ArticleFiltersSchema['sort'];
+      }
+
+      if (typeof search === 'string') {
+        state.search = search;
       }
     },
     setOrder: (state, action: PayloadAction<ArticleFiltersSchema['order']>) => {

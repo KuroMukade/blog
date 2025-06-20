@@ -49,7 +49,6 @@ export function buildServerLoaders({ isDev }) {
           ['@babel/preset-react', { runtime: 'automatic' }],
           '@babel/preset-typescript',
         ],
-        plugins: ['@loadable/babel-plugin'],
       },
     },
   };

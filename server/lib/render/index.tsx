@@ -19,7 +19,6 @@ import {
 } from 'used-styles';
 
 import { ServerCookiesManager } from 'lib/cookies';
-
 import { Head } from 'lib/jsx/head/Head';
 
 type Options = {
@@ -67,14 +66,14 @@ export const render = async (res: Response, options: Options) => {
       res.status(didError ? 500 : 200);
       res.set({ 'Content-Type': 'text/html' });
       const head = renderToString(
-          <Head reduxState={store.getState()} language={i18n.language} title={title} />,
+          <Head styles={manifest['initChunk.css']} reduxState={store.getState()} language={i18n.language} title={title} />,
       );
 
       res.write(`<!DOCTYPE html><html>${head}<body><div id="root">`);
       styledStream.pipe(res, { end: false });
       pipe(styledStream);
       styledStream.on('end', () => {
-        res.end('</body></html>');
+        res.end('</div><div id="modal-root"></div></body></html>');
       });
     },
 

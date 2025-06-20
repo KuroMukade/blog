@@ -5,9 +5,10 @@ type HeadTemplateType = {
     title: string;
     language: string;
     reduxState: Object;
+    styles: string;
 };
 
-export const Head = ({ title, language, reduxState }: HeadTemplateType) => {
+export const Head = ({ title, language, reduxState, styles }: HeadTemplateType) => {
   const reduxStateScript = `window.__PRELOADED_STATE__ = ${serializeJavascript(reduxState)};`;
 
   return (
@@ -21,6 +22,7 @@ export const Head = ({ title, language, reduxState }: HeadTemplateType) => {
           <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <meta name="description" content="ausbdasubhc" />
           <title>{title}</title>
+          <link rel="stylesheet" href={styles} />
           <noscript
               dangerouslySetInnerHTML={{ __html: '<b>Enable JavaScript to run this app.</b>' }}
           />

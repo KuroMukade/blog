@@ -11,6 +11,7 @@ import { getUserAuthData, userActions } from 'entities/User';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
@@ -40,6 +41,9 @@ export const Navbar = ({ onBurgerClick }: NavbarProps) => {
             <Button onClick={onBurgerClick}>
                 <img src={burgerIcon} alt="toggle sidebar" />
             </Button>
+            <Link to="/">
+                <img src="/static/assets/img/logo.svg" alt="website logo" />
+            </Link>
             <Button theme={ThemeButton.OUTLINE} onClick={onLogout}>{t('Выйти')}</Button>
         </div>
     );
@@ -50,6 +54,9 @@ export const Navbar = ({ onBurgerClick }: NavbarProps) => {
           <Button onClick={onBurgerClick}>
               <img src={burgerIcon} alt="toggle sidebar" />
           </Button>
+          <Link to="/">
+              <img src="/static/img/logo.svg" alt="website logo" />
+          </Link>
           <Button
               theme={ThemeButton.OUTLINE}
               onClick={onToggleModal}

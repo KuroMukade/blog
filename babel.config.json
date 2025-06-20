@@ -13,6 +13,5 @@
         ["i18next-extract", {
             "locales": ["ru", "en"]
         }],
-        ["@loadable/babel-plugin"]
     ]
 }
