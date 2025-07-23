@@ -27,10 +27,6 @@ export const ArticleItemsLoader = ({ hasMore, className }: {hasMore: boolean, cl
   return (
       <div className={className}>
           <ArticleListSkeleton />
-          <ArticleListSkeleton />
-          <ArticleListSkeleton />
-          <ArticleListSkeleton />
       </div>
-
   );
 };

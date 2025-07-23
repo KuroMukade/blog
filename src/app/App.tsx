@@ -9,7 +9,6 @@ import { useTheme } from 'shared/contexts/theme/useTheme';
 
 import { Sidebar } from 'widgets/Sidebar';
 
-import { removeStyles } from 'used-styles/dist/es2015/moveStyles';
 import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 
 const Layout = ({ children }: {children: ReactNode}) => {
@@ -28,10 +27,6 @@ const Layout = ({ children }: {children: ReactNode}) => {
 };
 
 const App: React.FC = () => {
-  useEffect(() => {
-    removeStyles();
-  }, []);
-
   return (
       <ErrorBoundaryWithSSR fallback="Error!">
           <Layout>

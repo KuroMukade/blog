@@ -19,14 +19,12 @@ interface PageProps {
   className?: string;
   onScrollEnd?: () => void;
   isSaveScroll?: boolean;
-  loader?: ReactNode;
   children: ReactNode;
 }
 
-export const Page = (props: PageProps) => {
-  const {
-    className, onScrollEnd, isSaveScroll = true, children, loader,
-  } = props;
+export const Page = ({
+  children, className, isSaveScroll, onScrollEnd,
+}: PageProps) => {
   const wrapperRef = useRef() as MutableRefObject<HTMLElement>;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const dispatch = useAppDispatch();
@@ -53,7 +51,6 @@ export const Page = (props: PageProps) => {
       <main onScroll={onScroll} ref={wrapperRef} className={classNames(s.pageWrapper, {}, [className])}>
           {children}
           {onScrollEnd && <div className={s.trigger} ref={triggerRef} />}
-          {loader}
       </main>
   );
 };

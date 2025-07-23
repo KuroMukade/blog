@@ -31,6 +31,7 @@ export const getSidebarItems = createSelector(
   ],
   (userData, t) => {
     const sidebarItemsList = getSidebarItemsList(t);
+
     if (userData) {
       sidebarItemsList.push(
         {

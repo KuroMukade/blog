@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import { getStore } from 'lib/store/getStore';
 import i18n from 'lib/i18n/config';
@@ -6,7 +6,7 @@ import i18n from 'lib/i18n/config';
 import { getIsMatchRoute } from 'lib/router/routeMatcher';
 import { render } from '../render';
 
-export const handleRequest = async (url: string, res: Response, req: Request) => {
+export const handleRequest = async (url: string, res: Response, req: Request, next: NextFunction) => {
   const parsed = url.split('?');
   const matchedRoute = getIsMatchRoute(parsed[0]);
 
@@ -14,7 +14,7 @@ export const handleRequest = async (url: string, res: Response, req: Request) =>
     res.statusCode = 404;
     res.setHeader('Content-type', 'text/html');
     res.send('<h2>404 not found</h2>');
-    return;
+    return next();
   }
 
   const { cookies } = req;

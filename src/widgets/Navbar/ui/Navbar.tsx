@@ -1,50 +1,41 @@
 import burgerIcon from 'shared/assets/icons/burger.svg';
 
-import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LoginModal } from 'features/AuthByUsername';
 
-import { getUserAuthData, userActions } from 'entities/User';
+import { useLogout } from 'entities/User';
 
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { Link } from 'react-router-dom';
+import { useAuthModal } from '../model/useAuthModal';
+
+import { Image } from 'shared/ui/Image/Image';
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
   onBurgerClick?: () => void;
+  loginModal: ReactNode;
+  isAuthAvailable?: boolean;
 }
 
-export const Navbar = ({ onBurgerClick }: NavbarProps) => {
+export const Navbar = ({ onBurgerClick, loginModal, isAuthAvailable }: NavbarProps) => {
   const { t } = useTranslation();
+  const { isAuthOpen, toggleModal } = useAuthModal();
+  const logout = useLogout();
 
-  const [isAuthOpen, setAuthOpen] = useState(false);
-
-  const dispatch = useAppDispatch();
-
-  const authData = useSelector(getUserAuthData);
-
-  const onToggleModal = useCallback(() => {
-    setAuthOpen((prev) => !prev);
-  }, []);
-
-  const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
-  }, [dispatch]);
-
-  if (authData) {
+  if (isAuthAvailable) {
     return (
         <div className={styles.navbar}>
             <Button onClick={onBurgerClick}>
                 <img src={burgerIcon} alt="toggle sidebar" />
             </Button>
             <Link to="/">
-                <img src="/static/assets/img/logo.svg" alt="website logo" />
+                <Image src='logo.svg' alt="website logo" />
             </Link>
-            <Button theme={ThemeButton.OUTLINE} onClick={onLogout}>{t('Выйти')}</Button>
+            <Button theme={ThemeButton.OUTLINE} onClick={logout}>{t('Выйти')}</Button>
         </div>
     );
   }
@@ -55,15 +46,16 @@ export const Navbar = ({ onBurgerClick }: NavbarProps) => {
               <img src={burgerIcon} alt="toggle sidebar" />
           </Button>
           <Link to="/">
-              <img src="/static/img/logo.svg" alt="website logo" />
+              <Image src='logo.svg' alt="website logo" />
           </Link>
           <Button
               theme={ThemeButton.OUTLINE}
-              onClick={onToggleModal}
+              onClick={toggleModal}
           >
               {t('Вход')}
           </Button>
-          <LoginModal isOpen={isAuthOpen} onClose={onToggleModal} />
+          {loginModal}
+          <LoginModal isOpen={isAuthOpen} onClose={toggleModal} />
       </div>
   );
 };

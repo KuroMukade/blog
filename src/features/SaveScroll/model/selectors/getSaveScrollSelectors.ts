@@ -5,6 +5,6 @@ export const getSaveScrollCurrentScroll = (state: StateSchema) => state.saveScro
 
 export const getSaveScrollScrollByPath = createSelector(
   getSaveScrollCurrentScroll,
-  (state: StateSchema, path: string) => path,
+  (_: StateSchema, path: string) => path,
   (scroll, path) => scroll[path] || 0,
 );

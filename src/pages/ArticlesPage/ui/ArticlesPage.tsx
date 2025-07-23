@@ -26,7 +26,6 @@ import {
 } from '../model/selectors/articlesSelectors';
 
 import s from './ArticlesPage.module.scss';
-import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
 
 interface ArticlesPageProps {
   className?: string
@@ -55,24 +54,16 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   }, [dispatch]);
 
   const onLoadNextPart = useCallback(() => {
+    if (!hasMore) return;
     dispatch(fetchArticlesNextPage());
-  }, [dispatch]);
+  }, [dispatch, hasMore]);
 
   useEffect(() => {
     dispatch(initArticlesPage());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchArticlesList({ page: 1 }));
-  }, [dispatch]);
-
   return (
       <Page
-          loader={(
-              <div className={s.content}>
-                  <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />
-              </div>
-          )}
           isSaveScroll
           onScrollEnd={onLoadNextPart}
           className={classNames(s.wrapper, {}, [className])}
@@ -90,6 +81,7 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
                   articles={articles}
                   view={view}
               />
+              {hasMore && <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />}
           </div>
       </Page>
   );

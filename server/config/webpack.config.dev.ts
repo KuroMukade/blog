@@ -2,9 +2,9 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import LoadablePlugin from '@loadable/webpack-plugin';
 import NodemonPlugin from 'nodemon-webpack-plugin';
 import { buildServerLoaders } from './loaders.js';
+import CopyPlugin from 'copy-webpack-plugin';
 
 const nodeJsPlugin = new webpack.DefinePlugin({
   __IS_DEV__: JSON.stringify(true),
@@ -35,12 +35,14 @@ export default {
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css',
     }),
-    new LoadablePlugin(),
     new WebpackManifestPlugin({}),
     new NodemonPlugin({
       script: path.resolve(__dirname, '..', '..', 'dist', 'server', 'server.js'),
       watch: [path.resolve(__dirname, '..', '..', 'dist')],
     }),
+    new CopyPlugin({
+      patterns: [{from: 'assets/img', to: 'img'}]
+    })
   ],
   resolve: {
     preferAbsolute: true,

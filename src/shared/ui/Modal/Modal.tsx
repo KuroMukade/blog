@@ -23,7 +23,6 @@ export const Modal: FC<ModalProps> = ({
   const mods: Mods = {
     [styles.opened]: isOpen,
   };
-  console.log({ styles });
 
   const [isMounted, setMounted] = useState(false);
 
