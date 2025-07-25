@@ -12,8 +12,10 @@ import { ThemeProvider } from 'shared/contexts/theme';
 import { moveStyles } from 'used-styles/moveStyles';
 import { CookiesProvider } from 'shared/contexts/cookies';
 import { I18nextWrapper } from 'app/providers/i18';
+import { i18n } from 'shared/lib/i18n';
 
 moveStyles();
+
 
 hydrateRoot(
   document.getElementById('root')!,

@@ -10,14 +10,17 @@ import { useTheme } from 'shared/contexts/theme/useTheme';
 import { Sidebar } from 'widgets/Sidebar';
 
 import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
+import { useSelector } from 'react-redux';
+import { getIsLoggedIn } from 'entities/User';
 
 const Layout = ({ children }: {children: ReactNode}) => {
   const [collapsed, setCollapsed] = useState(false);
   const { theme } = useTheme();
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   return (
       <div className={classNames('app', {}, [theme])}>
-          <Navbar onBurgerClick={() => setCollapsed(!collapsed)} />
+          <Navbar isAuthAvailable={Boolean(isLoggedIn)} onBurgerClick={() => setCollapsed(!collapsed)} />
           <div className="content-page">
               <Sidebar collapsed={collapsed} />
               {children}

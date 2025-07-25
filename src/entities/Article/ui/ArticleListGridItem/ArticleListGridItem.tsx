@@ -13,9 +13,12 @@ import { classNames } from 'shared/lib/classNames';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routeConfig';
+import { Image } from 'shared/ui/Image/Image';
+
 import { Article } from '../../model/types/article';
 
 import styles from './ArticleListGridItem.module.scss';
+import { ArticlesImage } from '../ArticlesImage/ArticlesImage';
 
 interface ArticleListItemProps {
     className?: string;
@@ -23,7 +26,7 @@ interface ArticleListItemProps {
 }
 
 export const ArticleListGridItem = memo(({ article, className }: ArticleListItemProps) => {
-  const [isHover, bindHover] = useHover();
+  const [_, bindHover] = useHover();
   const navigate = useNavigate();
 
   const onOpenArticle = useCallback(() => {
@@ -33,7 +36,7 @@ export const ArticleListGridItem = memo(({ article, className }: ArticleListItem
   return (
       <div className={classNames(styles.wrapperGrid, {}, [className])}>
           <Card {...bindHover} onClick={onOpenArticle}>
-              <img className={styles.cardImage} src={article.img} alt={article.title} />
+              <ArticlesImage className={styles.cardImage} src={article.img} alt={article.title} />
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
                       <AppLink className={styles.cardHeaderLink} to={`profile/${article.user?.id}`}>

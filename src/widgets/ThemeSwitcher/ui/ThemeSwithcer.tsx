@@ -11,7 +11,7 @@ import { TFunction } from 'i18next';
 
 import styles from './ThemeSwithcer.module.scss';
 
-interface ThemeSwithcerProps {
+interface ThemeSwitcherProps {
    className?: string;
    collapsed?: boolean;
 }
@@ -39,7 +39,7 @@ const getThemeParams = (theme: Theme, t: TFunction) => {
   };
 };
 
-export const ThemeSwitcher = ({ className, collapsed }: ThemeSwithcerProps) => {
+export const ThemeSwitcher = ({ className, collapsed }: ThemeSwitcherProps) => {
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
   const { themeToShow, style, icon } = getThemeParams(theme, t);
@@ -55,7 +55,6 @@ export const ThemeSwitcher = ({ className, collapsed }: ThemeSwithcerProps) => {
                 )
             }
           tabIndex={0}
-          onKeyDown={toggleTheme}
           onClick={toggleTheme}
       >
           <img src={icon} alt={theme} />
