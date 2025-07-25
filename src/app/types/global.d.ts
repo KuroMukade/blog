@@ -10,6 +10,8 @@ declare module '*.png' {
 
 interface Window {
   __PRELOADED_STATE__: any,
+  __LANG__: string,
+  i18nResources: any,
 }
 
 declare module '*.jpeg';

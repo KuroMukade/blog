@@ -7,6 +7,8 @@ export type { Profile, ProfileSchema } from './model/types/profile';
 export {
   profileActions,
   profileReducer,
+  injectSSRReducer,
+  initialProfileReducers,
 } from './model/slice/profileSlice';
 
 export {

@@ -17,11 +17,10 @@ import styles from './Navbar.module.scss';
 
 interface NavbarProps {
   onBurgerClick?: () => void;
-  loginModal: ReactNode;
   isAuthAvailable?: boolean;
 }
 
-export const Navbar = ({ onBurgerClick, loginModal, isAuthAvailable }: NavbarProps) => {
+export const Navbar = ({ onBurgerClick, isAuthAvailable }: NavbarProps) => {
   const { t } = useTranslation();
   const { isAuthOpen, toggleModal } = useAuthModal();
   const logout = useLogout();
@@ -54,7 +53,6 @@ export const Navbar = ({ onBurgerClick, loginModal, isAuthAvailable }: NavbarPro
           >
               {t('Вход')}
           </Button>
-          {loginModal}
           <LoginModal isOpen={isAuthOpen} onClose={toggleModal} />
       </div>
   );

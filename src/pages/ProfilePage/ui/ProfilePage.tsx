@@ -32,13 +32,6 @@ interface ProfilePageProps {
   className?: string;
 }
 
-// import { importRemote } from 'shared/lib/mf-loader';
-// const ProfileRemote = lazy(() => importRemote({
-//   module: './quiz',
-//   scope: 'Quiz',
-//   url: __PROFILE_MF_URL__,
-// }));
-
 const ProfilePage = ({ className }: ProfilePageProps) => {
   useDynamicModuleLoader('profile', reducers);
 
@@ -52,14 +45,15 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   const validateErrors = useSelector(getProfileValidateErrors);
 
   useEffect(() => {
+    if (formData) return;
     dispatch(fetchProfileData(id));
   }, [dispatch, id]);
 
-  const onChangeFirstname = useCallback((value?: string) => {
+  const onChangeFirstName = useCallback((value?: string) => {
     dispatch(profileActions.updateProfile({ first: value || '' }));
   }, [dispatch]);
 
-  const onChangeLastname = useCallback((value?: string) => {
+  const onChangeLastName = useCallback((value?: string) => {
     dispatch(profileActions.updateProfile({ lastname: value || '' }));
   }, [dispatch]);
 
@@ -98,8 +92,8 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
               isLoading={isLoading}
               error={error}
               readonly={readonly}
-              onChangeFirstname={onChangeFirstname}
-              onChangeLastname={onChangeLastname}
+              onChangeFirstName={onChangeFirstName}
+              onChangeLastName={onChangeLastName}
               onChangeAge={onChangeAge}
               onChangeCity={onChangeCity}
               onChangeUsername={onChangeUsername}

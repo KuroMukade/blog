@@ -5,6 +5,8 @@ import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
 import { classNames } from 'shared/lib/classNames';
 import styles from './LangSwithcer.module.scss';
+import { cookieStore } from 'shared/lib/store';
+import { LOCALE_STORE_KEY } from 'shared/lib/i18n/constants';
 
 interface LangSwitcherProps {
   className?: string;
@@ -15,7 +17,9 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ className, collapsed }) =>
   const { t, i18n } = useTranslation();
 
   const toggle = () => {
-    i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru');
+    const lang = i18n.language === 'ru' ? 'en' : 'ru'
+    i18n.changeLanguage(lang);
+    cookieStore.set(LOCALE_STORE_KEY, lang);
   };
 
   return (

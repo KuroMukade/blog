@@ -24,3 +24,8 @@
 .editing {
     border: 2px solid var(--inverted-primary-color);
 }
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+}

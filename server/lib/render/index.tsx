@@ -45,6 +45,15 @@ export const render = async (res: Response, options: Options) => {
     'utf-8',
   ));
 
+  const initialI18nStore: any = {};
+
+  i18n.languages.forEach((lang: string) => {
+  initialI18nStore[lang] = {};
+  i18n.options.ns.forEach((ns) => {
+    initialI18nStore[lang][ns] = i18n.getResourceBundle(lang, ns);
+  });
+});
+
   const { abort, pipe } = renderToPipeableStream((
   <StaticRouter location={url}>
       <Provider store={store}>
@@ -66,7 +75,7 @@ export const render = async (res: Response, options: Options) => {
       res.status(didError ? 500 : 200);
       res.set({ 'Content-Type': 'text/html' });
       const head = renderToString(
-          <Head styles={manifest['initChunk.css']} reduxState={store.getState()} language={i18n.language} title={title} />,
+          <Head styles={manifest['initChunk.css']} reduxState={store.getState()} i18nResources={initialI18nStore} language={i18n.language} title={title} />,
       );
 
       res.write(`<!DOCTYPE html><html>${head}<body><div id="root">`);

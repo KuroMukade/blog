@@ -3,7 +3,6 @@ import { ThunkConfig } from 'app/providers/StoreProvider';
 
 import { User, userActions, USER_COOKIE_STORAGE_KEY } from 'entities/User';
 import { i18n } from 'shared/lib/i18n';
-
 import { cookieStore } from 'shared/lib/store';
 
 interface LoginByUsernameProps {
@@ -22,11 +21,13 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
       }
 
       cookieStore.set(USER_COOKIE_STORAGE_KEY, response.data);
+      console.log(response.data, 'asdfasdf')
       dispatch(userActions.setAuthData(response.data));
       extra.navigate?.('/profile');
       return response.data;
     } catch (error) {
       return rejectWithValue(i18n.t('Вы ввели неверный логин или пароль'));
+      // return rejectWithValue('Wrong login')
     }
   },
 );

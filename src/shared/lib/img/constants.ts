@@ -1,1 +1,1 @@
-export const IMG_PATH_PREFIX = 'img';
+export const IMG_PATH_PREFIX = '/img';

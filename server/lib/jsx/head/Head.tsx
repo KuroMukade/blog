@@ -8,8 +8,9 @@ type HeadTemplateType = {
     styles: string;
 };
 
-export const Head = ({ title, language, reduxState, styles }: HeadTemplateType) => {
+export const Head = ({ title, language, reduxState, styles, i18nResources }: HeadTemplateType) => {
   const reduxStateScript = `window.__PRELOADED_STATE__ = ${serializeJavascript(reduxState)};`;
+  const i18nScript = `window.__LANG__ = "${language}"; window.i18nResources = ${serializeJavascript(i18nResources)};`;
 
   return (
       <head lang={language}>
@@ -27,6 +28,7 @@ export const Head = ({ title, language, reduxState, styles }: HeadTemplateType) 
               dangerouslySetInnerHTML={{ __html: '<b>Enable JavaScript to run this app.</b>' }}
           />
           <script dangerouslySetInnerHTML={{ __html: reduxStateScript }} />
+          <script dangerouslySetInnerHTML={{ __html: i18nScript }} />
       </head>
   );
 };
