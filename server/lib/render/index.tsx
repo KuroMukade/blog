@@ -48,11 +48,11 @@ export const render = async (res: Response, options: Options) => {
   const initialI18nStore: any = {};
 
   i18n.languages.forEach((lang: string) => {
-  initialI18nStore[lang] = {};
-  i18n.options.ns.forEach((ns) => {
-    initialI18nStore[lang][ns] = i18n.getResourceBundle(lang, ns);
+    initialI18nStore[lang] = {};
+    i18n.options.ns.forEach((ns) => {
+      initialI18nStore[lang][ns] = i18n.getResourceBundle(lang, ns);
+    });
   });
-});
 
   const { abort, pipe } = renderToPipeableStream((
   <StaticRouter location={url}>

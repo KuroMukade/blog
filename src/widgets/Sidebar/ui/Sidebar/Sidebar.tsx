@@ -20,12 +20,13 @@ interface SidebarProps {
 
 export const Sidebar = memo(({ className, collapsed }: SidebarProps) => {
   const { t } = useTranslation();
-  const sidebarItems = useSelector((store) => getSidebarItems(store, t));
+  const sidebarItems = useSelector(getSidebarItems);
 
   const linkList = useMemo(() => sidebarItems.map((item) => {
     const { path } = item;
+    item.text = t(item.text);
     return <SidebarItem item={item} collapsed={collapsed} key={path} />;
-  }), [collapsed, sidebarItems]);
+  }), [collapsed, sidebarItems, t]);
 
   return (
       <div

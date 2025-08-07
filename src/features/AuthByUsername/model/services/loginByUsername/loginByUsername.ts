@@ -21,7 +21,6 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
       }
 
       cookieStore.set(USER_COOKIE_STORAGE_KEY, response.data);
-      console.log(response.data, 'asdfasdf')
       dispatch(userActions.setAuthData(response.data));
       extra.navigate?.('/profile');
       return response.data;

@@ -3,10 +3,12 @@ import { Article } from 'entities/Article';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { getArticlesLimit } from 'pages/ArticlesPage/model/selectors/articlesSelectors';
 import { getArticleFiltersOrder } from 'features/ArticleFilters/model/selectors/articleFiltersSelector';
+import { SortOrderType } from 'shared/types';
 
-interface FetchArticlesListProps {
+type FetchArticlesListProps = {
   page?: number;
-}
+  order?: SortOrderType;
+};
 
 export const fetchArticlesList = createAsyncThunk<
   Article[],

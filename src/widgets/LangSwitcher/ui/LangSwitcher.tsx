@@ -16,12 +16,12 @@ interface LangSwitcherProps {
 export const LangSwitcher: FC<LangSwitcherProps> = ({ className, collapsed }) => {
   const { t, i18n } = useTranslation();
 
-  const toggle = () => {
-    const lang = i18n.language === 'ru' ? 'en' : 'ru'
-    i18n.changeLanguage(lang);
+  const toggle = async () => {
+    const lang = i18n.language === 'ru' ? 'en' : 'ru';
+    await i18n.changeLanguage(lang);
     cookieStore.set(LOCALE_STORE_KEY, lang);
   };
-
+  console.log(i18n);
   return (
       <Button
           className={

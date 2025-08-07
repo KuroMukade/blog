@@ -42,7 +42,6 @@ export const ProfileCard = ({
     onChangeCountry,
     onChangeCurrency,}: ProfileCardProps) => {
   const { t } = useTranslation('profile');
-  console.log({data, isLoading, error});
   if (isLoading) {
     return (
         <div className={classNames(s.ProfileCard, { [s.loading]: true }, [className])}>

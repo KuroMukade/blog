@@ -26,6 +26,8 @@ import {
 } from '../model/selectors/articlesSelectors';
 
 import s from './ArticlesPage.module.scss';
+import { getArticleFiltersOrder, getArticleFiltersSort } from 'features/ArticleFilters/model/selectors/articleFiltersSelector';
+import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
 
 interface ArticlesPageProps {
   className?: string
@@ -72,16 +74,17 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
               <div className={s.filters}>
                   <ArticleFiltersSearch />
                   <ArticleFiltersOrder />
+                  <ViewSelector view={view} onViewClick={onViewChange} />
               </div>
-              <ViewSelector view={view} onViewClick={onViewChange} />
-              <ArticleList
-                  hasMore={hasMore}
-                  isLoading={isLoading}
-                  error={error}
-                  articles={articles}
-                  view={view}
-              />
-              {hasMore && <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />}
+                <ArticleList
+                    hasMore={hasMore}
+                    isLoading={isLoading}
+                    error={error}
+                    className={s.articles}
+                    articles={articles}
+                    view={view}
+                />
+                {hasMore && <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />}
           </div>
       </Page>
   );

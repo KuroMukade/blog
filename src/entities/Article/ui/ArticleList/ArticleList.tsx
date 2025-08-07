@@ -32,7 +32,7 @@ export const ArticleList = memo(({
     );
   }
 
-  if (isLoading && !articles.length) {
+  if (isLoading || !articles.length) {
     return (
         <div className={classNames(styles.wrapper, {}, [className, styles[view]])}>
             <ArticleItemsLoader hasMore={hasMore} />

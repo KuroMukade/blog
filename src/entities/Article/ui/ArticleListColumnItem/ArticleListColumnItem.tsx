@@ -6,7 +6,6 @@ import archiveIcon from 'shared/assets/icons/bookmark-mini.svg';
 import heartIcon from 'shared/assets/icons/heart.svg';
 import messageIcon from 'shared/assets/icons/message.svg';
 import eyeIcon from 'shared/assets/icons/eye.svg';
-import { useHover } from 'shared/lib/hooks/useHover';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useRef } from 'react';
 import { RoutePath } from 'shared/config/routeConfig';
@@ -22,8 +21,6 @@ interface ArticleListListItemProps {
 
 export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
   const { className, article } = props;
-
-  const [_, bindHover] = useHover();
 
   const navigate = useNavigate();
 
@@ -41,7 +38,7 @@ export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
 
   return (
       <div className={classNames(styles.wrapperColumns, {}, [className])}>
-          <Card {...bindHover} onClick={onOpenArticle}>
+          <Card onClick={onOpenArticle}>
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
                       <AppLink className={styles.cardHeaderLink} to={`profile/${article.user?.id}`}>

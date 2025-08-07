@@ -9,8 +9,8 @@ import { saveScrollReducer } from 'features/SaveScroll';
 import { $api } from 'shared/api/api';
 
 import { routerReducer } from 'app/providers/router';
-import { articlesPageReducer } from 'pages/ArticlesPage';
-import { articleFiltersReducer } from 'features/ArticleFilters';
+import { articlesPageReducer, fetchArticlesList } from 'pages/ArticlesPage';
+import { articleFiltersReducer, articlesFiltersActions } from 'features/ArticleFilters';
 import type { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 import { profileReducer } from 'entities/Profile';

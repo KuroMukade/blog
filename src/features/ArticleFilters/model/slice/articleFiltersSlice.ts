@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { QueryParams } from 'shared/lib/url';
 import { ArticleFiltersSchema } from '../types/ArticleFilters';
+import { ASCENDING_URL_VALUE } from '../constants/sort';
+import { isSortOrderValid } from '../helpers/sortValidation';
 
 const initialState: ArticleFiltersSchema = {
-  order: 'asc',
+  order: ASCENDING_URL_VALUE,
   sort: 'createdAt',
   search: '',
 };
@@ -15,7 +17,7 @@ const articlesFiltersSlice = createSlice({
     initFilterParams: (state, action: PayloadAction<QueryParams>) => {
       const { sort, order, search } = action.payload;
 
-      if (order === 'asc' || order === 'desc') {
+      if (isSortOrderValid(order)) {
         state.order = order;
       }
 

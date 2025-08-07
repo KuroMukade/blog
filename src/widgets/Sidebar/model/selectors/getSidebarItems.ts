@@ -8,41 +8,36 @@ import { RoutePath } from 'shared/config/routeConfig';
 
 import { getUserAuthData } from 'entities/User';
 
-import { TFunction } from 'i18next';
 import { SidebarItemType } from '../types/sidebar';
 
-const getSidebarItemsList = (t: TFunction): SidebarItemType[] => [
+const getSidebarItemsList = (): SidebarItemType[] => [
   {
     path: RoutePath.main,
-    text: t('Главная'),
+    text: 'Главная',
     icon: homeIcon,
   },
   {
     path: RoutePath.about,
-    text: t('О нас'),
+    text: 'О нас',
     icon: fireIcon,
   },
 ];
 
-export const getSidebarItems = createSelector(
-  [
-    getUserAuthData,
-    (store, t: TFunction) => t,
-  ],
-  (userData, t) => {
-    const sidebarItemsList = getSidebarItemsList(t);
+export const getSidebarItems = createSelector(getUserAuthData,
+  (userData) => {
+    const sidebarItemsList = getSidebarItemsList();
 
     if (userData) {
       sidebarItemsList.push(
         {
           path: RoutePath.profile + userData.id,
-          text: t('Профиль'),
+          text: 'Профиль',
           authOnly: true,
           icon: timeIcon,
         },
         {
           path: RoutePath.articles_page,
-          text: t('Статьи'),
+          text: 'Статьи',
           icon: bookmarkIcon,
           authOnly: true,
         },
