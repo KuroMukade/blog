@@ -26,8 +26,6 @@ import {
 } from '../model/selectors/articlesSelectors';
 
 import s from './ArticlesPage.module.scss';
-import { getArticleFiltersOrder, getArticleFiltersSort } from 'features/ArticleFilters/model/selectors/articleFiltersSelector';
-import { fetchArticlesList } from '../model/services/fetchArticlesList/fetchArticlesList';
 
 interface ArticlesPageProps {
   className?: string

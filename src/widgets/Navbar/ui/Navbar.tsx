@@ -24,8 +24,6 @@ export const Navbar = ({ onBurgerClick, isAuthAvailable }: NavbarProps) => {
   const { t, i18n } = useTranslation();
   const { isAuthOpen, toggleModal } = useAuthModal();
   const logout = useLogout();
-    console.log(t('Выйти'))
-    console.log({abc: i18n.options})
   if (isAuthAvailable) {
     return (
         <div className={styles.navbar}>

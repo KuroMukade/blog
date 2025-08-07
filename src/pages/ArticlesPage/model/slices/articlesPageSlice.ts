@@ -37,8 +37,9 @@ export const articlesPageSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
-    initState: (state) => {
-      const view = cookieStore.get(ARTICLE_STORAGE_KEY) as ArticleView;
+    initState: (state, action: PayloadAction<ArticleView | null>) => {
+      const view = action.payload || cookieStore.get(ARTICLE_STORAGE_KEY) as ArticleView;
+
       if (view) {
         state.view = view;
       } else {

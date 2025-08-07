@@ -21,7 +21,7 @@ export const LangSwitcher: FC<LangSwitcherProps> = ({ className, collapsed }) =>
     await i18n.changeLanguage(lang);
     cookieStore.set(LOCALE_STORE_KEY, lang);
   };
-  console.log(i18n);
+
   return (
       <Button
           className={

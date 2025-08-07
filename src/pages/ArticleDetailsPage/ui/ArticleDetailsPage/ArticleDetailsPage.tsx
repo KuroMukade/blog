@@ -47,7 +47,7 @@ export const ArticleDetailsPage = memo(({ className }: ArticleDetailsPageProps) 
 
   useEffect(() => {
     dispatch(fetchCommentsByArticleId(id));
-  });
+  }, [dispatch]);
 
   if (!id) {
     return (

@@ -1,5 +1,5 @@
-import { UrlParamsType } from 'shared/lib/url';
+import { QueryParams } from "shared/lib/url";
 
 export type RouterSchema = {
-    searchParams: UrlParamsType;
+    searchParams: QueryParams;
 };

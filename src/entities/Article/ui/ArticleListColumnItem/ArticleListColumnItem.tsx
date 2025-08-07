@@ -9,10 +9,10 @@ import eyeIcon from 'shared/assets/icons/eye.svg';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useRef } from 'react';
 import { RoutePath } from 'shared/config/routeConfig';
-import brokenImage from 'shared/assets/images/noutFound.png';
 import { Article } from '../../model/types/article';
 
 import styles from './ArticleListColumnItem.module.scss';
+import { ArticlesImage } from '../ArticlesImage/ArticlesImage';
 
 interface ArticleListListItemProps {
     className?: string;
@@ -23,14 +23,6 @@ export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
   const { className, article } = props;
 
   const navigate = useNavigate();
-
-  const imgRef = useRef<HTMLImageElement>(null);
-
-  const setBrokenImage = () => {
-    if (imgRef?.current) {
-      imgRef.current.src = brokenImage;
-    }
-  };
 
   const onOpenArticle = useCallback(() => {
     navigate(`${RoutePath.article_details_page}${article.id}`);
@@ -51,9 +43,7 @@ export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
                       <p className={styles.cardTitle}>{article.title}</p>
                       <span className={styles.cardSubtitle}>{article.subtitle}</span>
                   </div>
-                  <img
-                      ref={imgRef}
-                      onError={setBrokenImage}
+                  <ArticlesImage
                       className={styles.cardImage}
                       src={article.img}
                       alt={article.title}
