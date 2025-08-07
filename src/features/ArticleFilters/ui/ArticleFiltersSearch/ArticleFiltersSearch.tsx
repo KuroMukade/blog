@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import searchIcon from 'shared/assets/icons/magnify.svg';
@@ -24,7 +24,7 @@ export const ArticleFiltersSearch = memo(() => {
   return (
       <div className={s.ArticleFiltersSearch}>
           <img className={s.searchIcon} src={searchIcon} alt="search" />
-          <Input placeholder={t('Найти...')} className={s.input} onChange={onChange} value={searchValue} />
+          <Input id='search' placeholder={t('Найти...')} className={s.input} onChange={onChange} value={searchValue} />
       </div>
   );
 });

@@ -7,7 +7,12 @@ export const getLanguage = (cookies: Record<string, any>) => {
   return (cookies['locale']) || fallback;
 }
 
+const getCriticalTranslations = () => {
+  
+};
+
 export const prepareLocales = async (i18n: i18n, cookies: Record<string, any>) => {
     const lang = getLanguage(cookies);
     await i18n.changeLanguage(lang);
+    await i18n.loadNamespaces(['translation', 'articleFiltersOrder']);
 }

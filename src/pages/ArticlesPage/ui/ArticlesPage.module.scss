@@ -2,10 +2,6 @@
     min-height: 100%;
 }
 
-.content {
-    max-width: 900px;
-}
-
 .filters {
     display: flex;
     gap: 16px;
@@ -13,4 +9,10 @@
 
 .loader {
     margin-top: 40px;
+}
+
+.articles {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
 }

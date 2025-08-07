@@ -12,6 +12,7 @@ import { Sidebar } from 'widgets/Sidebar';
 import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'entities/User';
+import { useSSR } from 'react-i18next';
 
 const Layout = ({ children }: {children: ReactNode}) => {
   const [collapsed, setCollapsed] = useState(false);

@@ -26,7 +26,6 @@ interface ArticleListItemProps {
 }
 
 export const ArticleListGridItem = memo(({ article, className }: ArticleListItemProps) => {
-  const [_, bindHover] = useHover();
   const navigate = useNavigate();
 
   const onOpenArticle = useCallback(() => {
@@ -35,7 +34,7 @@ export const ArticleListGridItem = memo(({ article, className }: ArticleListItem
 
   return (
       <div className={classNames(styles.wrapperGrid, {}, [className])}>
-          <Card {...bindHover} onClick={onOpenArticle}>
+          <Card onClick={onOpenArticle}>
               <ArticlesImage className={styles.cardImage} src={article.img} alt={article.title} />
               <div className={styles.content}>
                   <div className={styles.cardHeader}>
