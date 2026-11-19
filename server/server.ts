@@ -17,7 +17,7 @@ router.use('/', handleErrors((req, res, next) => {
   if (req.url.match(/\.(png|jpg|jpeg|gif|svg)$/)) {
     return next();
   }
-  handleRequest(req.url, res, req, next);
+  return handleRequest(req.url, res, req, next);
 }));
 
 app.use(router);
