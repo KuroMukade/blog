@@ -23,6 +23,7 @@ import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
 
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
+import styles from './ProfilePage.module.scss';
 
 const reducers: ReducersList = {
   profile: profileReducer,
@@ -82,25 +83,27 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
   }, [dispatch]);
 
   return (
-      <Page className={classNames('', {}, [className])}>
-          <ProfilePageHeader />
-          {validateErrors?.length && validateErrors.map((err) => (
-              <Text key={err} theme={TextTheme.ERROR} text={err} />
-          ))}
-          <ProfileCard
-              data={formData}
-              isLoading={isLoading}
-              error={error}
-              readonly={readonly}
-              onChangeFirstName={onChangeFirstName}
-              onChangeLastName={onChangeLastName}
-              onChangeAge={onChangeAge}
-              onChangeCity={onChangeCity}
-              onChangeUsername={onChangeUsername}
-              onChangeAvatar={onChangeAvatar}
-              onChangeCurrency={onChangeCurrency}
-              onChangeCountry={onChangeCountry}
-          />
+      <Page className={classNames(styles.page, {}, [className])}>
+          <div className={styles.content}>
+              <ProfilePageHeader />
+              {validateErrors?.length && validateErrors.map((err) => (
+                  <Text key={err} theme={TextTheme.ERROR} text={err} />
+              ))}
+              <ProfileCard
+                  data={formData}
+                  isLoading={isLoading}
+                  error={error}
+                  readonly={readonly}
+                  onChangeFirstName={onChangeFirstName}
+                  onChangeLastName={onChangeLastName}
+                  onChangeAge={onChangeAge}
+                  onChangeCity={onChangeCity}
+                  onChangeUsername={onChangeUsername}
+                  onChangeAvatar={onChangeAvatar}
+                  onChangeCurrency={onChangeCurrency}
+                  onChangeCountry={onChangeCountry}
+              />
+          </div>
       </Page>
   );
 };

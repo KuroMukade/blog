@@ -19,9 +19,7 @@ interface ArticleListListItemProps {
     article: Article;
 }
 
-export const ArticleListColumnItem = (props: ArticleListListItemProps) => {
-  const { className, article } = props;
-
+export const ArticleListColumnItem = ({ article, className }: ArticleListListItemProps) => {
   const navigate = useNavigate();
 
   const onOpenArticle = useCallback(() => {

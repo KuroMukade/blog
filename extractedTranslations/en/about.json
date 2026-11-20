@@ -1,3 +1,14 @@
 {
+  "federationDescription": "federationDescription",
+  "federationTitle": "federationTitle",
+  "intro": "intro",
+  "projectTitle": "projectTitle",
+  "readArticles": "readArticles",
+  "readerDescription": "readerDescription",
+  "readerTitle": "readerTitle",
+  "ssrDescription": "ssrDescription",
+  "ssrTitle": "ssrTitle",
+  "stateDescription": "stateDescription",
+  "stateTitle": "stateTitle",
   "О нас": "О нас"
 }

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import { Response } from 'express';
+import type { i18n } from 'i18next';
 
 import App from '@client/app/App';
 import { ThemeProvider } from '@client/shared/contexts/theme';
@@ -20,11 +21,12 @@ import {
 
 import { ServerCookiesManager } from 'lib/cookies';
 import { Head } from 'lib/jsx/head/Head';
+import { getUsedResources } from 'lib/i18n/lang';
 
 type Options = {
     url: string;
     store: any;
-    i18n: any;
+    i18n: i18n;
     title: string;
     cookies: any;
 };
@@ -44,15 +46,6 @@ export const render = async (res: Response, options: Options) => {
     path.resolve(__dirname, '..', 'client', 'manifest.json'),
     'utf-8',
   ));
-
-  const initialI18nStore: any = {};
-
-  i18n.languages.forEach((lang: string) => {
-    initialI18nStore[lang] = {};
-    i18n.options.ns.forEach((ns) => {
-      initialI18nStore[lang][ns] = i18n.getResourceBundle(lang, ns);
-    });
-  });
 
   const { abort, pipe } = renderToPipeableStream((
   <StaticRouter location={url}>
@@ -74,8 +67,11 @@ export const render = async (res: Response, options: Options) => {
     onAllReady() {
       res.status(didError ? 500 : 200);
       res.set({ 'Content-Type': 'text/html' });
+
+      const i18nResources = getUsedResources(i18n);
+
       const head = renderToString(
-          <Head styles={manifest['initChunk.css']} reduxState={store.getState()} i18nResources={initialI18nStore} language={i18n.language} title={title} />,
+          <Head styles={manifest['initChunk.css']} reduxState={store.getState()} i18nResources={i18nResources} language={i18n.language} title={title} />,
       );
 
       res.write(`<!DOCTYPE html><html>${head}<body><div id="root">`);

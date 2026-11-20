@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { AppRouter } from 'app/providers/router';
 
@@ -9,19 +9,22 @@ import { useTheme } from 'shared/contexts/theme/useTheme';
 
 import { Sidebar } from 'widgets/Sidebar';
 
-import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 import { useSelector } from 'react-redux';
 import { getIsLoggedIn } from 'entities/User';
-import { useSSR } from 'react-i18next';
+import { ErrorBoundaryWithSSR } from './providers/ErrorBoundary';
 
 const Layout = ({ children }: {children: ReactNode}) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const { theme } = useTheme();
   const isLoggedIn = useSelector(getIsLoggedIn);
 
   return (
       <div className={classNames('app', {}, [theme])}>
-          <Navbar isAuthAvailable={Boolean(isLoggedIn)} onBurgerClick={() => setCollapsed(!collapsed)} />
+          <Navbar
+              isAuthAvailable={Boolean(isLoggedIn)}
+              isSidebarExpanded={!collapsed}
+              onBurgerClick={() => setCollapsed((previous) => !previous)}
+          />
           <div className="content-page">
               <Sidebar collapsed={collapsed} />
               {children}

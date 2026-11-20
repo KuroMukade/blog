@@ -1,3 +1,13 @@
 {
-  "Главная": "Main"
+  "Главная": "Main",
+  "coverAlt": "A laptop and an open notebook on a desk",
+  "welcomeTitle": "Notes on web development",
+  "welcomeDescription": "A learning blog about how websites work. Explore React, server rendering, and what happens between requesting a page and making the first click.",
+  "topicsTitle": "What we explore",
+  "reactTitle": "React and state",
+  "reactDescription": "Build interfaces from components and manage application state with Redux.",
+  "ssrTitle": "SSR and styles",
+  "ssrDescription": "See how the server assembles HTML and styles for the first view and how the browser adds interactivity.",
+  "counterTitle": "Redux counter",
+  "counterDescription": "Press + or − to update the value in the store."
 }

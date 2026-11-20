@@ -1,7 +1,7 @@
 import type { StateSchema } from 'app/providers/StoreProvider';
 import { createSelector } from 'reselect';
-import { getSearchParams } from './getSearchParams';
 import { getIsViewValid } from 'pages/ArticlesPage/model/helpers/viewParams';
+import { getSearchParams } from './getSearchParams';
 
 export const getSearchParam = createSelector(
   [getSearchParams, (_: StateSchema, searchParam: string) => searchParam],
@@ -12,4 +12,5 @@ export const getSearchParam = createSelector(
     }
 
     return '';
-  });
+  },
+);

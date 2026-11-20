@@ -24,7 +24,7 @@ export const ArticleFiltersSearch = memo(() => {
   return (
       <div className={s.ArticleFiltersSearch}>
           <img className={s.searchIcon} src={searchIcon} alt="search" />
-          <Input id='search' placeholder={t('Найти...')} className={s.input} onChange={onChange} value={searchValue} />
+          <Input id="search" placeholder={t('Найти...')} className={s.input} onChange={onChange} value={searchValue} />
       </div>
   );
 });

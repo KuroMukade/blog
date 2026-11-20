@@ -16,6 +16,9 @@
 }
 
 .content-page {
+    position: relative;
     display: flex;
+    min-height: calc(100vh - var(--navbar-height));
+    padding-left: var(--sidebar-width-collapsed);
     background-color: var(--bg-color);
 }

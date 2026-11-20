@@ -7,20 +7,15 @@ import styles from './SidebarItem.module.scss';
 
 interface SidebarItemProps {
    item: SidebarItemType;
-   collapsed: boolean;
 }
 
 export const SidebarItem = memo(({
-  item, collapsed,
+  item,
 }: SidebarItemProps) => {
   return (
       <AppLink className={styles.link} theme={AppLinkTheme.PRIMARY} to={item.path}>
           <img src={item.icon} alt="" />
-          {!collapsed && (
-          <span className={styles.text}>
-              {item.text}
-          </span>
-          )}
+          <span data-sidebar-label>{item.text}</span>
       </AppLink>
   );
 });

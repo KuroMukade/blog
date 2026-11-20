@@ -13,7 +13,6 @@ import styles from './ThemeSwithcer.module.scss';
 
 interface ThemeSwitcherProps {
    className?: string;
-   collapsed?: boolean;
 }
 
 const getThemeParams = (theme: Theme, t: TFunction) => {
@@ -39,14 +38,14 @@ const getThemeParams = (theme: Theme, t: TFunction) => {
   };
 };
 
-export const ThemeSwitcher = ({ className, collapsed }: ThemeSwitcherProps) => {
+export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
   const { themeToShow, style, icon } = getThemeParams(theme, t);
 
   return (
-      <div
-          role="button"
+      <button
+          type="button"
           className={
                 classNames(
                   styles.wrapper,
@@ -54,15 +53,12 @@ export const ThemeSwitcher = ({ className, collapsed }: ThemeSwitcherProps) => {
                   [className, theme === Theme.DARK ? styles.light : styles.dark],
                 )
             }
-          tabIndex={0}
           onClick={toggleTheme}
       >
-          <img src={icon} alt={theme} />
-          {!collapsed && (
-          <span className={classNames(styles.themeName, {}, [style])}>
+          <img src={icon} alt="" />
+          <span className={classNames(styles.themeName, {}, [style])} data-sidebar-label>
               {themeToShow}
           </span>
-          )}
-      </div>
+      </button>
   );
 };

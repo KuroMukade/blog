@@ -21,7 +21,6 @@ import { articlesPageActions, articlesPageReducer, getArticles } from '../model/
 import {
   getArticlesError,
   getArticlesHasMore,
-  getArticlesIsLoading,
   getArticlesView,
 } from '../model/selectors/articlesSelectors';
 
@@ -43,7 +42,6 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
   useDynamicModuleLoader('articlesPage', initialPageReducers, false);
   useDynamicModuleLoader('articlesFilters', initialFiltersReducers, false);
   const articles = useSelector(getArticles.selectAll);
-  const isLoading = useSelector(getArticlesIsLoading);
   const hasMore = useSelector(getArticlesHasMore);
   const view = useSelector(getArticlesView);
   const error = useSelector(getArticlesError);
@@ -74,15 +72,13 @@ export const ArticlesPage: FC<ArticlesPageProps> = ({ className }) => {
                   <ArticleFiltersOrder />
                   <ViewSelector view={view} onViewClick={onViewChange} />
               </div>
-                <ArticleList
-                    hasMore={hasMore}
-                    isLoading={isLoading}
-                    error={error}
-                    className={s.articles}
-                    articles={articles}
-                    view={view}
-                />
-                {hasMore && <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />}
+              <ArticleList
+                  error={error}
+                  className={s.articles}
+                  articles={articles}
+                  view={view}
+              />
+              {hasMore && <ArticleItemsLoader className={s.loader} hasMore={Boolean(hasMore)} />}
           </div>
       </Page>
   );

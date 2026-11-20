@@ -14,10 +14,10 @@ app.use('/img', express.static(path.join(__dirname, '../server/img')));
 const router = express.Router();
 
 router.use('/', handleErrors((req, res, next) => {
-  if (req.url.match(/\.(png|jpg|jpeg|gif|svg)$/)) {
+  if (req.url.match(/\.(png|jpg|jpeg|gif|svg|static|img|json)$/)) {
     return next();
   }
-  return handleRequest(req.url, res, req, next);
+  return handleRequest(req.url, res, req);
 }));
 
 app.use(router);

@@ -11,9 +11,9 @@ import { $api } from 'shared/api/api';
 import { routerReducer } from 'app/providers/router';
 import { articlesPageReducer, fetchArticlesList } from 'pages/ArticlesPage';
 import { articleFiltersReducer, articlesFiltersActions } from 'features/ArticleFilters';
+import { profileReducer } from 'entities/Profile';
 import type { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
-import { profileReducer } from 'entities/Profile';
 
 export const extraArg: ThunkExtraArg = {
   api: $api,
@@ -32,7 +32,9 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...staticReducers,
-    ...{ ...asyncReducers, profile: profileReducer, articlesPage: articlesPageReducer, articlesFilters: articleFiltersReducer },
+    ...{
+      ...asyncReducers, profile: profileReducer, articlesPage: articlesPageReducer, articlesFilters: articleFiltersReducer,
+    },
   };
 
   const reducerManager = createReducerManager(rootReducers);
