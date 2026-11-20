@@ -1,16 +1,18 @@
 import React from 'react';
 import serializeJavascript from 'serialize-javascript';
+import type { Resource } from 'i18next';
 
 type HeadTemplateType = {
     title: string;
     language: string;
     reduxState: Object;
     styles: string;
+    i18nResources: Resource;
 };
 
 export const Head = ({ title, language, reduxState, styles, i18nResources }: HeadTemplateType) => {
   const reduxStateScript = `window.__PRELOADED_STATE__ = ${serializeJavascript(reduxState)};`;
-  const i18nScript = `window.__LANG__ = "${language}"; window.i18nResources = ${serializeJavascript(i18nResources)};`;
+  const i18nScript = `window.__LANG__ = ${serializeJavascript(language)}; window.i18nResources = ${serializeJavascript(i18nResources)};`;
 
   return (
       <head lang={language}>

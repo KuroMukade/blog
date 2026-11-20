@@ -23,7 +23,8 @@ const getSidebarItemsList = (): SidebarItemType[] => [
   },
 ];
 
-export const getSidebarItems = createSelector(getUserAuthData,
+export const getSidebarItems = createSelector(
+  getUserAuthData,
   (userData) => {
     const sidebarItemsList = getSidebarItemsList();
 

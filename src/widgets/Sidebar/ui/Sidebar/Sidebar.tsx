@@ -23,26 +23,23 @@ export const Sidebar = memo(({ className, collapsed }: SidebarProps) => {
   const sidebarItems = useSelector(getSidebarItems);
 
   const linkList = useMemo(() => sidebarItems.map((item) => {
-    const { path } = item;
-    item.text = t(item.text);
-    return <SidebarItem item={item} collapsed={collapsed} key={path} />;
-  }), [collapsed, sidebarItems, t]);
+    return <SidebarItem item={{ ...item, text: t(item.text) }} key={item.path} />;
+  }), [sidebarItems, t]);
 
   return (
       <div
+          id="app-sidebar"
           data-testid="sidebar"
           className={classNames(styles.sidebar, { [styles.collapsed]: collapsed }, [className])}
       >
-          <nav className={styles.nav}>
-              {linkList}
-          </nav>
-          <div
-              className={
-                    classNames(styles.switchers, { [styles.collapsedSwitchers]: collapsed }, [className])
-                }
-          >
-              <ThemeSwitcher collapsed={collapsed} />
-              <LangSwitcher collapsed={collapsed} />
+          <div className={styles.panel}>
+              <nav className={styles.nav}>
+                  {linkList}
+              </nav>
+              <div className={styles.switchers}>
+                  <ThemeSwitcher />
+                  <LangSwitcher />
+              </div>
           </div>
       </div>
   );

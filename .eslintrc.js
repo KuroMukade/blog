@@ -47,7 +47,6 @@ module.exports = {
         extensions: ['.js', '.jsx', '.tsx'],
       },
     ],
-    'no-img-tag': 'warning',
     'no-continue': 'off',
     'import/no-unresolved': 'off',
     'react-hooks/rules-of-hooks': 'error',

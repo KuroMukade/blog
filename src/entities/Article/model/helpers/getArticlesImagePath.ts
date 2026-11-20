@@ -1,1 +1,1 @@
-export const getArticlesImagePath = (url: string) => 'articles/' + url;
+export const getArticlesImagePath = (url: string) => `articles/${url}`;

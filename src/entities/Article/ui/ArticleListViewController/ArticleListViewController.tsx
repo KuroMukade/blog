@@ -7,9 +7,7 @@ interface ArticleListViewControllerProps {
   view?: ArticleView;
 }
 
-export const ArticleListViewController = (props: ArticleListViewControllerProps) => {
-  const { article, view } = props;
-
+export const ArticleListViewController = ({ article, view }: ArticleListViewControllerProps) => {
   switch (view) {
     case 'grid': return (
         <ArticleListGridItem article={article} />

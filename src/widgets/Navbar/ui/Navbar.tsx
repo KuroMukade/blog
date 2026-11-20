@@ -10,28 +10,29 @@ import { useLogout } from 'entities/User';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
 import { Link } from 'react-router-dom';
+import { Image } from 'shared/ui/Image/Image';
 import { useAuthModal } from '../model/useAuthModal';
 
-import { Image } from 'shared/ui/Image/Image';
 import styles from './Navbar.module.scss';
 
 interface NavbarProps {
   onBurgerClick?: () => void;
   isAuthAvailable?: boolean;
+  isSidebarExpanded: boolean;
 }
 
-export const Navbar = ({ onBurgerClick, isAuthAvailable }: NavbarProps) => {
+export const Navbar = ({ onBurgerClick, isAuthAvailable, isSidebarExpanded }: NavbarProps) => {
   const { t, i18n } = useTranslation();
   const { isAuthOpen, toggleModal } = useAuthModal();
   const logout = useLogout();
   if (isAuthAvailable) {
     return (
         <div className={styles.navbar}>
-            <Button onClick={onBurgerClick}>
+            <Button onClick={onBurgerClick} aria-controls="app-sidebar" aria-expanded={isSidebarExpanded}>
                 <img src={burgerIcon} alt="toggle sidebar" />
             </Button>
             <Link to="/">
-                <Image src='logo.svg' alt="website logo" />
+                <Image src="logo.svg" alt="website logo" />
             </Link>
             <Button theme={ThemeButton.OUTLINE} onClick={logout}>{t('Выйти')}</Button>
         </div>
@@ -40,11 +41,11 @@ export const Navbar = ({ onBurgerClick, isAuthAvailable }: NavbarProps) => {
 
   return (
       <div className={styles.navbar}>
-          <Button onClick={onBurgerClick}>
+          <Button onClick={onBurgerClick} aria-controls="app-sidebar" aria-expanded={isSidebarExpanded}>
               <img src={burgerIcon} alt="toggle sidebar" />
           </Button>
           <Link to="/">
-              <Image src='logo.svg' alt="website logo" />
+              <Image src="logo.svg" alt="website logo" />
           </Link>
           <Button
               theme={ThemeButton.OUTLINE}

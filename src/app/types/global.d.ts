@@ -11,7 +11,7 @@ declare module '*.png' {
 interface Window {
   __PRELOADED_STATE__: any,
   __LANG__: string,
-  i18nResources: any,
+  i18nResources?: import('i18next').Resource,
 }
 
 declare module '*.jpeg';

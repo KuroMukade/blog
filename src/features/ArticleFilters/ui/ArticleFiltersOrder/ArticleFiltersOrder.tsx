@@ -7,11 +7,11 @@ import { SortOrderType } from 'shared/types';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { saveScrollActions } from 'features/SaveScroll';
-import { getArticleFiltersOrder } from '../../model/selectors/articleFiltersSelector';
-import { articlesFiltersActions } from '../../model/slice/articleFiltersSlice';
 import { DESCENDING_URL_VALUE, SORT_ORDER_URL_PARAM_NAME, ASCENDING_URL_VALUE } from 'features/ArticleFilters/model/constants/sort';
 import { isSortOrderValid } from 'features/ArticleFilters/model/helpers/sortValidation';
 import { fetchArticlesList } from 'pages/ArticlesPage';
+import { articlesFiltersActions } from '../../model/slice/articleFiltersSlice';
+import { getArticleFiltersOrder } from '../../model/selectors/articleFiltersSelector';
 
 type PropsType = {
   className?: string;
@@ -30,7 +30,7 @@ export const ArticleFiltersOrder = memo<PropsType>(({ className }: PropsType) =>
     dispatch(articlesFiltersActions.setOrder(order));
     searchParams.set(SORT_ORDER_URL_PARAM_NAME, order);
     setSearchParams(searchParams);
-    dispatch(fetchArticlesList({page: 1}));
+    dispatch(fetchArticlesList({ page: 1 }));
     saveScrollActions.setScrollPosition({ path: pathname, position: 0 });
   }, [dispatch, pathname, searchParams, setSearchParams]);
 
@@ -43,7 +43,7 @@ export const ArticleFiltersOrder = memo<PropsType>(({ className }: PropsType) =>
   }], [t]);
 
   return (
-      <Select name='articles order' onChange={onSetOrder} className={className} options={selectOptions} value={currentOrder} />
+      <Select name="articles order" onChange={onSetOrder} className={className} options={selectOptions} value={currentOrder} />
   );
 });
 

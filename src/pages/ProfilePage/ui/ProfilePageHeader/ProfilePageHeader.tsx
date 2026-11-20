@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Text } from 'shared/ui/Text/Text';
 import { Button, ThemeButton } from 'shared/ui/Button/Button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
@@ -39,7 +38,7 @@ export const ProfilePageHeader = ({ className }: ProfilePageHeaderProps) => {
 
   return (
       <div className={classNames(styles.ProfilePageHeader, {}, [className])}>
-          <Text textSize="X" title={t('Профиль')} />
+          <h1>{t('Профиль')}</h1>
           {canEdit && (
           <div className={styles.container}>
               {readonly
@@ -55,7 +54,7 @@ export const ProfilePageHeader = ({ className }: ProfilePageHeaderProps) => {
                 : (
                     <>
                         <Button
-                            className={styles.editBtn}
+                            className={styles.cancelBtn}
                             theme={ThemeButton.OUTLINE}
                             onClick={onCancelEdit}
                         >

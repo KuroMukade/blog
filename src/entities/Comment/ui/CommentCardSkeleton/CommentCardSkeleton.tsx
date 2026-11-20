@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useId } from 'react';
 import ContentLoader from 'react-content-loader';
 
 interface CommentCardSkeletonProps {
@@ -7,6 +7,8 @@ interface CommentCardSkeletonProps {
 
 export const CommentCardSkeleton = memo((props: CommentCardSkeletonProps) => {
   const { className } = props;
+  const id = useId();
+
   return (
       <ContentLoader
           className={className}
@@ -17,6 +19,7 @@ export const CommentCardSkeleton = memo((props: CommentCardSkeletonProps) => {
           backgroundColor="#ededed"
           foregroundColor="#d6d6d6"
           {...props}
+          uniqueKey={id}
       >
           <rect x="0" y="60" rx="8" ry="8" width="595" height="96" />
           <circle cx="20" cy="20" r="20" />

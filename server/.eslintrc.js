@@ -47,6 +47,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.tsx'],
       },
     ],
+    'no-continue': 'off',
     'import/no-unresolved': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
@@ -75,6 +76,25 @@ module.exports = {
     'arrow-body-style': 'off',
     'class-methods-use-this': 0,
     'react/display-name': ['error'],
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'react-redux',
+            importNames: ['useDispatch'],
+            message: 'useDispatch is restricted. Use custom typed useAppDispatch instead.',
+          },
+        ],
+      },
+    ],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector: "CallExpression[callee.name='useDispatch']",
+        message: 'useDispatch is restricted. Use custom typed useAppDispatch.',
+      },
+    ],
   },
   globals: {
     __IS_DEV__: true,

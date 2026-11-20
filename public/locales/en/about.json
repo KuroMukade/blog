@@ -1,3 +1,14 @@
 {
-  "О нас": "About us"
+  "О нас": "About us",
+  "intro": "This is a learning blog about web development. The site itself is a working example of how a server prepares a page and how the browser makes it interactive.",
+  "readerTitle": "What you can read",
+  "readerDescription": "The Articles section covers programming languages and changes in their ecosystems. You can sort articles by views and switch between grid and list layouts.",
+  "projectTitle": "How this site works",
+  "ssrTitle": "Server rendering and styles",
+  "ssrDescription": "Express prepares page data, React renders the HTML, and a critical CSS collector adds the styles used by the server-rendered markup.",
+  "stateTitle": "State and hydration",
+  "stateDescription": "The server sends the browser the initial Redux state and translations. React then attaches event handlers to the existing markup.",
+  "federationTitle": "Micro-frontends",
+  "federationDescription": "The project includes a Webpack Module Federation configuration for experimenting with a separate profile build.",
+  "readArticles": "Browse articles"
 }

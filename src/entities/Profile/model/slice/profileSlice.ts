@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ReduxStoreWithManager } from 'app/providers/StoreProvider';
 import { Profile, ProfileSchema } from '../types/profile';
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
-import { ReduxStoreWithManager } from 'app/providers/StoreProvider';
 
 const initialState: ProfileSchema = {
   readonly: true,
@@ -76,7 +76,7 @@ export const { reducer: profileReducer } = profileSlice;
 export const injectSSRReducer = (store: ReduxStoreWithManager) => {
   store.reducerManager.add('profile', profileReducer);
 };
-;
+
 export const initialProfileReducers = {
   profile: profileReducer,
-}
+};

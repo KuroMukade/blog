@@ -1,18 +1,22 @@
-// import { LOCALE_STORE_KEY, LANGUAGE_TYPE } from "@client/shared/lib/i18n/constants"
-import { i18n } from "i18next";
+import type { i18n, Resource } from 'i18next';
 
-export const getLanguage = (cookies: Record<string, any>) => {
-  const fallback = 'en';
+import { DEFAULT_LANGUAGE, LANGUAGES_LIST, LOCALE_STORE_KEY } from '@client/shared/lib/i18n/constants';
 
-  return (cookies['locale']) || fallback;
-}
+export const prepareLocales = (baseI18n: i18n, cookies: Record<string, string>) => {
+  const requestedLanguage = cookies[LOCALE_STORE_KEY];
+  const lng = LANGUAGES_LIST.find((language) => language === requestedLanguage) ?? DEFAULT_LANGUAGE;
 
-const getCriticalTranslations = () => {
-  
+  return baseI18n.cloneInstance({ lng });
 };
 
-export const prepareLocales = async (i18n: i18n, cookies: Record<string, any>) => {
-    const lang = getLanguage(cookies);
-    await i18n.changeLanguage(lang);
-    await i18n.loadNamespaces(['translation', 'articleFiltersOrder']);
-}
+export const getUsedResources = (requestI18n: i18n): Resource => {
+  const namespaces = requestI18n.reportNamespaces?.getUsedNamespaces() ?? ['translation'];
+
+  return Object.fromEntries(requestI18n.languages.map((language) => [
+    language,
+    Object.fromEntries(namespaces.map((namespace) => [
+      namespace,
+      requestI18n.getResourceBundle(language, namespace) ?? {},
+    ])),
+  ]));
+};

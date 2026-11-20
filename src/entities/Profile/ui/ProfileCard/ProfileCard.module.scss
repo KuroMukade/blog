@@ -1,31 +1,100 @@
 .ProfileCard {
-    padding: 20px;
-    border: 2px solid var(--inverted-bg-color);
-}
-
-.input {
-    margin-top: 10px;
-}
-
-.loading,
-.error {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-}
-
-.avatarWrapper {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+  --profile-border: color-mix(in srgb, var(--color-inverted) 14%, transparent);
+  --avatar-size: clamp(96px, 16vw, 156px);
+  padding: clamp(14px, 4vw, 32px);
+  border: 1px solid var(--profile-border);
+  border-radius: clamp(18px, 3.5vw, 30px);
+  background: var(--bg-color-secondary);
+  color: var(--color-inverted);
+  box-shadow: 0 16px 44px -36px rgb(0 0 0 / 65%);
 }
 
 .editing {
-    border: 2px solid var(--inverted-primary-color);
+  border-color: var(--inverted-primary-color);
+}
+
+.error {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+}
+
+.data {
+  display: grid;
+  gap: 24px;
+}
+
+.avatarWrapper {
+  display: grid;
+  justify-items: center;
+}
+
+.avatarFrame {
+  width: min(100%, var(--avatar-size));
+  aspect-ratio: 1;
+}
+
+.avatarFrame img {
+  display: block;
+  object-fit: cover;
 }
 
 .inputs {
-    display: flex;
-    flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+
+.inputs .input {
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--profile-border);
+  border-radius: 14px;
+  background: var(--bg-color);
+  color: var(--color-inverted);
+  font-size: 15px;
+}
+
+.inputs div.input {
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  select {
+    max-width: 100%;
+    padding: 4px 8px;
+    color: var(--color-inverted);
+    background: var(--bg-color-secondary);
+  }
+}
+
+.placeholder {
+  background: var(--color-inverted);
+  opacity: 0.12;
+  animation: profile-pulse 1.4s ease-in-out infinite alternate;
+}
+
+.avatarPlaceholder {
+  width: min(100%, var(--avatar-size));
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.fieldPlaceholder {
+  min-height: 48px;
+  border-radius: 14px;
+}
+
+@keyframes profile-pulse {
+  to {
+    opacity: 0.24;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .placeholder {
+    animation: none;
+  }
 }
